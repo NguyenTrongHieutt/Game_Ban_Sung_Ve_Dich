@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\MY PC\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\MY PC\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\CommonFunc.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CommonFunc.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\MY PC\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BaseObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\MY PC\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BaseObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CommonFunc.cpp",
+              "DocumentMoniker": "C:\\Users\\MY PC\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\CommonFunc.cpp",
+              "RelativeDocumentMoniker": "CommonFunc.cpp",
+              "ToolTip": "C:\\Users\\MY PC\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\CommonFunc.cpp",
+              "RelativeToolTip": "CommonFunc.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-06T09:56:39.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BaseObject.h",
+              "DocumentMoniker": "C:\\Users\\MY PC\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.h",
+              "RelativeDocumentMoniker": "BaseObject.h",
+              "ToolTip": "C:\\Users\\MY PC\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.h",
+              "RelativeToolTip": "BaseObject.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-06T09:56:34.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BaseObject.cpp",
+              "DocumentMoniker": "C:\\Users\\MY PC\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.cpp",
+              "RelativeDocumentMoniker": "BaseObject.cpp",
+              "ToolTip": "C:\\Users\\MY PC\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.cpp",
+              "RelativeToolTip": "BaseObject.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-06T09:56:23.011Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

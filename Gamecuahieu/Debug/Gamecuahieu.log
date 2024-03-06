@@ -1,8 +1,65 @@
-﻿  main.cpp
-C:\Users\MY PC\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(38,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+﻿  BaseObject.cpp
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(38,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'BaseObject.cpp')
+  
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(46,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'BaseObject.cpp')
+  
+  BulletObject.cpp
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(38,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'BulletObject.cpp')
+  
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(46,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'BulletObject.cpp')
+  
+  CommonFunc.cpp
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(38,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'CommonFunc.cpp')
+  
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(46,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'CommonFunc.cpp')
+  
+  gamemap.cpp
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(38,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'gamemap.cpp')
+  
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(46,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'gamemap.cpp')
+  
+  ImpTimer.cpp
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(38,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'ImpTimer.cpp')
+  
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(46,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'ImpTimer.cpp')
+  
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\ImpTimer.cpp(33,14): warning C4553: '==': result of expression not used; did you intend '='?
+  main.cpp
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(38,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
   (compiling source file 'main.cpp')
   
-C:\Users\MY PC\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(46,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(46,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
   (compiling source file 'main.cpp')
   
-  Gamecuahieu.vcxproj -> C:\Users\MY PC\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Debug\Gamecuahieu.exe
+  MainObject.cpp
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(38,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
+  (compiling source file 'MainObject.cpp')
+  
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(46,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
+  (compiling source file 'MainObject.cpp')
+  
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(98,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(99,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(159,47): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(164,66): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(177,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(204,26): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(377,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(386,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(407,45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(423,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(438,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(448,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(458,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Gamecuahieu.vcxproj -> C:\Users\MY PC\OneDrive\Tài liệu\GitHub\Game_Ban_Sung_Ve_Dich\Debug\Gamecuahieu.exe
