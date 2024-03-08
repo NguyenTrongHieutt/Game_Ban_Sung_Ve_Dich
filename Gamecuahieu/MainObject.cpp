@@ -123,6 +123,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 			break;
 		case SDLK_b:
 			ChangeBullet(sellect_bullet_);
+			break;
 		default:
 			break;
 		}
@@ -251,108 +252,7 @@ void MainObject::DoPlayer(Map& map_data)
 			y_val_ = 0;
 		}
 	}
-}/*
-void MainObject::CenterEntityOnmap(Map&map_data) const
-{
-	map_data.start_x_ = x_pos_ - (SCREEN_WIDTH / 2);
-	if (map_data.start_x_ < 0)
-	{
-		map_data.start_x_ = 0;
-	}
-	else if (map_data.start_x_ + SCREEN_WIDTH >= map_data.max_x_)
-	{
-		map_data.start_x_ = map_data.max_x_ - SCREEN_WIDTH;
-	}
-	map_data.start_y_ = y_pos_ - (SCREEN_HEIGHT / 2);
-	if (map_data.start_y_<0)
-	{
-		map_data.start_y_ = 0;
-	}
-	else if (map_data.start_y_ + SCREEN_HEIGHT >= map_data.max_y_)
-	{
-		map_data.start_y_ = map_data.start_y_ - SCREEN_HEIGHT;
-	}
 }
-void MainObject::CheckToMap(Map&map_data)
-{
-	int x1 = 0;
-	int x2 = 0;
-
-	int y1 = 0;
-	int y2 = 0;
-
-	//Ktra chieu ngang
-	int height_min = height_frame_ < TILE_SIZE ? height_frame_ : TILE_SIZE;
-	x1 = (int)(x_pos_ + x_val_) / TILE_SIZE;
-	x2 = (int)(x_pos_ + x_val_ + width_frame_-1) / TILE_SIZE;
-
-	y1 = (int)(y_pos_) / TILE_SIZE;
-	y2 = (int)(y_pos_ + height_min - 1) / TILE_SIZE;
-	if (x1 >= 0 && x2 < MAX_MAP_X&&y1>=0&&y2<MAX_MAP_Y)
-	{
-		if (x_val_ > 0)//main object is moving right
-		{
-			if (map_data.tile[y1][x2] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
-			{
-				x_pos_ = x2 * TILE_SIZE - width_frame_ - 1;
-				x_val_ = 0;
-
-			}
-		}
-		else if (x_val_ < 0)
-		{
-			if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y2][x1] != BLANK_TILE)
-			{
-				x_pos_ = (x1 + 1) * TILE_SIZE;
-				x_val_ = 0;
-			}
-		}
-	}
-	//ktra theo chieu doc
-	int width_min = width_frame_ < TILE_SIZE ? width_frame_ : TILE_SIZE;
-	x1 = (int)(x_pos_) / TILE_SIZE;
-	x2 = (int)(x_pos_ + width_min) / TILE_SIZE;
-
-	y1 =(int)(y_pos_ + y_val_) / TILE_SIZE;
-	y2 = (int)(y_pos_ + y_val_ + height_frame_ - 1) / TILE_SIZE;
-	if (x1 >= 0 && x2 < MAX_MAP_X && y1 >= 0 && y2 < MAX_MAP_Y)
-	{
-		if (y_val_ > 0)
-		{
-			if (map_data.tile[y2][x1] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
-			{
-				y_pos_ = y2 * TILE_SIZE - height_frame_ - 1;
-				y_val_= 0;
-				on_ground = true;
-				if (status_ == WALK_NONE)
-				{
-					status_ = WALK_RIGHT;
-				}
-				
-			}
-		}
-		else if (y_val_ < 0)
-		{
-			if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y1][x2] != BLANK_TILE)
-			{
-				y_pos_ = (y1 + 1) * TILE_SIZE;
-				x_val_ = 0;
-			}
-		}
-
-	}
-	x_pos_ += x_val_;
-	y_pos_ += y_val_;
-	if (x_pos_ < 0)
-	{
-		x_pos_ = 0;
-	}
-	else if (x_pos_ + width_frame_ > map_data.max_x_)
-	{
-		x_pos_ = map_data.max_x_ - width_frame_ - 1;
-	}
-
-}*/
 void MainObject::CheckToMap(Map& map_data)
 {
 	int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
