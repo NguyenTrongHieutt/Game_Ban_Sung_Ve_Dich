@@ -108,68 +108,62 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 		{
 		switch (events.key.keysym.sym)
 		{
-		case SDLK_RIGHT:
+		case SDLK_d:
 
 			status_ = WALK_RIGHT;
 			input_type_.right_ = 1;
 			input_type_.left_ = 0;
 			UpdateImagePlayer(screen);
 			break;
-		case SDLK_LEFT:
+		case SDLK_a:
 			status_ = WALK_LEFT;
 			input_type_.left_ = 1;
 			input_type_.right_ = 0;
 			UpdateImagePlayer(screen);
 			break;
-		case SDLK_b:
+		case SDLK_l:
 			ChangeBullet(sellect_bullet_);
 			break;
-		default:
-			break;
-		}
-	}
-	else if (events.type == SDL_KEYUP)
-	{
-		switch (events.key.keysym.sym)
-		{
-		case SDLK_RIGHT:
-			input_type_.right_ = 0;
-
-			break;
-		case SDLK_LEFT:
-			input_type_.left_ = 0;
-			break;
-		default:
-			break;
-		}
-	}
-	if (events.type == SDL_MOUSEBUTTONDOWN)
-	{
-		if (events.button.button == SDL_BUTTON_RIGHT)
-		{
+		case SDLK_j:
 			input_type_.jump_ = 1;
-		}
-		else if (events.button.button == SDL_BUTTON_LEFT)
-		{
+			break;
+		case SDLK_k:
 			BulletObject* p_bullet = new BulletObject();
 			p_bullet->set_bullet_type(sellect_bullet_);
 			p_bullet->LoadImgBullet(screen);
 			if (status_ == WALK_LEFT)
 			{
 				p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
-				p_bullet->SetRect(this->rect_.x , rect_.y + height_frame_ * 0.25);
+				p_bullet->SetRect(this->rect_.x, rect_.y + height_frame_ * 0.25);
 			}
 			else
 			{
 				p_bullet->set_bullet_dir(BulletObject::DIR_RIGHT);
 				p_bullet->SetRect(this->rect_.x + width_frame_ - 20, rect_.y + height_frame_ * 0.25);
 			}
-			
+
 			p_bullet->set_x_val(20);
 			p_bullet->set_y_val(20);
 			p_bullet->set_is_move(true);
 
 			p_bullet_list_.push_back(p_bullet);
+			break;
+		
+		}
+	}
+	else if (events.type == SDL_KEYUP)
+	{
+		switch (events.key.keysym.sym)
+		{
+		case SDLK_d:
+			input_type_.right_ = 0;
+
+			break;
+		case SDLK_a:
+			input_type_.left_ = 0;
+			break;
+		default:
+			break;
 		}
 	}
 }
@@ -234,14 +228,14 @@ void MainObject::DoPlayer(Map& map_data)
 		CenterEntityOnmap(map_data);
 	}
 	if (come_back_time_ > 0)
-	{
+	{ 
 		come_back_time_--;
 		if (come_back_time_ == 0)
 		{
 			on_ground = false;
 			if (x_pos_ > 256)
 			{
-				x_pos_ -= 256;//4 tilemap
+				x_pos_ -=SCREEN_WIDTH/2;// Nua Map
 			}
 			else
 			{
@@ -339,7 +333,7 @@ void MainObject::CheckToMap(Map& map_data)
 	}
 	if (y_pos_ > map_data.max_y_)
 	{
-		come_back_time_ = 60;
+		come_back_time_ = 50;
 	}
 }
 void MainObject::CenterEntityOnmap(Map& map_data) const
