@@ -124,6 +124,12 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 		case SDLK_l:
 			ChangeBullet(sellect_bullet_);
 			break;
+		case SDLK_w:
+			input_type_.up_ = 1;
+			break;
+		case SDLK_s:
+			input_type_.down_ = 1;
+			break;
 		case SDLK_j:
 			input_type_.jump_ = 1;
 			break;
@@ -133,13 +139,39 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 			p_bullet->LoadImgBullet(screen);
 			if (status_ == WALK_LEFT)
 			{
-				p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
-				p_bullet->SetRect(this->rect_.x, rect_.y + height_frame_ * 0.25);
+				if (input_type_.up_ == 1)
+				{
+					p_bullet->set_bullet_dir(BulletObject::DIR_UP_LEFT);
+					p_bullet->SetRect(this->rect_.x, rect_.y + height_frame_ * 0.25);
+				}
+				else if (input_type_.down_ == 1)
+				{
+					p_bullet->set_bullet_dir(BulletObject::DIR_DOWN_LEFT);
+					p_bullet->SetRect(this->rect_.x, rect_.y + height_frame_ * 0.25);
+				}
+				else
+				{
+					p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
+					p_bullet->SetRect(this->rect_.x, rect_.y + height_frame_ * 0.25);
+				}
 			}
 			else
 			{
-				p_bullet->set_bullet_dir(BulletObject::DIR_RIGHT);
-				p_bullet->SetRect(this->rect_.x + width_frame_ - 20, rect_.y + height_frame_ * 0.25);
+				if (input_type_.up_ == 1)
+				{
+					p_bullet->set_bullet_dir(BulletObject::DIR_UP_RIGHT);
+					p_bullet->SetRect(this->rect_.x + width_frame_ - 20, rect_.y + height_frame_ * 0.25);
+				}
+				else if (input_type_.down_ == 1)
+				{
+					p_bullet->set_bullet_dir(BulletObject::DIR_DOWN_RIGHT);
+					p_bullet->SetRect(this->rect_.x + width_frame_ - 20, rect_.y + height_frame_ * 0.25);
+				}
+				else
+				{
+					p_bullet->set_bullet_dir(BulletObject::DIR_RIGHT);
+					p_bullet->SetRect(this->rect_.x + width_frame_ - 20, rect_.y + height_frame_ * 0.25);
+				}
 			}
 
 			p_bullet->set_x_val(20);
@@ -162,6 +194,10 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 		case SDLK_a:
 			input_type_.left_ = 0;
 			break;
+		case SDLK_w:
+			input_type_.up_ = 0;
+		case SDLK_s:
+			input_type_.down_ = 0;
 		default:
 			break;
 		}
