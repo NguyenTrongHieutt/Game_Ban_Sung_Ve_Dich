@@ -3,11 +3,12 @@
 #define COMMON_FUNCTION_H_
 #include<windows.h>
 #include<string>
+#include<cmath>
 #include<SDL.h>
 #include<SDL_image.h>
 #include<SDL_mixer.h>
 #include<SDL_ttf.h>
-
+#include<vector>
 static SDL_Window* g_window = NULL;
 static SDL_Renderer* g_screen = NULL;
 static SDL_Event g_event;
@@ -25,6 +26,7 @@ const int RENDER_DRAW_COLOR = 0xff;
 #define MAX_MAP_X 400
 #define MAX_MAP_Y 10
 #define BLANK_TILE 0			
+#define STATE_MONEY 4
 typedef struct Map 
 {
 	int start_x_;

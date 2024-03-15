@@ -5,6 +5,7 @@
 #include"BaseObject.h"
 #include"BulletObject.h"
 #include<vector>
+
 #define GRAVITY_SPEED 0.8
 #define MAX_FALL_SPEED 10
 #define PLAYER_SPEED 8
@@ -41,7 +42,12 @@ public:
 	std::vector<BulletObject*> get_bullet_list()const { return p_bullet_list_; }
 	void HandleBullet(SDL_Renderer* des);
 	void ChangeBullet(const int& sellectbullet);
+	void IncreaseMoney();
+	float get_x_pos()const { return x_pos_; }
+	float get_y_pos()const { return y_pos_; }
+	
 private:
+	int money_count;
 	std::vector<BulletObject*> p_bullet_list_;
 	float x_val_; 
 	float y_val_;

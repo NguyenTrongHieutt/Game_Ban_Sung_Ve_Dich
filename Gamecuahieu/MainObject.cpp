@@ -22,6 +22,7 @@ MainObject::MainObject()
 	come_back_time_ = 0;
 	sellect_bullet_ = BulletObject::SPHERE_BULLET;
 	doublejump = false;
+	money_count = 0;
 }
 MainObject::~MainObject()
 {
@@ -301,20 +302,42 @@ void MainObject::CheckToMap(Map& map_data)
 	{
 		if (x_val_ > 0) // Di chuyển sang phải
 		{
-			if (map_data.tile[y1][x2] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
+			int val1 = map_data.tile[y1][x2];
+			int val2 = map_data.tile[y2][x2];
+			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
-				// Đặt lại vị trí x để tránh va chạm
-				x_pos_ = x2 * TILE_SIZE - width_frame_ - 1;
-				x_val_ = 0;
+				map_data.tile[y1][x2] = 0;
+				map_data.tile[y2][x2] = 0;
+				IncreaseMoney();
+			}
+			else
+			{
+				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
+				{
+					// Đặt lại vị trí x để tránh va chạm
+					x_pos_ = x2 * TILE_SIZE - width_frame_ - 1;
+					x_val_ = 0;
+				}
 			}
 		}
 		else if (x_val_ < 0) // Di chuyển sang trái
 		{
-			if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y2][x1] != BLANK_TILE)
+			int val1 = map_data.tile[y1][x1];
+			int val2 = map_data.tile[y2][x1];
+			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
-				// Đặt lại vị trí x để tránh va chạm
-				x_pos_ = (x1 + 1) * TILE_SIZE;
-				x_val_ = 0;
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				IncreaseMoney();
+			}
+			else
+			{
+				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
+				{
+					// Đặt lại vị trí x để tránh va chạm
+					x_pos_ = (x1 + 1) * TILE_SIZE;
+					x_val_ = 0;
+				}
 			}
 		}
 	}
@@ -331,27 +354,49 @@ void MainObject::CheckToMap(Map& map_data)
 	{
 		if (y_val_ > 0) // Rơi xuống
 		{
-			if (map_data.tile[y2][x1] != BLANK_TILE || map_data.tile[y2][x2] != BLANK_TILE)
+			int val1 = map_data.tile[y2][x1];
+			int val2 = map_data.tile[y2][x2];
+			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
-				// Đặt lại vị trí y để tránh va chạm
-				y_pos_ = y2 * TILE_SIZE - height_frame_ - 1;
-				y_val_ = 0;
-				on_ground = true;
-				doublejump = true;
-				if (status_ == WALK_NONE)
+				map_data.tile[y2][x1] = 0;
+				map_data.tile[y2][x2] = 0;
+				IncreaseMoney();
+			}
+			else
+			{
+				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
 				{
-					status_ = WALK_RIGHT;
+					// Đặt lại vị trí y để tránh va chạm
+					y_pos_ = y2 * TILE_SIZE - height_frame_ - 1;
+					y_val_ = 0;
+					on_ground = true;
+					doublejump = true;
+					if (status_ == WALK_NONE)
+					{
+						status_ = WALK_RIGHT;
+					}
 				}
 			}
 		}
 		else if (y_val_ < 0) // Nhảy lên
 		{
 			on_ground = false;
-			if (map_data.tile[y1][x1] != BLANK_TILE || map_data.tile[y1][x2] != BLANK_TILE)
+			int val1 = map_data.tile[y1][x1];
+			int val2 = map_data.tile[y1][x2];
+			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
-				// Đặt lại vị trí y để tránh va chạm
-				y_pos_ = (y1 + 1) * TILE_SIZE;
-				y_val_ = 0;
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y1][x2] = 0;
+				IncreaseMoney();
+			}
+			else
+			{
+				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
+				{
+					// Đặt lại vị trí y để tránh va chạm
+					y_pos_ = (y1 + 1) * TILE_SIZE;
+					y_val_ = 0;
+				}
 			}
 		}
 	}
@@ -375,7 +420,7 @@ void MainObject::CheckToMap(Map& map_data)
 void MainObject::CenterEntityOnmap(Map& map_data) const
 {
 	// Đặt vị trí bắt đầu của map để nhân vật nằm giữa màn hình
-	map_data.start_x_ = x_pos_ - (SCREEN_WIDTH / 2);
+	map_data.start_x_ = x_pos_ - (SCREEN_WIDTH / 3);
 	if (map_data.start_x_ < 0)
 	{
 		map_data.start_x_ = 0;
@@ -385,7 +430,7 @@ void MainObject::CenterEntityOnmap(Map& map_data) const
 		map_data.start_x_ = map_data.max_x_ - SCREEN_WIDTH;
 	}
 
-	map_data.start_y_ = y_pos_ - (SCREEN_HEIGHT / 2);
+	map_data.start_y_ = y_pos_ - (SCREEN_HEIGHT / 3);
 	if (map_data.start_y_ < 0)
 	{
 		map_data.start_y_ = 0;
@@ -394,6 +439,10 @@ void MainObject::CenterEntityOnmap(Map& map_data) const
 	{
 		map_data.start_y_ = map_data.max_y_ - SCREEN_HEIGHT;
 	}
+}
+void MainObject::IncreaseMoney()
+{
+	money_count++;
 }
 void MainObject::UpdateImagePlayer(SDL_Renderer* des)
 {

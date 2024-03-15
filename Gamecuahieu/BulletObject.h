@@ -1,9 +1,12 @@
 #pragma once
 #ifndef BULLET_OBJECT_H_
 #define BULLET_OBJECT_H_
+#define SPEED_BULLET 15
+#define HEIGHT_THREAT 50
 
 #include "BaseObject.h"
 #include "CommonFunc.h"
+
 
 class BulletObject : public BaseObject
 {
@@ -47,11 +50,15 @@ public:
 
     void HandleMove(const int& x_border, const int& y_border);
     bool LoadImgBullet(SDL_Renderer* des);
+    void HandleMoveThreat(const int& x_border, const int& y_border, const float& x1, const float& y1,const float& x2,const float& y2 );
 private:
     int x_val_;
     int y_val_;
     bool is_move_;
     unsigned int bullet_dir_;
     unsigned int bullet_type_;
+    bool flag_bullet;
+    float x_bullet;
+    float y_bullet;
 };
 #endif
