@@ -199,6 +199,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 			input_type_.up_ = 0;
 		case SDLK_s:
 			input_type_.down_ = 0;
+			break;
 		default:
 			break;
 		}
