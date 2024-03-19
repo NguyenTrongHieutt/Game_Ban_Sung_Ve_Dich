@@ -47,6 +47,10 @@ typedef struct Input
 	int jump_;
 };
 
-
+namespace SDLCommonFunc
+{
+	bool CheckCollision(const  SDL_Rect& object1, const SDL_Rect& object2);
+	bool IsInside(const SDL_Rect& rectA, const SDL_Rect& rectB);
+}
 
 #endif // !COMMON_FUNCTION_H_

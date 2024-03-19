@@ -61,9 +61,9 @@ public:
     std::vector<BulletObject*> get_bullet_list() const { return bullet_list_; }
     void set_bullet_list(const std::vector<BulletObject*>& am_list) { bullet_list_ = am_list; }
     void InitBullet(BulletObject* p_bullet, SDL_Renderer* screen);
-    void MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit,const float& x2,const float& y2 );
-   
-
+    void MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit,const float& x2,const float& y2,Map& map_data );
+    void RemoveBullet(const int& idx);
+    SDL_Rect GetRectFrame();
     enum TypeMove
     {
         STATIC_THREAT = 0,

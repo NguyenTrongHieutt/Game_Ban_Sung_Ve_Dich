@@ -40,8 +40,10 @@ public:
 		p_bullet_list_ = bullet_list;
 	}
 	std::vector<BulletObject*> get_bullet_list()const { return p_bullet_list_; }
-	void HandleBullet(SDL_Renderer* des);
+	void HandleBullet(SDL_Renderer* des,Map& map_data);
 	void ChangeBullet(const int& sellectbullet);
+	void RemoveBullet(const int& idx);
+	SDL_Rect GetRectFrame();
 	void IncreaseMoney();
 	float get_x_pos()const { return x_pos_; }
 	float get_y_pos()const { return y_pos_; }

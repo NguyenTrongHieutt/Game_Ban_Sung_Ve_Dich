@@ -39,6 +39,15 @@ bool MainObject::LoadImg(std::string path, SDL_Renderer* screen)
 	}
 	return ret;
 }
+SDL_Rect MainObject::GetRectFrame()
+{
+	SDL_Rect rect;
+	rect.x = rect_.x;
+	rect.y = rect_.y;
+	rect.w = width_frame_;
+	rect.h = height_frame_;
+	return rect;
+}
 void MainObject::set_clips()
 {
 	if (width_frame_ > 0 && height_frame_ > 0)
@@ -205,7 +214,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 		}
 	}
 }
-void MainObject::HandleBullet(SDL_Renderer* des)
+void MainObject::HandleBullet(SDL_Renderer* des,Map& map_data)
 {
 	for (int i = 0; i < p_bullet_list_.size(); i++)
 	{
@@ -214,7 +223,7 @@ void MainObject::HandleBullet(SDL_Renderer* des)
 		{
 			if (p_bullet->get_is_move() == true)
 			{
-				p_bullet->HandleMove(SCREEN_WIDTH, SCREEN_HEIGHT);
+				p_bullet->HandleMove(SCREEN_WIDTH, SCREEN_HEIGHT,map_data);
 				p_bullet->Render(des);
 			}
 			else
@@ -227,6 +236,20 @@ void MainObject::HandleBullet(SDL_Renderer* des)
 				}
 			}
 	    }
+	}
+}
+void MainObject::RemoveBullet(const int& idx)
+{
+	int size = p_bullet_list_.size();
+	if(size>0&&idx<size)
+	{ 
+		BulletObject* p_bullet = p_bullet_list_.at(idx);
+		p_bullet_list_.erase(p_bullet_list_.begin() + idx);
+		if (p_bullet)
+		{
+			delete p_bullet;
+			p_bullet = NULL;
+		}
 	}
 }
 void MainObject::DoPlayer(Map& map_data)
