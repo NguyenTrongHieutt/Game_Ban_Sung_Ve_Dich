@@ -51,6 +51,8 @@ public:
     void HandleMove(const int& x_border, const int& y_border);
     bool LoadImgBullet(SDL_Renderer* des);
     void HandleMoveThreat(const int& x_border, const int& y_border, const float& x1, const float& y1,const float& x2,const float& y2 );
+    void set_speedbullet_x_y(const float& x_, const float& y_) { x_bullet = x_; y_bullet = y_; }
+    
 private:
     int x_val_;
     int y_val_;

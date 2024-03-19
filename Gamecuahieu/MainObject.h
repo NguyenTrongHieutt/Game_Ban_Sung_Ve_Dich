@@ -45,7 +45,7 @@ public:
 	void IncreaseMoney();
 	float get_x_pos()const { return x_pos_; }
 	float get_y_pos()const { return y_pos_; }
-	
+	float get_x_val() const { return x_val_; }
 private:
 	int money_count;
 	std::vector<BulletObject*> p_bullet_list_;

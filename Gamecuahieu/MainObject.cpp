@@ -420,8 +420,8 @@ void MainObject::CheckToMap(Map& map_data)
 }
 void MainObject::CenterEntityOnmap(Map& map_data) const
 {
-	// Đặt vị trí bắt đầu của map để nhân vật nằm giữa màn hình
-	map_data.start_x_ = x_pos_ - (SCREEN_WIDTH / 3);
+	// Đặt vị trí bắt đầu của map để nhân vật nằm gần giữa màn hình
+	map_data.start_x_ = (int)(x_pos_ / SCREEN_WIDTH) * SCREEN_WIDTH;
 	if (map_data.start_x_ < 0)
 	{
 		map_data.start_x_ = 0;

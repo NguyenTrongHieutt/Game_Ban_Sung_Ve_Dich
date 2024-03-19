@@ -1,28 +1,17 @@
-﻿  MainObject.cpp
+﻿  BulletObject.cpp
 C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(16,30): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  (compiling source file 'MainObject.cpp')
+  (compiling source file 'BulletObject.cpp')
   
 C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(40,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
-  (compiling source file 'MainObject.cpp')
+  (compiling source file 'BulletObject.cpp')
   
 C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(48,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
-  (compiling source file 'MainObject.cpp')
+  (compiling source file 'BulletObject.cpp')
   
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(99,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(100,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(146,47): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(151,47): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(156,47): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(164,67): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(169,67): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(174,67): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(210,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(237,26): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(319,45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(339,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(371,46): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(398,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(414,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(424,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\MainObject.cpp(434,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\BulletObject.cpp(137,45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\BulletObject.cpp(140,49): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\BulletObject.cpp(147,45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\BulletObject.cpp(150,49): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\BulletObject.cpp(156,20): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\BulletObject.cpp(163,20): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
   Gamecuahieu.vcxproj -> C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Debug\Gamecuahieu.exe

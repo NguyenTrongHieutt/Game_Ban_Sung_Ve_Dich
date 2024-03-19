@@ -289,7 +289,7 @@ void ThreatsObject::InitBullet(BulletObject* p_bullet, SDL_Renderer* screen)
 		if (ret)
 		{
 			p_bullet->set_is_move(true);
-			p_bullet->SetRect(rect_.x +5 , rect_.y+ 10);
+			p_bullet->SetRect(rect_.x, rect_.y);
 			bullet_list_.push_back(p_bullet);
 		}
 	}
@@ -305,13 +305,14 @@ void ThreatsObject::MakeBullet(SDL_Renderer* des, const int& x_limit, const int&
 			
 				if (p_bullet->get_is_move()==true)
 				{
+					  
 						p_bullet->HandleMoveThreat(x_limit, y_limit,x_pos_,y_pos_,x2,y2);
 						p_bullet->Render(des); 
 				}
 				else
 				{
 					p_bullet->set_is_move(true);
-					p_bullet->SetRect(rect_.x + 10, rect_.y + 10);
+					p_bullet->SetRect(rect_.x, rect_.y);
 				}
 			
 		}
