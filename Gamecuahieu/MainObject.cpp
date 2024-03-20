@@ -23,6 +23,10 @@ MainObject::MainObject()
 	sellect_bullet_ = BulletObject::SPHERE_BULLET;
 	doublejump = false;
 	money_count = 0;
+	num_brave = 0;
+	Threat_can_fire = false;
+	out_area = false;
+	brave = false;
 }
 MainObject::~MainObject()
 {
@@ -114,8 +118,8 @@ void MainObject::Show(SDL_Renderer* des)
 }
 void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 {
-	if(events.type==SDL_KEYDOWN)
-		{
+	if (events.type == SDL_KEYDOWN)
+	{
 		switch (events.key.keysym.sym)
 		{
 		case SDLK_d:
@@ -142,6 +146,9 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 			break;
 		case SDLK_j:
 			input_type_.jump_ = 1;
+			break;
+		case SDLK_i:
+			brave = true;
 			break;
 		case SDLK_k:
 			BulletObject* p_bullet = new BulletObject();
@@ -190,7 +197,6 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 
 			p_bullet_list_.push_back(p_bullet);
 			break;
-		
 		}
 	}
 	else if (events.type == SDL_KEYUP)
@@ -208,6 +214,9 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 			input_type_.up_ = 0;
 		case SDLK_s:
 			input_type_.down_ = 0;
+			break;
+		case SDLK_i:
+			brave = false;
 			break;
 		default:
 			break;
@@ -254,6 +263,7 @@ void MainObject::RemoveBullet(const int& idx)
 }
 void MainObject::DoPlayer(Map& map_data)
 {
+	out_area = false;
 	if (come_back_time_ == 0)
 	{
 		x_val_ = 0;
@@ -291,9 +301,11 @@ void MainObject::DoPlayer(Map& map_data)
 	if (come_back_time_ > 0)
 	{ 
 		come_back_time_--;
+		Threat_can_fire = false;
+		on_ground = true;
+		doublejump = true;
 		if (come_back_time_ == 0)
 		{
-			on_ground = false;
 			if (x_pos_ > 256)
 			{
 				x_pos_ -=SCREEN_WIDTH/2;// Nua Map
@@ -334,6 +346,12 @@ void MainObject::CheckToMap(Map& map_data)
 				map_data.tile[y2][x2] = 0;
 				IncreaseMoney();
 			}
+			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
+			{
+				map_data.tile[y1][x2] = 0;
+				map_data.tile[y2][x2] = 0;
+				num_brave++;
+			}
 			else
 			{
 				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
@@ -353,6 +371,12 @@ void MainObject::CheckToMap(Map& map_data)
 				map_data.tile[y1][x1] = 0;
 				map_data.tile[y2][x1] = 0;
 				IncreaseMoney();
+			}
+			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
+			{
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				num_brave++;
 			}
 			else
 			{
@@ -386,6 +410,12 @@ void MainObject::CheckToMap(Map& map_data)
 				map_data.tile[y2][x2] = 0;
 				IncreaseMoney();
 			}
+			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
+			{
+				map_data.tile[y2][x1] = 0;
+				map_data.tile[y2][x2] = 0;
+				num_brave++;
+			}
 			else
 			{
 				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
@@ -395,6 +425,7 @@ void MainObject::CheckToMap(Map& map_data)
 					y_val_ = 0;
 					on_ground = true;
 					doublejump = true;
+					Threat_can_fire = true;
 					if (status_ == WALK_NONE)
 					{
 						status_ = WALK_RIGHT;
@@ -412,6 +443,12 @@ void MainObject::CheckToMap(Map& map_data)
 				map_data.tile[y1][x1] = 0;
 				map_data.tile[y1][x2] = 0;
 				IncreaseMoney();
+			}
+			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
+			{
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y1][x2] = 0;
+				num_brave++;
 			}
 			else
 			{
@@ -438,13 +475,14 @@ void MainObject::CheckToMap(Map& map_data)
 	}
 	if (y_pos_ > map_data.max_y_)
 	{
+		out_area = true;
 		come_back_time_ = 50;
 	}
 }
 void MainObject::CenterEntityOnmap(Map& map_data) const
 {
-	// Đặt vị trí bắt đầu của map để nhân vật nằm gần giữa màn hình
-	map_data.start_x_ = (int)(x_pos_ / SCREEN_WIDTH) * SCREEN_WIDTH;
+	//Chuyển map sang phần khác
+	map_data.start_x_ =  (int)((x_pos_+width_frame_/2) / SCREEN_WIDTH)* SCREEN_WIDTH;
 	if (map_data.start_x_ < 0)
 	{
 		map_data.start_x_ = 0;
@@ -454,7 +492,7 @@ void MainObject::CenterEntityOnmap(Map& map_data) const
 		map_data.start_x_ = map_data.max_x_ - SCREEN_WIDTH;
 	}
 
-	map_data.start_y_ = y_pos_ - (SCREEN_HEIGHT / 3);
+	map_data.start_y_ = 0;
 	if (map_data.start_y_ < 0)
 	{
 		map_data.start_y_ = 0;
@@ -502,5 +540,45 @@ void MainObject::ChangeBullet(const int& sellectbullet)
 	else
 	{
 		sellect_bullet_ = BulletObject::SPHERE_BULLET;
+	}
+}
+void MainObject::DoBrave(Map& map_data)
+{
+	
+	int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+	int height_min = height_frame_ < TILE_SIZE ? height_frame_ : TILE_SIZE;
+	int width_min = width_frame_ < TILE_SIZE ? width_frame_ : TILE_SIZE;
+
+
+	x1 = (int)(x_pos_ + TILE_SIZE) / TILE_SIZE;
+	x2 = (int)(x_pos_ + TILE_SIZE + width_frame_ - 1) / TILE_SIZE;
+
+	y1 = (int)(y_pos_) / TILE_SIZE;
+	y2 = (int)(y_pos_ + height_min - 1) / TILE_SIZE;
+
+	// Kiểm tra va chạm với tile theo chiều ngang
+	if (x1 >= 0 && x2 < MAX_MAP_X && y1 >= 0 && y2 < MAX_MAP_Y)
+	{
+		if (status_ == WALK_RIGHT) // Di chuyển sang phải
+		{
+			int val1 = map_data.tile[y2][x2];
+			int val2 = map_data.tile[y2+1][x2];
+			if(val2 !=BLANK_TILE && val1 == BLANK_TILE)
+			{
+				map_data.tile[y2][x2] = BRAVE;
+				num_brave--;
+			}
+		}
+		else if(status_==WALK_LEFT)
+		{
+			int val1 = map_data.tile[y2+1][x1-2];
+			int val2 = map_data.tile[y2][x1-2];
+			if (val1 != BLANK_TILE && val2==BLANK_TILE)
+			{
+				map_data.tile[y2][x1 - 2] = BRAVE;
+				num_brave--;
+			}
+			
+		}
 	}
 }

@@ -161,6 +161,8 @@
     <ClCompile Include="ImpTimer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainObject.cpp" />
+    <ClCompile Include="PlayerPower.cpp" />
+    <ClCompile Include="TextObject.cpp" />
     <ClCompile Include="ThreatsObject.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +171,8 @@
     <ClInclude Include="CommonFunc.h" />
     <ClInclude Include="ExplosionObject.h" />
     <ClInclude Include="gamemap.h" />
+    <ClInclude Include="PlayerPower.h" />
+    <ClInclude Include="TextObject.h" />
     <ClInclude Include="ImpTimer.h" />
     <ClInclude Include="MainObject.h" />
     <ClInclude Include="ThreatsObject.h" />

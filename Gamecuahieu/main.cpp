@@ -6,8 +6,10 @@
 #include"ImpTimer.h"
 #include"ThreatsObject.h"
 #include"ExplosionObject.h"
+#include"TextObject.h"
+#include"PlayerPower.h"
 BaseObject g_background;
-
+TTF_Font* font_time=NULL;
 
 
 
@@ -38,6 +40,15 @@ bool InitData()
             {
                 success = false;
             }
+        }
+        if (TTF_Init() == -1)
+        {
+           success= false;
+        }
+        font_time = TTF_OpenFont("font//dlxfont.ttf",15);
+        if (font_time == NULL)
+        {
+            success = false;
         }
     }
     return success;
@@ -71,7 +82,7 @@ std::vector<ThreatsObject*>MakeThreatsList()
             p_threats->LoadImg("img//threat_left.png", g_screen);
             p_threats->set_clips();
             p_threats->set_type_move(ThreatsObject::MOVE_IN_SPACE_TH);
-            p_threats->set_x_pos(1000 + i * 500);
+            p_threats->set_x_pos(1000 + i * 800);
             p_threats->set_y_pos(250);
             p_threats->set_input_left(1);
             int pos1 = p_threats->get_x_pos() - 60;
@@ -117,6 +128,12 @@ int main(int argc, char* argv[])
     p_player.LoadImg("img//player_right.png", g_screen);
     p_player.set_clips();
 
+    PlayerLives player_power;
+    player_power.Init(g_screen);
+    PlayerMoney player_money;
+    player_money.Init(g_screen);
+    player_money.SetPos(SCREEN_WIDTH * 0.5 - 300, 8);
+
     std::vector<ThreatsObject*>threats_list = MakeThreatsList();
     ExplosionObject exp_player;
     bool pRet=exp_player.LoadImg("img//exp3.png", g_screen);
@@ -126,6 +143,21 @@ int main(int argc, char* argv[])
     bool tRet = exp_threat.LoadImg("img//exp3.png", g_screen);
     if (!tRet) return -1;
     exp_threat.set_clips();
+
+    int num_die = 1;
+    //Time text
+    TextObject time_game;
+    time_game.SetColor(TextObject::WHITE_TEXT);
+  
+    TextObject mark_game;
+    mark_game.SetColor(TextObject::WHITE_TEXT);
+    UINT mark_value = 0;
+    TextObject money_game;
+    money_game.SetColor(TextObject::WHITE_TEXT);
+    TextObject numbrave_game;
+    numbrave_game.SetColor(TextObject::WHITE_TEXT);
+    TextObject notification_brave;
+    notification_brave.SetColor(TextObject::WHITE_TEXT);
     bool is_quit = false;
     
     while (!is_quit)
@@ -148,16 +180,55 @@ int main(int argc, char* argv[])
        
         p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
         p_player.DoPlayer(map_data);
+        if (p_player.get_brave() && p_player.GetNumBrave()>0)
+        {
+                p_player.DoBrave(map_data);
+        }
+        if (p_player.get_out_area())
+        {
+            num_die++;
+            player_power.Decrease();
+            player_power.Render(g_screen);
+        }
+        if(num_die>3)
+        {
+            player_power.Decrease();
+            player_power.Render(g_screen);
+            if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
+            {
+                close();
+                SDL_Quit();
+                return 0;
+            }
+        }
         p_player.Show(g_screen);
         p_player.HandleBullet(g_screen,map_data);
         game_map.SetMap(map_data);
         game_map.DrawMap(g_screen);
+        player_power.Show(g_screen);
+        player_money.Show(g_screen);
+
         for (int i = 0; i < threats_list.size(); i++)
         {
             ThreatsObject* p_threat = threats_list.at(i);
-            if (map_data.start_x_ > p_threat->get_x_pos())continue;
-            else if ( map_data.start_x_ + SCREEN_WIDTH < p_threat->get_x_pos())
+            if (map_data.start_x_ > p_threat->get_x_pos())
             {
+                std::vector<BulletObject*> bullet_LIST = p_threat->get_bullet_list();
+                for (int i = 0; i < bullet_LIST.size(); i++)
+                {
+                    bullet_LIST[i]->set_is_move(false);
+                    bullet_LIST[i]->SetRect(p_threat->get_x_pos() - map_data.start_x_, p_threat->get_y_pos());
+                }
+                continue;
+            }
+            else if (map_data.start_x_ + SCREEN_WIDTH < p_threat->get_x_pos())
+            {
+                std::vector<BulletObject*> bullet_LIST = p_threat->get_bullet_list();
+                for (int i = 0; i < bullet_LIST.size(); i++)
+                {
+                    bullet_LIST[i]->set_is_move(false);
+                    bullet_LIST[i]->SetRect(p_threat->get_x_pos() - map_data.start_x_, p_threat->get_y_pos());
+                }
                 break;
             }
             else {
@@ -165,59 +236,69 @@ int main(int argc, char* argv[])
                 {
                     p_threat->SetMapXY(map_data.start_x_, map_data.start_y_);
                     p_threat->ImpMoveType(g_screen);
-                    p_threat->DoPlayer(map_data);
-                    p_threat->MakeBullet(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT, p_player.get_x_pos(), p_player.get_y_pos(),map_data);
+                    p_threat->DoPlayer(map_data,g_screen);
+                    if (p_threat->get_on_ground())
+                    {
+                        p_threat->MakeBullet(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT, p_player.get_x_pos(), p_player.get_y_pos(), map_data);
+                    }
                     p_threat->Show(g_screen);
 
                     SDL_Rect rect_player = p_player.GetRectFrame();
                     bool bCol1 = false;
-                    std::vector<BulletObject*>tBullet_list = p_threat->get_bullet_list();
-                    for (int jj = 0; jj < tBullet_list.size(); jj++)
+                    if (p_player.get_threat_can_fire() )
                     {
-                        BulletObject* pt_bullet = tBullet_list.at(jj);
-                        if (pt_bullet)
+                        std::vector<BulletObject*>tBullet_list = p_threat->get_bullet_list();
+                        for (int jj = 0; jj < tBullet_list.size(); jj++)
                         {
-                            bCol1 = SDLCommonFunc::IsInside(pt_bullet->GetRect(), rect_player);
+                            BulletObject* pt_bullet = tBullet_list.at(jj);
+                            if (pt_bullet)
+                            {
+                                bCol1 = SDLCommonFunc::IsInside(pt_bullet->GetRect(), rect_player);
+
+                            }
                             if (bCol1)
                             {
-                                for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
-                                {
-                                    int x_pos = p_player.get_x_pos() - rect_player.w * 0.5;
-                                    int y_pos = p_player.get_y_pos() - rect_player.h * 0.5;
-                                    exp_player.set_frame(ex);
-                                    exp_player.SetRect(x_pos, y_pos);
-                                    exp_player.Show(g_screen);
-                                    SDL_RenderPresent(g_screen);
-                                }
-                                
-                                p_threat->RemoveBullet(jj);
                                 break;
                             }
                         }
-                    }
-                    SDL_Rect rect_threat = p_threat->GetRectFrame();
-                    bool bCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_threat);
-                    if (bCol2)
-                    {
-                        for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
+                        SDL_Rect rect_threat = p_threat->GetRectFrame();
+                        bool bCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_threat);
+                        if (bCol1 == true || bCol2 == true)
                         {
-                            int x_pos = p_player.get_x_pos() - rect_player.w * 0.5;
-                            int y_pos = p_player.get_y_pos() - rect_player.h * 0.5;
-                            exp_player.set_frame(ex);
-                            exp_player.SetRect(x_pos, y_pos);
-                            exp_player.Show(g_screen);
-                            SDL_RenderPresent(g_screen);
-                        }
+                            int width_exp_frame = exp_player.get_frame_height();
+                            int heiht_exp_height = exp_player.get_frame_width();
+                            for (int ex = 0; ex < 4; ex++)
+                            {
+                                int x_pos = (p_player.GetRect().x + p_player.get_frame_width() * 0.5) - width_exp_frame * 0.5;
+                                int y_pos = (p_player.GetRect().y + p_player.get_frame_height() * 0.5) - heiht_exp_height * 0.5;
 
-                    }
-                    if (bCol1 == true || bCol2 == true)
-                    {
-                        if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
-                        {
-                            p_threat->Free();
-                            close();
-                            SDL_Quit();
-                            return 0;
+                                exp_player.set_frame(ex);
+                                exp_player.SetRect(x_pos, y_pos);
+                                exp_player.Show(g_screen);
+                                SDL_RenderPresent(g_screen);
+                            }
+                            num_die++;
+                            if (num_die <= 3)
+                            {
+                                p_player.SetRect(0, 0);
+                                p_player.set_comebeack_time(60);
+                                SDL_Delay(500);
+                                player_power.Decrease();
+                                player_power.Render(g_screen);
+                                continue;
+                            }
+                            else
+                            {
+                                player_power.Decrease();
+                                player_power.Render(g_screen);
+                                if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
+                                {
+                                    p_threat->Free();
+                                    close();
+                                    SDL_Quit();
+                                    return 0;
+                                }
+                            }
                         }
                     }
                 }
@@ -235,32 +316,114 @@ int main(int argc, char* argv[])
                 for (int t = 0; t < threats_list.size(); t++)
                 {
                     ThreatsObject* obj_threat = threats_list.at(t);
-                    if (obj_threat != NULL)
+                    if (map_data.start_x_ > obj_threat->get_x_pos())continue;
+                    else if (map_data.start_x_ + SCREEN_WIDTH < obj_threat->get_x_pos())
                     {
-                        SDL_Rect tRect;
-                        tRect.x = obj_threat->GetRect().x;
-                        tRect.y = obj_threat->GetRect().y;
-                        tRect.w = obj_threat->get_width_frame();
-                        tRect.h = obj_threat->get_height_frame();
-                        SDL_Rect bRect = p_bullet->GetRect();
-                        bool bCol = SDLCommonFunc::IsInside(bRect, tRect);
-                        if (bCol)
+                        break;
+                    }
+                    else {
+                        if (obj_threat != NULL)
                         {
-                            for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
+                            SDL_Rect tRect;
+                            tRect.x = obj_threat->GetRect().x;
+                            tRect.y = obj_threat->GetRect().y;
+                            tRect.w = obj_threat->get_width_frame();
+                            tRect.h = obj_threat->get_height_frame();
+                            SDL_Rect bRect = p_bullet->GetRect();
+                            bool bCol = SDLCommonFunc::IsInside(bRect, tRect);
+                            if (bCol)
                             {
-                                int x_pos = obj_threat->GetRect().x - frame_exp_width * 0.5;
-                                int y_pos = obj_threat->GetRect().y - frame_exp_heigh * 0.5;
-                                exp_threat.set_frame(ex);
-                                exp_threat.SetRect(x_pos, y_pos);
-                                exp_threat.Show(g_screen);
-                            }   
-                            p_player.RemoveBullet(r);
-                            obj_threat->Free();
-                            threats_list.erase(threats_list.begin() + t);
+                                if (p_bullet->get_bullet_type() == BulletObject::SPHERE_BULLET &&
+                                    obj_threat->get_typemove() == ThreatsObject::MOVE_IN_SPACE_TH)
+                                {
+                                    mark_value += 100;
+                                    for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
+                                    {
+                                        int x_pos = obj_threat->GetRect().x - frame_exp_width * 0.5;
+                                        int y_pos = obj_threat->GetRect().y - frame_exp_heigh * 0.5;
+                                        exp_threat.set_frame(ex);
+                                        exp_threat.SetRect(x_pos, y_pos);
+                                        exp_threat.Show(g_screen);
+                                    }
+                                    obj_threat->Free();
+                                    threats_list.erase(threats_list.begin() + t);
+                                }
+                                else if(p_bullet->get_bullet_type() == BulletObject::LASER_BULLET &&
+                                    obj_threat->get_typemove() == ThreatsObject::STATIC_THREAT)
+                                {
+                                    mark_value += 200;
+                                    for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
+                                    {
+                                        int x_pos = obj_threat->GetRect().x - frame_exp_width * 0.5;
+                                        int y_pos = obj_threat->GetRect().y - frame_exp_heigh * 0.5;
+                                        exp_threat.set_frame(ex);
+                                        exp_threat.SetRect(x_pos, y_pos);
+                                        exp_threat.Show(g_screen);
+                                    }
+                                    obj_threat->Free();
+                                    threats_list.erase(threats_list.begin() + t);
+                                }
+                                p_player.RemoveBullet(r);
+                            }
                         }
                     }
                 }
             }
+        }
+        //Show game time
+        std::string str_time = "TIME: ";
+        Uint32 time_val = SDL_GetTicks() / 1000;
+        Uint32 val_time = 300 - time_val;
+        Uint32 minutes = val_time / 60; // Số phút
+        Uint32 seconds = val_time % 60; // Số giây còn lại
+
+        if (val_time <= 0)
+        {
+            if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
+            {
+                is_quit = true;
+                break;
+            }
+        }
+        else
+        {
+            std::string str_min = std::to_string(minutes);
+            std::string str_sec = std::to_string(seconds);
+            if (seconds < 10) {
+                str_sec = "0" + str_sec;
+            }
+
+            str_time += str_min + ":" + str_sec;
+            time_game.SetText(str_time);
+            time_game.loadFromRenderedText(font_time, g_screen);
+            time_game.RenderText(g_screen, SCREEN_WIDTH - 200, 15);
+        }
+        std::string val_str_mark = std::to_string(mark_value);
+        std::string strMark("Mark: ");
+        strMark += val_str_mark;
+
+        mark_game.SetText(strMark);
+        mark_game.loadFromRenderedText(font_time, g_screen);
+        mark_game.RenderText(g_screen, SCREEN_WIDTH * 0.5 - 50, 15);
+
+        int num_brave = p_player.GetNumBrave();
+        std::string numbrave_str = std::to_string(num_brave);
+        numbrave_game.SetText(numbrave_str);
+        numbrave_game.loadFromRenderedText(font_time, g_screen);
+        numbrave_game.RenderText(g_screen, SCREEN_WIDTH * 0.5 + 250, 15);
+
+        int money_val = p_player.GetMoneyCount();
+        std::string money_str = std::to_string(money_val);
+        money_game.SetText(money_str);
+        money_game.loadFromRenderedText(font_time, g_screen);
+        money_game.RenderText(g_screen, SCREEN_WIDTH * 0.5 - 250, 15);
+
+        if (num_brave== 0)
+        {
+            std::string notification = "NO BRAVE";
+            notification_brave.SetText(notification);
+            notification_brave.loadFromRenderedText(font_time, g_screen);
+            notification_brave.RenderText(g_screen, SCREEN_WIDTH * 0.5 + 270, 15);
         }
         SDL_RenderPresent(g_screen);
         int real_imp_time = fps_timer.get_ticks();

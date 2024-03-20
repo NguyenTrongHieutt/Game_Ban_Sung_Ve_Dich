@@ -1,4 +1,3 @@
-#pragma once
 #ifndef GAME_MAP_H
 #define GAME_MAP_H
 #include"CommonFunc.h"

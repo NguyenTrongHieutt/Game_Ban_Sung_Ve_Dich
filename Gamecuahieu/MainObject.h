@@ -1,5 +1,4 @@
-#pragma once
-#ifndef MAIN_OBJECT_H_
+﻿#ifndef MAIN_OBJECT_H_
 #define MAIN_OBJECT_H_
 #include"CommonFunc.h"
 #include"BaseObject.h"
@@ -10,6 +9,7 @@
 #define MAX_FALL_SPEED 10
 #define PLAYER_SPEED 8
 #define PLAYER_JUMP_VAL 18
+
 class MainObject :public BaseObject
 {
 public:
@@ -48,8 +48,23 @@ public:
 	float get_x_pos()const { return x_pos_; }
 	float get_y_pos()const { return y_pos_; }
 	float get_x_val() const { return x_val_; }
+	void set_comebeack_time(const int& cb_time) { come_back_time_ = cb_time; }
+	int get_frame_width() { return width_frame_; }
+	int get_frame_height() { return height_frame_; }
+
+	int GetMoneyCount() { return money_count; }
+	int GetNumBrave() { return num_brave; }
+
+	bool get_threat_can_fire() { return Threat_can_fire; }
+	bool get_out_area() { return out_area; }
+
+	void DoBrave(Map& map_data);
+	bool get_brave() { return brave; }
 private:
+	bool out_area;
+	bool Threat_can_fire;
 	int money_count;
+	int num_brave;
 	std::vector<BulletObject*> p_bullet_list_;
 	float x_val_; 
 	float y_val_;
@@ -68,6 +83,8 @@ private:
 	int come_back_time_;
 	unsigned int sellect_bullet_;
 	bool doublejump;
+	bool brave;
+
 };
 
 

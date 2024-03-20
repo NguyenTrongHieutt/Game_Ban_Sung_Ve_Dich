@@ -1,7 +1,6 @@
-#pragma once
 #ifndef BULLET_OBJECT_H_
 #define BULLET_OBJECT_H_
-#define SPEED_BULLET 15
+#define SPEED_BULLET 12
 #define HEIGHT_THREAT 50
 
 #include "BaseObject.h"
@@ -54,6 +53,7 @@ public:
     void set_speedbullet_x_y(const float& x_, const float& y_) { x_bullet = x_; y_bullet = y_; }
     void CheckToMapMain(Map& map_data);
     void CheckToMapThreat(Map& map_data);
+    unsigned int get_bullet_type() { return bullet_type_; }
 private:
     int x_val_;
     int y_val_;

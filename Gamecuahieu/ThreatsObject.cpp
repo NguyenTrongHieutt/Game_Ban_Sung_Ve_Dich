@@ -109,7 +109,7 @@ void ThreatsObject::Show(SDL_Renderer* des)
 		SDL_RenderCopy(des, p_object_, current_clip, &renderQuad);
 	}
 }
-void ThreatsObject::DoPlayer(Map& gMap)
+void ThreatsObject::DoPlayer(Map& gMap, SDL_Renderer* screen)
 {
 	if (come_back_time_ == 0)
 	{
@@ -128,7 +128,7 @@ void ThreatsObject::DoPlayer(Map& gMap)
 		{
 			x_val_ += THREAT_SPEED;
 		}
-		CheckToMap(gMap);
+		CheckToMap(gMap,screen);
 	}
 	else if (come_back_time_ > 0)
 	{
@@ -171,7 +171,7 @@ void ThreatsObject::RemoveBullet(const int& idx)
 		}
 	}
 }
-void ThreatsObject::CheckToMap(Map& map_data)
+void ThreatsObject::CheckToMap(Map& map_data,SDL_Renderer* screen)
 {
 	int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
 	int height_min = height_frame_ < TILE_SIZE ? height_frame_ : TILE_SIZE;
@@ -191,26 +191,33 @@ void ThreatsObject::CheckToMap(Map& map_data)
 		{
 			int val1 = map_data.tile[y1][x2];
 			int val2 = map_data.tile[y2][x2];
-		
-				if ((val1 != BLANK_TILE&&val1!= STATE_MONEY) || (val2 != BLANK_TILE&&val2!= STATE_MONEY))
-				{
-					// Đặt lại vị trí x để tránh va chạm
-					x_pos_ = x2 * TILE_SIZE - width_frame_ - 1;
-					x_val_ = 0;
-				}
-			
+
+			if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+			{
+				// Đặt lại vị trí x để tránh va chạm
+				x_pos_ = x2 * TILE_SIZE - width_frame_ - 1;
+				x_val_ = -x_val_; // Đổi hướng di chuyển
+				input_type_.left_ = 1;
+				input_type_.right_ = 0;
+				LoadImg("img//threat_left.png", screen);
+
+				
+			}
 		}
 		else if (x_val_ < 0) // Di chuyển sang trái
 		{
 			int val1 = map_data.tile[y1][x1];
 			int val2 = map_data.tile[y2][x1];
 			if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
-				{
-					// Đặt lại vị trí x để tránh va chạm
-					x_pos_ = (x1 + 1) * TILE_SIZE;
-					x_val_ = 0;
-				}
-			
+			{
+				// Đặt lại vị trí x để tránh va chạm
+				x_pos_ = (x1 + 1) * TILE_SIZE;
+				x_val_ = -x_val_; // Đổi hướng di chuyển
+				input_type_.left_ = 0;
+				input_type_.right_ = 1;
+				LoadImg("img//threat_right.png", screen);
+				
+			}
 		}
 	}
 
@@ -268,6 +275,7 @@ void ThreatsObject::CheckToMap(Map& map_data)
 	}
 	if (y_pos_ > map_data.max_y_)
 	{
+		on_ground = false;
 		come_back_time_ = 50;
 	}
 }
@@ -319,26 +327,26 @@ void ThreatsObject::InitBullet(BulletObject* p_bullet, SDL_Renderer* screen)
 }
 void ThreatsObject::MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit, const float& x2,const float& y2,Map& map_data)
 {
-	
-	for (int i = 0; i < bullet_list_.size(); i++)
-	{
-		BulletObject* p_bullet = bullet_list_.at(i);
-		if (p_bullet != NULL)
+
+		for (int i = 0; i < bullet_list_.size(); i++)
 		{
-			
-				if (p_bullet->get_is_move()==true)
+			BulletObject* p_bullet = bullet_list_.at(i);
+			if (p_bullet != NULL)
+			{
+
+				if (p_bullet->get_is_move() == true)
 				{
-					  
-						p_bullet->HandleMoveThreat(x_limit, y_limit,x_pos_,y_pos_,x2,y2,map_data);
-						p_bullet->Render(des); 
+
+					p_bullet->HandleMoveThreat(x_limit, y_limit, x_pos_, y_pos_, x2, y2, map_data);
+					p_bullet->Render(des);
 				}
 				else
 				{
 					p_bullet->set_is_move(true);
 					p_bullet->SetRect(rect_.x, rect_.y);
 				}
-			
+
+			}
 		}
-	}
 	
 }

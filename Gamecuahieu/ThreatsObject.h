@@ -1,4 +1,3 @@
-#pragma once
 #ifndef THREATS_OBJECT_H_
 #define THREATS_OBJECT_H_
 
@@ -35,9 +34,9 @@ public:
  
     void SetMapXY(const int& map_x, const int& map_y) { map_x_ = map_x, map_y_ = map_y; }
   
-    void CheckToMap(Map& g_map);
+    void CheckToMap(Map& g_map, SDL_Renderer* screen);
  
-    void DoPlayer(Map& g_map);
+    void DoPlayer(Map& g_map, SDL_Renderer* screen);
  
     void Show(SDL_Renderer* des);
     bool LoadImg(std::string path, SDL_Renderer* screen);
@@ -61,7 +60,8 @@ public:
     std::vector<BulletObject*> get_bullet_list() const { return bullet_list_; }
     void set_bullet_list(const std::vector<BulletObject*>& am_list) { bullet_list_ = am_list; }
     void InitBullet(BulletObject* p_bullet, SDL_Renderer* screen);
-    void MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit,const float& x2,const float& y2,Map& map_data );
+    void MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit,
+                    const float& x2,const float& y2,Map& map_data );
     void RemoveBullet(const int& idx);
     SDL_Rect GetRectFrame();
     enum TypeMove
@@ -69,7 +69,8 @@ public:
         STATIC_THREAT = 0,
         MOVE_IN_SPACE_TH = 1,
     };
-
+    int get_typemove() { return type_move_; }
+    bool get_on_ground(){return on_ground;}
 private:
     int map_x_;
     int map_y_;

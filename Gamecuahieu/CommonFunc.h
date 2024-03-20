@@ -1,4 +1,3 @@
-#pragma once
 #ifndef COMMON_FUNCTION_H_
 #define COMMON_FUNCTION_H_
 #include<windows.h>
@@ -27,6 +26,9 @@ const int RENDER_DRAW_COLOR = 0xff;
 #define MAX_MAP_Y 10
 #define BLANK_TILE 0			
 #define STATE_MONEY 4
+#define ITEM_BRAVE 11
+#define BRAVE 10
+
 typedef struct Map 
 {
 	int start_x_;
