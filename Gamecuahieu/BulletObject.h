@@ -1,6 +1,7 @@
 #ifndef BULLET_OBJECT_H_
 #define BULLET_OBJECT_H_
 #define SPEED_BULLET 12
+#define SPEED_BOSS 15
 #define HEIGHT_THREAT 50
 
 #include "BaseObject.h"
@@ -49,7 +50,10 @@ public:
 
     void HandleMove(const int& x_border, const int& y_border,Map& map_data);
     bool LoadImgBullet(SDL_Renderer* des);
-    void HandleMoveThreat(const int& x_border, const int& y_border, const float& x1, const float& y1,const float& x2,const float& y2,Map& Map_data );
+    void HandleMoveBoss(const int& x_border, const int& y_border, const float& x1,
+                        const float& y1, const float& x2, const float& y2, Map& Map_data);
+    void HandleMoveThreat(const int& x_border, const int& y_border, const float& x1, 
+                          const float& y1,const float& x2,const float& y2,Map& Map_data );
     void set_speedbullet_x_y(const float& x_, const float& y_) { x_bullet = x_; y_bullet = y_; }
     void CheckToMapMain(Map& map_data);
     void CheckToMapThreat(Map& map_data);

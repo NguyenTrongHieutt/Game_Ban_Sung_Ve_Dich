@@ -57,6 +57,7 @@ public:
 
 	bool get_threat_can_fire() { return Threat_can_fire; }
 	bool get_out_area() { return out_area; }
+	bool get_on_ground() { return on_ground; }
 
 	void DoBrave(Map& map_data);
 	bool get_brave() { return brave; }

@@ -3,88 +3,104 @@
   "WorkspaceRootPath": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\TextObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\TextObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\MainObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\MainObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\PlayerPower.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\PlayerPower.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\MainObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\MainObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\ExplosionObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\CommonFunc.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\CommonFunc.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ThreatsObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\ThreatsObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BossObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\BossObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\BaseObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\MainObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\MainObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\CommonFunc.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\CommonFunc.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\PlayerPower.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\PlayerPower.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ImpTimer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\ImpTimer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\gamemap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ImpTimer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\ImpTimer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\gamemap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\CommonFunc.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\CommonFunc.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\BulletObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\ExplosionObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\BulletObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\TextObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\TextObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\BaseObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\PlayerPower.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\PlayerPower.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ThreatsObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\ThreatsObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\BaseObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ImpTimer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\ImpTimer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\CommonFunc.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\CommonFunc.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\MainObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\MainObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\gamemap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\gamemap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\TextObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\TextObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\ExplosionObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\ExplosionObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\TextObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\TextObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BossObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\BossObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\BulletObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\BaseObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ImpTimer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\ImpTimer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\Geometric.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\Geometric.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\BulletObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\Geometric.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B353610-026A-4EC9-9D2E-691E73D9900A}|Gamecuahieu\\Gamecuahieu.vcxproj|solutionrelative:Gamecuahieu\\Geometric.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -94,7 +110,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
@@ -104,145 +120,113 @@
               "RelativeDocumentMoniker": "Gamecuahieu\\MainObject.cpp",
               "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\MainObject.cpp",
               "RelativeToolTip": "Gamecuahieu\\MainObject.cpp",
-              "ViewState": "AQIAALYBAAAAAAAAAAAAAL4BAAADAAAA",
+              "ViewState": "AQIAALMBAAAAAAAAAAAAANsBAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-02T15:14:07.954Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TextObject.cpp",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\TextObject.cpp",
-              "RelativeDocumentMoniker": "Gamecuahieu\\TextObject.cpp",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\TextObject.cpp",
-              "RelativeToolTip": "Gamecuahieu\\TextObject.cpp",
-              "ViewState": "AQIAADAAAAAAAAAAAAAAAE8AAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-19T15:29:08.969Z",
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "PlayerPower.h",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\PlayerPower.h",
+              "RelativeDocumentMoniker": "Gamecuahieu\\PlayerPower.h",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\PlayerPower.h",
+              "RelativeToolTip": "Gamecuahieu\\PlayerPower.h",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAuwDMAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-20T10:39:57.208Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ThreatsObject.h",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ThreatsObject.h",
+              "RelativeDocumentMoniker": "Gamecuahieu\\ThreatsObject.h",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ThreatsObject.h",
+              "RelativeToolTip": "Gamecuahieu\\ThreatsObject.h",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAAAFIAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-14T01:17:42.639Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ThreatsObject.cpp",
               "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ThreatsObject.cpp",
               "RelativeDocumentMoniker": "Gamecuahieu\\ThreatsObject.cpp",
               "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ThreatsObject.cpp",
               "RelativeToolTip": "Gamecuahieu\\ThreatsObject.cpp",
-              "ViewState": "AQIAADsBAAAAAAAAAAAAAIUAAAACAAAA",
+              "ViewState": "AQIAAMwAAAAAAAAAAAAuwP4AAACMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-14T01:26:11.005Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "CommonFunc.h",
               "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\CommonFunc.h",
               "RelativeDocumentMoniker": "Gamecuahieu\\CommonFunc.h",
               "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\CommonFunc.h",
               "RelativeToolTip": "Gamecuahieu\\CommonFunc.h",
-              "ViewState": "AQIAABkAAAAAAAAAAAAAAB4AAAAAAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAABsAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-02T15:14:07.954Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainObject.h",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\MainObject.h",
-              "RelativeDocumentMoniker": "Gamecuahieu\\MainObject.h",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\MainObject.h",
-              "RelativeToolTip": "Gamecuahieu\\MainObject.h",
-              "ViewState": "AQIAADUAAAAAAAAAAAAAAFgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-02T15:14:07.954Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T15:14:07.954Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "PlayerPower.h",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\PlayerPower.h",
-              "RelativeDocumentMoniker": "Gamecuahieu\\PlayerPower.h",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\PlayerPower.h",
-              "RelativeToolTip": "Gamecuahieu\\PlayerPower.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAUAAAA",
+              "Title": "BaseObject.h",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.h",
+              "RelativeDocumentMoniker": "Gamecuahieu\\BaseObject.h",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.h",
+              "RelativeToolTip": "Gamecuahieu\\BaseObject.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-20T10:39:57.208Z",
+              "WhenOpened": "2024-03-02T15:14:07.783Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BossObject.cpp",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BossObject.cpp",
+              "RelativeDocumentMoniker": "Gamecuahieu\\BossObject.cpp",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BossObject.cpp",
+              "RelativeToolTip": "Gamecuahieu\\BossObject.cpp",
+              "ViewState": "AQIAAMYAAAAAAAAAAAAAACYBAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-20T16:17:18.47Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ExplosionObject.h",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.h",
-              "RelativeDocumentMoniker": "Gamecuahieu\\ExplosionObject.h",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.h",
-              "RelativeToolTip": "Gamecuahieu\\ExplosionObject.h",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-19T10:48:46.694Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\main.cpp",
               "RelativeDocumentMoniker": "Gamecuahieu\\main.cpp",
               "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\main.cpp",
               "RelativeToolTip": "Gamecuahieu\\main.cpp",
-              "ViewState": "AQIAAMMBAAAAAAAAAAAAAJgBAAAvAAAA",
+              "ViewState": "AQIAAC8BAAAAAAAAAAAYwPYAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-03-02T15:14:07.844Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "PlayerPower.cpp",
               "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\PlayerPower.cpp",
               "RelativeDocumentMoniker": "Gamecuahieu\\PlayerPower.cpp",
               "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\PlayerPower.cpp",
               "RelativeToolTip": "Gamecuahieu\\PlayerPower.cpp",
-              "ViewState": "AQIAAD4AAAAAAAAAAAAAAAkAAAAOAAAA",
+              "ViewState": "AQIAAG4AAAAAAAAAAAAuwHcAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-20T10:40:39Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-20T10:40:39Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "ImpTimer.h",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ImpTimer.h",
-              "RelativeDocumentMoniker": "Gamecuahieu\\ImpTimer.h",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ImpTimer.h",
-              "RelativeToolTip": "Gamecuahieu\\ImpTimer.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-02T15:14:07.954Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "gamemap.h",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.h",
-              "RelativeDocumentMoniker": "Gamecuahieu\\gamemap.h",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.h",
-              "RelativeToolTip": "Gamecuahieu\\gamemap.h",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-02T15:14:07.97Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
               "Title": "ImpTimer.cpp",
               "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ImpTimer.cpp",
               "RelativeDocumentMoniker": "Gamecuahieu\\ImpTimer.cpp",
@@ -250,125 +234,187 @@
               "RelativeToolTip": "Gamecuahieu\\ImpTimer.cpp",
               "ViewState": "AQIAADMAAAAAAAAAAAAAADsAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T15:14:07.954Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T15:14:07.954Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "gamemap.cpp",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.cpp",
-              "RelativeDocumentMoniker": "Gamecuahieu\\gamemap.cpp",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.cpp",
-              "RelativeToolTip": "Gamecuahieu\\gamemap.cpp",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAgwE4AAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T15:14:07.97Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 10,
               "Title": "CommonFunc.cpp",
               "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\CommonFunc.cpp",
               "RelativeDocumentMoniker": "Gamecuahieu\\CommonFunc.cpp",
               "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\CommonFunc.cpp",
               "RelativeToolTip": "Gamecuahieu\\CommonFunc.cpp",
-              "ViewState": "AQIAAAwAAAAAAAAAAAApwCUAAAABAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAABUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T15:14:07.97Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T15:14:07.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "gamemap.h",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.h",
+              "RelativeDocumentMoniker": "Gamecuahieu\\gamemap.h",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.h",
+              "RelativeToolTip": "Gamecuahieu\\gamemap.h",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAABoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-02T15:14:07.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "gamemap.cpp",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.cpp",
+              "RelativeDocumentMoniker": "Gamecuahieu\\gamemap.cpp",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\gamemap.cpp",
+              "RelativeToolTip": "Gamecuahieu\\gamemap.cpp",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAgwE4AAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-02T15:14:07.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MainObject.h",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\MainObject.h",
+              "RelativeDocumentMoniker": "Gamecuahieu\\MainObject.h",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\MainObject.h",
+              "RelativeToolTip": "Gamecuahieu\\MainObject.h",
+              "ViewState": "AQIAADMAAAAAAAAAAAAAADsAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-02T15:14:07.954Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 14,
-              "Title": "BulletObject.cpp",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.cpp",
-              "RelativeDocumentMoniker": "Gamecuahieu\\BulletObject.cpp",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.cpp",
-              "RelativeToolTip": "Gamecuahieu\\BulletObject.cpp",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAAAIBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T15:14:07.954Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "ExplosionObject.cpp",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.cpp",
-              "RelativeDocumentMoniker": "Gamecuahieu\\ExplosionObject.cpp",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.cpp",
-              "RelativeToolTip": "Gamecuahieu\\ExplosionObject.cpp",
-              "ViewState": "AQIAAEsAAAAAAAAAAAAAAEcAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-19T10:49:24.554Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "BulletObject.h",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.h",
-              "RelativeDocumentMoniker": "Gamecuahieu\\BulletObject.h",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.h",
-              "RelativeToolTip": "Gamecuahieu\\BulletObject.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-02T15:14:07.954Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
               "Title": "TextObject.h",
               "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\TextObject.h",
               "RelativeDocumentMoniker": "Gamecuahieu\\TextObject.h",
               "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\TextObject.h",
               "RelativeToolTip": "Gamecuahieu\\TextObject.h",
-              "ViewState": "AQIAAAoAAAAAAAAAAAApwB8AAAAAAAAA",
+              "ViewState": "AQIAABMAAAAAAAAAAAApwB8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-19T15:28:14.276Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-19T15:28:14.276Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ExplosionObject.h",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.h",
+              "RelativeDocumentMoniker": "Gamecuahieu\\ExplosionObject.h",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.h",
+              "RelativeToolTip": "Gamecuahieu\\ExplosionObject.h",
+              "ViewState": "AQIAAAMAAAAAAAAAAAApwA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-19T10:48:46.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ExplosionObject.cpp",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.cpp",
+              "RelativeDocumentMoniker": "Gamecuahieu\\ExplosionObject.cpp",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ExplosionObject.cpp",
+              "RelativeToolTip": "Gamecuahieu\\ExplosionObject.cpp",
+              "ViewState": "AQIAADkAAAAAAAAAAAAAAFYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-19T10:49:24.554Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "TextObject.cpp",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\TextObject.cpp",
+              "RelativeDocumentMoniker": "Gamecuahieu\\TextObject.cpp",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\TextObject.cpp",
+              "RelativeToolTip": "Gamecuahieu\\TextObject.cpp",
+              "ViewState": "AQIAAEEAAAAAAAAAAAApwE8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-19T15:29:08.969Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 18,
+              "Title": "BossObject.h",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BossObject.h",
+              "RelativeDocumentMoniker": "Gamecuahieu\\BossObject.h",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BossObject.h",
+              "RelativeToolTip": "Gamecuahieu\\BossObject.h",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-20T16:15:59.151Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "BulletObject.cpp",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.cpp",
+              "RelativeDocumentMoniker": "Gamecuahieu\\BulletObject.cpp",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.cpp",
+              "RelativeToolTip": "Gamecuahieu\\BulletObject.cpp",
+              "ViewState": "AQIAAAQAAAAAAAAAAAApwBIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-02T15:14:07.954Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "BaseObject.cpp",
               "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.cpp",
               "RelativeDocumentMoniker": "Gamecuahieu\\BaseObject.cpp",
               "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.cpp",
               "RelativeToolTip": "Gamecuahieu\\BaseObject.cpp",
-              "ViewState": "AQIAABMAAAAAAAAAAAApwCEAAAAAAAAA",
+              "ViewState": "AQIAAAIAAAAAAAAAAAApwA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-03-02T15:14:07.954Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T15:14:07.954Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "ThreatsObject.h",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ThreatsObject.h",
-              "RelativeDocumentMoniker": "Gamecuahieu\\ThreatsObject.h",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ThreatsObject.h",
-              "RelativeToolTip": "Gamecuahieu\\ThreatsObject.h",
-              "ViewState": "AQIAAEcAAAAAAAAAAAApwEgAAAArAAAA",
+              "DocumentIndex": 21,
+              "Title": "ImpTimer.h",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ImpTimer.h",
+              "RelativeDocumentMoniker": "Gamecuahieu\\ImpTimer.h",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\ImpTimer.h",
+              "RelativeToolTip": "Gamecuahieu\\ImpTimer.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-14T01:17:42.639Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T15:14:07.954Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "BaseObject.h",
-              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.h",
-              "RelativeDocumentMoniker": "Gamecuahieu\\BaseObject.h",
-              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BaseObject.h",
-              "RelativeToolTip": "Gamecuahieu\\BaseObject.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "DocumentIndex": 22,
+              "Title": "Geometric.h",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\Geometric.h",
+              "RelativeDocumentMoniker": "Gamecuahieu\\Geometric.h",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\Geometric.h",
+              "RelativeToolTip": "Gamecuahieu\\Geometric.h",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAABwAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-03-02T15:14:07.783Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-20T15:46:42.255Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "BulletObject.h",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.h",
+              "RelativeDocumentMoniker": "Gamecuahieu\\BulletObject.h",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\BulletObject.h",
+              "RelativeToolTip": "Gamecuahieu\\BulletObject.h",
+              "ViewState": "AQIAACwAAAAAAAAAAAAAAAMAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-03-02T15:14:07.954Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Geometric.cpp",
+              "DocumentMoniker": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\Geometric.cpp",
+              "RelativeDocumentMoniker": "Gamecuahieu\\Geometric.cpp",
+              "ToolTip": "C:\\Users\\HIEU\\Documents\\GitHub\\Game_Ban_Sung_Ve_Dich\\Gamecuahieu\\Geometric.cpp",
+              "RelativeToolTip": "Gamecuahieu\\Geometric.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-03-20T15:48:27.132Z"
             }
           ]
         }

@@ -36,4 +36,30 @@ private:
     int x_pos_;
     int y_pos_;
 };
+class BossLives:public BaseObject
+{
+public:
+    BossLives();
+    ~BossLives();
+
+    void Show(SDL_Renderer* screen);
+    void Init(SDL_Renderer* screen);
+    void SetPos(const int& x, const int& y) { x_pos_ = x; y_pos_ = y; };
+private:
+    int x_pos_;
+    int y_pos_;
+};
+class PlayerBrave : public BaseObject
+{
+public:
+    PlayerBrave();
+    ~PlayerBrave();
+
+    void Show(SDL_Renderer* screen);
+    void Init(SDL_Renderer* screen);
+    void SetPos(const int& x, const int& y) { x_pos_ = x; y_pos_ = y; };
+private:
+    int x_pos_;
+    int y_pos_;
+};
 #endif

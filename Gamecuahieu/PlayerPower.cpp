@@ -82,3 +82,53 @@ void PlayerMoney::Show(SDL_Renderer* screen)
     rect_.y = y_pos_;
     Render(screen);
 }
+//BossLives
+BossLives::BossLives()
+{
+    x_pos_ = 0;
+    y_pos_ = 0;
+}
+
+BossLives::~BossLives()
+{
+
+}
+
+
+void BossLives::Init(SDL_Renderer* screen)
+{
+    LoadImg("img//money.png", screen);
+}
+
+
+void BossLives::Show(SDL_Renderer* screen)
+{
+    rect_.x = x_pos_;
+    rect_.y = y_pos_;
+    Render(screen);
+}
+//Brave
+PlayerBrave::PlayerBrave()
+{
+    x_pos_ = 0;
+    y_pos_ = 0;
+}
+
+PlayerBrave::~PlayerBrave()
+{
+
+}
+
+
+void PlayerBrave::Init(SDL_Renderer* screen)
+{
+    LoadImg("img//brave.png", screen);
+}
+
+
+void PlayerBrave::Show(SDL_Renderer* screen)
+{
+    rect_.x = x_pos_;
+    rect_.y = y_pos_;
+    Render(screen);
+}

@@ -55,7 +55,7 @@ public:
         animation_b_ = pos_b;
     }
     void set_input_left(const int& ipLeft) { input_type_.left_ = ipLeft; }
-    void ImpMoveType(SDL_Renderer* screen);
+    void ImpMoveType(SDL_Renderer* screen, const float& x, const float& y);
     void InitThreats();
     std::vector<BulletObject*> get_bullet_list() const { return bullet_list_; }
     void set_bullet_list(const std::vector<BulletObject*>& am_list) { bullet_list_ = am_list; }

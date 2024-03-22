@@ -48,6 +48,12 @@
     <ClCompile Include="PlayerPower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Geometric.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BossObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFunc.h">
@@ -78,6 +84,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerPower.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometric.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

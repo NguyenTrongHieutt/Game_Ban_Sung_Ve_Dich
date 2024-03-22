@@ -192,7 +192,7 @@ void ThreatsObject::CheckToMap(Map& map_data,SDL_Renderer* screen)
 			int val1 = map_data.tile[y1][x2];
 			int val2 = map_data.tile[y2][x2];
 
-			if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+			if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1!=ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2!=ITEM_BRAVE))
 			{
 				// Đặt lại vị trí x để tránh va chạm
 				x_pos_ = x2 * TILE_SIZE - width_frame_ - 1;
@@ -208,7 +208,7 @@ void ThreatsObject::CheckToMap(Map& map_data,SDL_Renderer* screen)
 		{
 			int val1 = map_data.tile[y1][x1];
 			int val2 = map_data.tile[y2][x1];
-			if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+			if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
 			{
 				// Đặt lại vị trí x để tránh va chạm
 				x_pos_ = (x1 + 1) * TILE_SIZE;
@@ -236,7 +236,7 @@ void ThreatsObject::CheckToMap(Map& map_data,SDL_Renderer* screen)
 			int val1 = map_data.tile[y2][x1];
 			int val2 = map_data.tile[y2][x2];
 			
-			if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+			if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
 				{
 					// Đặt lại vị trí y để tránh va chạm
 					y_pos_ = y2 * TILE_SIZE - height_frame_ - 1;
@@ -252,7 +252,7 @@ void ThreatsObject::CheckToMap(Map& map_data,SDL_Renderer* screen)
 			int val1 = map_data.tile[y1][x1];
 			int val2 = map_data.tile[y1][x2];
 			
-			if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+			if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
 				{
 					// Đặt lại vị trí y để tránh va chạm
 					y_pos_ = (y1 + 1) * TILE_SIZE;
@@ -279,11 +279,12 @@ void ThreatsObject::CheckToMap(Map& map_data,SDL_Renderer* screen)
 		come_back_time_ = 50;
 	}
 }
-void ThreatsObject::ImpMoveType(SDL_Renderer* screen)
+void ThreatsObject::ImpMoveType(SDL_Renderer* screen,const float& x,const float& y)
 {
 	if (type_move_ == STATIC_THREAT)
 	{
-		;//
+		if(x_pos_>=x) LoadImg("img//threat_level.png", screen);
+		else LoadImg("img//threat_level_right.png", screen);
 	}
 	else
 	{
