@@ -133,21 +133,45 @@ int main(int argc, char* argv[])
     Uint32 timegame = 300;
     Uint32 val_time = 300;
     GameMap game_map;
-    int ret_menu = Menu::ShowMenu(g_screen, font_time);
-    if (ret_menu == 0)
-    {
-        Continue = false;
-        Game::ResetThreatGame();
+    std::ifstream File("HaveContinue.txt");
+    int X=0;
+
+    if (File.is_open()) {  
+        File >> X;
+        File.close();  
     }
-    else if (ret_menu == 1)
-    {
-        Continue = true;
+    else {
+        std::cerr << "Unable to open file." << std::endl;
+    }
+    if (X == 1) {
+        int ret_menu = Menu::ShowMenu(g_screen, font_time);
+        if (ret_menu == 0)
+        {
+            Continue = false;
+            Game::ResetThreatGame();
+        }
+        else if (ret_menu == 1)
+        {
+            Continue = true;
+        }
+        else
+        {
+            return 0;
+        }
     }
     else
     {
-        return 0;
+        int ret_menu = Menu::ShowMenuNoCon(g_screen, font_time);
+        if (ret_menu == 0)
+        {
+            Continue = false;
+            Game::ResetThreatGame();
+        }
+        else
+        {
+            return 0;
+        }
     }
-
    
     if (LoadBackground() == false)
     {
@@ -248,6 +272,17 @@ int main(int argc, char* argv[])
                 Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
                     , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
                 Game::SaveMap("map//mapcontinue.txt", map_data);
+                std::ofstream file("HaveContinue.txt");
+                if (file.is_open())
+                {
+                    int x = 1;
+                    file << x << "\n";
+                    file.close();
+                }
+                else
+                {
+                    std::cerr << "Unable to save map to file " << std::endl;
+                }
                 is_quit = true;
             }
             p_player.HandelInputAction(g_event, g_screen);
@@ -272,9 +307,17 @@ int main(int argc, char* argv[])
         {
             player_power.Decrease();
             player_power.Render(g_screen);
-            Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
-                , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
-            Game::SaveMap("map//mapcontinue.txt", map_data);
+            std::ofstream file("HaveContinue.txt");
+            if (file.is_open())
+            {
+                int x = 0;
+                file << x << "\n";
+                file.close();
+            }
+            else
+            {
+                std::cerr << "Unable to save map to file " << std::endl;
+            }
             if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
             {
                 close();
@@ -381,12 +424,25 @@ int main(int argc, char* argv[])
                             {
                                 player_power.Decrease();
                                 player_power.Render(g_screen);
-                                Menu::ShowGameOver(g_screen, font_time);
-                               
+                                std::ofstream file("HaveContinue.txt");
+                                if (file.is_open())
+                                {
+                                    int x = 0;
+                                    file << x << "\n";
+                                    file.close();
+                                }
+                                else
+                                {
+                                    std::cerr << "Unable to save map to file " << std::endl;
+                                }
+                                if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
+                                {
                                     bossObject.Free();
                                     close();
                                     SDL_Quit();
-                                    is_quit = true;
+                                    return 0;
+                                }
+                               
                                 
                             }
                         }
@@ -528,13 +584,21 @@ int main(int argc, char* argv[])
                         {
                             player_power.Decrease();
                             player_power.Render(g_screen);
-                            Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
-                                , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
-                            Game::SaveMap("map//mapcontinue.txt", map_data);
+                           
                             is_quit = true;
+                            std::ofstream file("HaveContinue.txt");
+                            if (file.is_open())
+                            {
+                                int x = 0;
+                                file << x << "\n";
+                                file.close();
+                            }
+                            else
+                            {
+                                std::cerr << "Unable to save map to file " << std::endl;
+                            }
                             if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
                             {
-                                bossObject.Free();
                                 close();
                                 SDL_Quit();
                                 return 0;
@@ -584,10 +648,20 @@ int main(int argc, char* argv[])
             {
                 if (num_boss == 0)
                 {
-                    Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
-                    , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
-                Game::SaveMap("map//mapcontinue.txt", map_data);
+                   
                 is_quit = true;
+                std::ofstream file("HaveContinue.txt");
+                if (file.is_open())
+                {
+                    int x = 0;
+                    file << x << "\n";
+                    file.close();
+                }
+                else
+                {
+                    std::cerr << "Unable to save map to file " << std::endl;
+                }
+           
                     if (MessageBox(NULL, L"VITORY!", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
                     {
                         close();
@@ -611,9 +685,17 @@ int main(int argc, char* argv[])
 
         if (val_time <= 0)
         {
-            Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
-                , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
-            Game::SaveMap("map//mapcontinue.txt", map_data);
+            std::ofstream file("HaveContinue.txt");
+            if (file.is_open())
+            {
+                int x = 0;
+                file << x << "\n";
+                file.close();
+            }
+            else
+            {
+                std::cerr << "Unable to save map to file " << std::endl;
+            }
             is_quit = true;
             if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
             {
