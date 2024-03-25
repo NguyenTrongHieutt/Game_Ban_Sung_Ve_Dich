@@ -10,6 +10,8 @@
 #include"PlayerPower.h"
 #include"Geometric.h"
 #include"BossObject.h"
+#include"Menu.h"
+#include"Game.h"
 BaseObject g_background;
 TTF_Font* font_time=NULL;
 
@@ -84,7 +86,7 @@ std::vector<ThreatsObject*>MakeThreatsList()
             p_threats->LoadImg("img//threat_left.png", g_screen);
             p_threats->set_clips();
             p_threats->set_type_move(ThreatsObject::MOVE_IN_SPACE_TH);
-            p_threats->set_x_pos(1000 + i * 1200);
+            p_threats->set_x_pos(1000 + i * 950);
             p_threats->set_y_pos(250);
             p_threats->set_input_left(1);
             int pos1 = p_threats->get_x_pos() - 60;
@@ -104,7 +106,7 @@ std::vector<ThreatsObject*>MakeThreatsList()
             p_threats->LoadImg("img//threat_level.png", g_screen);
             p_threats->set_clips();
             p_threats->set_type_move(ThreatsObject::STATIC_THREAT);
-            p_threats->set_x_pos(10500+ i*500);
+            p_threats->set_x_pos(10500+ i*700);
             p_threats->set_y_pos(250);
             p_threats->set_input_left(0);
             BulletObject* p_bullet = new BulletObject();
@@ -114,26 +116,50 @@ std::vector<ThreatsObject*>MakeThreatsList()
     }
     return list_threats;
 }
-//Boss Threat
-BossObject bossObject;
 
 int main(int argc, char* argv[])
 {
-    ImpTimer fps_timer;
+    bool Continue = false;
+    
     if (InitData() == false)
         return -1;
-    if (LoadBackground() == false)
-        return -1;
+   
+    //Boss Threat
+    BossObject bossObject;
+    int num_boss = 15;
+    MainObject p_player;
+    int num_die = 3;
+    ImpTimer fps_timer;
+    Uint32 timegame = 300;
+    Uint32 val_time = 300;
     GameMap game_map;
+    int ret_menu = Menu::ShowMenu(g_screen, font_time);
+    if (ret_menu == 0)
+    {
+        Continue = false;
+        Game::ResetThreatGame();
+    }
+    else if (ret_menu == 1)
+    {
+        Continue = true;
+    }
+    else
+    {
+        return 0;
+    }
+
+   
+    if (LoadBackground() == false)
+    {
+        return -1;
+    }
     game_map.LoadMap("map/map01.dat");
     game_map.LoadTiles(g_screen);
     
-    MainObject p_player;
+ 
     p_player.LoadImg("img//player_right.png", g_screen);
     p_player.set_clips();
 
-    PlayerLives player_power;
-    player_power.Init(g_screen);
     PlayerMoney player_money;
     player_money.Init(g_screen);
     player_money.SetPos(SCREEN_WIDTH * 0.5 - 300, 8);
@@ -156,7 +182,7 @@ int main(int argc, char* argv[])
     if (!tRet) return -1;
     exp_threat.set_clips();
 
-    int num_die = 1;
+    
     //Time text
     TextObject time_game;
     time_game.SetColor(TextObject::WHITE_TEXT);
@@ -177,7 +203,7 @@ int main(int argc, char* argv[])
     threat.SetColor(TextObject::WHITE_TEXT);
     bool flag_threat = false;
 
-    int num_boss = 15;
+   
     if (num_boss != 0)
     {
         bool ret = bossObject.LoadImg("img//threat_level.png", g_screen);
@@ -188,13 +214,40 @@ int main(int argc, char* argv[])
         BulletObject* b_bullet = new BulletObject();
         bossObject.InitBullet(b_bullet, g_screen);
     }
+    if (Continue)
+    {
+        int mnc, br;
+        float xpos, ypos;
+        Game::LoadGame("Game.txt", mnc, br, xpos, ypos, num_boss, num_die, mark_value, timegame);
+        p_player.set_x_pos(xpos);
+        p_player.set_y_pos(ypos);
+        p_player.SetBrave(br);
+        p_player.SetMoney(mnc);
+        std::ifstream file("Threat.txt");
+        int pos;
+        while (file >> pos)
+        {
+            threats_list.erase(threats_list.begin() + pos);
+        }
+        file.close();
+        Map continuemap = game_map.getMap();
+        Game::LoadMapFromTxt("map//mapcontinue.txt", continuemap);
+        game_map.SetMap(continuemap);
+    }
+
+    PlayerLives player_power;
+    player_power.Init(g_screen, num_die);
     while (!is_quit)
     {
         fps_timer.start();
+        Map map_data = game_map.getMap();
         while (SDL_PollEvent(&g_event) != 0)
         {
             if (g_event.type == SDL_QUIT)
             {
+                Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
+                    , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
+                Game::SaveMap("map//mapcontinue.txt", map_data);
                 is_quit = true;
             }
             p_player.HandelInputAction(g_event, g_screen);
@@ -202,10 +255,7 @@ int main(int argc, char* argv[])
         SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
         SDL_RenderClear(g_screen);
         g_background.Render(g_screen, NULL);
-        
-        Map map_data = game_map.getMap();
-  
-       
+   
         p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
         p_player.DoPlayer(map_data);
         if (p_player.get_brave() && p_player.GetNumBrave()>0)
@@ -214,14 +264,17 @@ int main(int argc, char* argv[])
         }
         if (p_player.get_out_area())
         {
-            num_die++;
+            num_die--;
             player_power.Decrease();
             player_power.Render(g_screen);
         }
-        if(num_die>3)
+        if(num_die<=0)
         {
             player_power.Decrease();
             player_power.Render(g_screen);
+            Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
+                , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
+            Game::SaveMap("map//mapcontinue.txt", map_data);
             if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
             {
                 close();
@@ -314,8 +367,8 @@ int main(int argc, char* argv[])
                                 exp_player.Show(g_screen);
                                 SDL_RenderPresent(g_screen);
                             }
-                            num_die++;
-                            if (num_die <= 3)
+                            num_die--;
+                            if (num_die !=0)
                             {
                                 p_player.SetRect(0, 0);
                                 p_player.set_comebeack_time(60);
@@ -328,13 +381,13 @@ int main(int argc, char* argv[])
                             {
                                 player_power.Decrease();
                                 player_power.Render(g_screen);
-                                if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
-                                {
-                                    p_threat->Free();
+                                Menu::ShowGameOver(g_screen, font_time);
+                               
+                                    bossObject.Free();
                                     close();
                                     SDL_Quit();
-                                    return 0;
-                                }
+                                    is_quit = true;
+                                
                             }
                         }
                     }
@@ -381,6 +434,7 @@ int main(int argc, char* argv[])
                                         exp_threat.SetRect(x_pos, y_pos);
                                         exp_threat.Show(g_screen);
                                     }
+                                    Game::SaveDieThreat(t);
                                     obj_threat->Free();
                                     threats_list.erase(threats_list.begin() + t);
                                     flag_threat = false;
@@ -397,6 +451,7 @@ int main(int argc, char* argv[])
                                         exp_threat.SetRect(x_pos, y_pos);
                                         exp_threat.Show(g_screen);
                                     }
+                                    Game::SaveDieThreat(t);
                                     obj_threat->Free();
                                     threats_list.erase(threats_list.begin() + t);
                                     flag_threat = false;
@@ -459,8 +514,8 @@ int main(int argc, char* argv[])
                             exp_player.Show(g_screen);
                             SDL_RenderPresent(g_screen);
                         }
-                        num_die++;
-                        if (num_die <= 3)
+                        num_die--;
+                        if (num_die !=0)
                         {
                             p_player.SetRect(0, 0);
                             p_player.set_comebeack_time(60);
@@ -473,6 +528,10 @@ int main(int argc, char* argv[])
                         {
                             player_power.Decrease();
                             player_power.Render(g_screen);
+                            Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
+                                , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
+                            Game::SaveMap("map//mapcontinue.txt", map_data);
+                            is_quit = true;
                             if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
                             {
                                 bossObject.Free();
@@ -525,6 +584,10 @@ int main(int argc, char* argv[])
             {
                 if (num_boss == 0)
                 {
+                    Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
+                    , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
+                Game::SaveMap("map//mapcontinue.txt", map_data);
+                is_quit = true;
                     if (MessageBox(NULL, L"VITORY!", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
                     {
                         close();
@@ -542,12 +605,16 @@ int main(int argc, char* argv[])
         //Show game time
         std::string str_time = "TIME: ";
         Uint32 time_val = SDL_GetTicks() / 1000;
-        Uint32 val_time = 300 - time_val;
+        val_time = timegame - time_val;
         Uint32 minutes = val_time / 60; // Số phút
         Uint32 seconds = val_time % 60; // Số giây còn lại
 
         if (val_time <= 0)
         {
+            Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
+                , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
+            Game::SaveMap("map//mapcontinue.txt", map_data);
+            is_quit = true;
             if (MessageBox(NULL, L"GAME OVER", L"Info", MB_OK | MB_ICONSTOP) == IDOK)
             {
                 is_quit = true;

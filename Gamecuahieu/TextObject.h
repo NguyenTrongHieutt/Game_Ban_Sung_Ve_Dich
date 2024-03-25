@@ -7,8 +7,8 @@
 class TextObject
 {
 public:
-    TextObject(void);
-    ~TextObject(void);
+    TextObject();
+    ~TextObject();
 
     enum TextColor
     {

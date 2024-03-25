@@ -36,3 +36,4 @@ bool SDLCommonFunc::IsInside(const SDL_Rect& rectA, const SDL_Rect& rectB) {
    
     return leftA >= leftB && rightA <= rightB && topA >= topB && bottomA <= bottomB;
 }
+

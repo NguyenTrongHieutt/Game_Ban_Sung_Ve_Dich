@@ -27,7 +27,7 @@ public:
 	};
 private:
 	Map game_map_;
-	TileMat tile_mat[MAX_TILES];
+	TileMat tile_mat[MAX_TILES]; 
 };
 
 

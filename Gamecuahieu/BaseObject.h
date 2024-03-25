@@ -1,6 +1,7 @@
 #ifndef BASE_OBJECT_H_
 #define BASE_OBJECT_H_
 #include"CommonFunc.h"
+
 class BaseObject
 {
 public:
@@ -22,4 +23,5 @@ protected:
 	SDL_Texture* p_object_;
 	SDL_Rect rect_;
 };
+
 #endif // !BASE_OBJECT_H_

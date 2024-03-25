@@ -27,23 +27,31 @@ void PlayerLives::Show(SDL_Renderer* screen)
     }
 }
 
-void PlayerLives::Init(SDL_Renderer* screen)
+void PlayerLives::Init(SDL_Renderer* screen,const int& num)
 {
     LoadImg("img//player_pw.png", screen);
-    number_ = 3;
+
     if (pos_list_.size() > 0)
     {
         pos_list_.clear();
     }
-
-    AddPos(20);
-    AddPos(60);
-    AddPos(100);
+    if (num >= 1)
+    {
+        AddPos(20);
+    }
+    if (num >= 2)
+    {
+        AddPos(60);
+    }
+    if (num >= 3)
+    {
+        AddPos(100);
+    }
 }
 
 void PlayerLives::Decrease()
 {
-    number_--;
+   
     pos_list_.pop_back();
 }
 

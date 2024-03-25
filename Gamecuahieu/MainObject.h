@@ -54,6 +54,10 @@ public:
 
 	int GetMoneyCount() { return money_count; }
 	int GetNumBrave() { return num_brave; }
+	void SetMoney(int mn) { money_count = mn; }
+	void SetBrave(int br) { num_brave = br; }
+	void set_x_pos(const float& xps) { x_pos_ = xps; }
+	void set_y_pos(const float& yps) { y_pos_ = yps; }
 
 	bool get_threat_can_fire() { return Threat_can_fire; }
 	bool get_out_area() { return out_area; }
