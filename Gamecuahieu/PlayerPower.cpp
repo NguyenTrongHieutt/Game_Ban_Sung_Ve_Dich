@@ -105,7 +105,7 @@ BossLives::~BossLives()
 
 void BossLives::Init(SDL_Renderer* screen)
 {
-    LoadImg("img//money.png", screen);
+    LoadImg("img//player_pw.png", screen);
 }
 
 

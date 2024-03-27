@@ -150,7 +150,7 @@ void BulletObject:: CheckToMapMain(Map& map_data)
             int val2 = map_data.tile[y2][x2];
             
            
-                if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+                if ((val1 != BLANK_TILE && val1 != STATE_MONEY&&val1!=ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY&&val2!=ITEM_BRAVE))
                 {
                     is_move_ = false;
                 }
@@ -163,7 +163,7 @@ void BulletObject:: CheckToMapMain(Map& map_data)
           
             
             
-                if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+            if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
                 {
                     is_move_ = false;
                 }
@@ -188,7 +188,7 @@ void BulletObject:: CheckToMapMain(Map& map_data)
            
             
             
-                if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+            if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
                 {
                     is_move_ = false;
                 }
@@ -202,7 +202,7 @@ void BulletObject:: CheckToMapMain(Map& map_data)
            
             
             
-                if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+            if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
                 {
                     is_move_=false;
                 }
@@ -325,7 +325,7 @@ void BulletObject::CheckToMapThreat(Map& map_data)
             int val2 = map_data.tile[y2][x2];
 
 
-            if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+            if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
             {
                 is_move_ = false;
                 flag_bullet = true;
@@ -339,7 +339,7 @@ void BulletObject::CheckToMapThreat(Map& map_data)
 
 
 
-            if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+            if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
             {
                 is_move_ = false;
                 flag_bullet = true;
@@ -365,7 +365,7 @@ void BulletObject::CheckToMapThreat(Map& map_data)
 
 
 
-            if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+            if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
             {
                 is_move_ = false;
                 flag_bullet = true;
@@ -380,7 +380,7 @@ void BulletObject::CheckToMapThreat(Map& map_data)
 
 
 
-            if ((val1 != BLANK_TILE && val1 != STATE_MONEY) || (val2 != BLANK_TILE && val2 != STATE_MONEY))
+            if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
             {
                 is_move_ = false;
                 flag_bullet = true;
