@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
+    <ClCompile Include="BossMini.cpp" />
     <ClCompile Include="BossObject.cpp" />
     <ClCompile Include="BulletObject.cpp" />
     <ClCompile Include="CommonFunc.cpp" />
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="BossMini.h" />
     <ClInclude Include="BossObject.h" />
     <ClInclude Include="BulletObject.h" />
     <ClInclude Include="CommonFunc.h" />

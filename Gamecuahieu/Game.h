@@ -13,7 +13,10 @@ namespace Game
         int num_boss,
         int num_die,
         UINT mark_value,
-        UINT32 val_time)
+        UINT32 val_time,
+        bool showboss,
+        float x_pos_boss,
+        float y_pos_boss)
   {
         std::ofstream file(filename);
         if (file.is_open()) {
@@ -25,6 +28,9 @@ namespace Game
                 << num_die << " "
                 << mark_value << " "
                 << val_time << " "
+                << showboss << " "
+                << x_pos_boss<<" "
+                <<y_pos_boss<< " "
                 << std::endl;
             file.close();
         }
@@ -40,7 +46,10 @@ namespace Game
             int& num_boss,
             int& num_die,
             UINT& mark_value,
-            UINT32& val_time
+            UINT32& val_time,
+            bool& showboss,
+            float& x_pos_boss,
+            float& y_pos_boss
             ) {
         std::ifstream file(filename);
         if (file.is_open()) {
@@ -52,6 +61,9 @@ namespace Game
                 >> num_die
                 >> mark_value
                 >> val_time
+                >>showboss
+                >> x_pos_boss
+                >> y_pos_boss
                 ;
                
             file.close();

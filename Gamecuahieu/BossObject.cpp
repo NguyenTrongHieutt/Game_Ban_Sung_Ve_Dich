@@ -15,6 +15,7 @@ BossObject::BossObject()
     think_time_ = 0;
     map_x_ = 0;
     map_y_ = 0;
+    on_ground_ = 0;
 }
 
 BossObject::~BossObject()
@@ -74,7 +75,24 @@ void BossObject::Show(SDL_Renderer* des)
         SDL_RenderCopy(des, p_object_, currentClip, &renderQuad);
     }
 }
-
+void BossObject::ImpMoveType( const float& x)
+{
+        if (on_ground_ == true)
+        {
+            if (x_pos_ >= x)
+            {
+                input_type_.left_ = 1;
+                input_type_.right_ = 0;
+                
+            }
+            else if (x_pos_ < x)
+            {
+                input_type_.right_ = 1;
+                input_type_.left_ = 0;
+              
+            }
+        }
+}
 void BossObject::DoPlayer(Map& g_map)
 {
     if (think_time_ == 0)
@@ -89,12 +107,12 @@ void BossObject::DoPlayer(Map& g_map)
 
         if (input_type_.left_ == 1)
         {
-            x_val_ -= PLAYER_SPEED;
+            x_val_ -= BOSS_SPEED;
         }
 
         else if (input_type_.right_ == 1)
         {
-            x_val_ += PLAYER_SPEED;
+            x_val_ += BOSS_SPEED;
         }
 
         if (input_type_.jump_ == 1)
@@ -102,8 +120,7 @@ void BossObject::DoPlayer(Map& g_map)
             if (on_ground_ == 1)
             {
                 y_val_ = -PLAYER_HIGHT_VAL;
-            }
-
+            }  
             input_type_.jump_ = 0;
         }
 
@@ -212,6 +229,13 @@ void BossObject::CheckToMap(Map& g_map)
         if (x_val_ > 0) // when object is moving by right  ===>
         {
             // Check current position of map. It is not blank_tile.
+            int val1 = g_map.tile[y1][x2];
+            int val2 = g_map.tile[y2][x2];
+            if (val1 == BRAVE || val2 == BRAVE)
+            {
+                g_map.tile[y1][x2] = 0;
+                g_map.tile[y2][x2] = 0;
+            }
             if ((g_map.tile[y1][x2] != BLANK_TILE) || (g_map.tile[y2][x2] != BLANK_TILE))
             {
                 // Fixed post of object at current post of map.
@@ -223,6 +247,13 @@ void BossObject::CheckToMap(Map& g_map)
         }
         else if (x_val_ < 0) // When moving by left    <====
         {
+            int val1 = g_map.tile[y1][x1];
+            int val2 = g_map.tile[y2][x1];
+            if (val1 == BRAVE || val2 == BRAVE)
+            {
+                g_map.tile[y1][x1] = 0;
+                g_map.tile[y2][x1] = 0;
+            }
             if ((g_map.tile[y1][x1] != BLANK_TILE) || (g_map.tile[y2][x1] != BLANK_TILE))
             {
                 x_pos_ = (x1 + 1) * TILE_SIZE;

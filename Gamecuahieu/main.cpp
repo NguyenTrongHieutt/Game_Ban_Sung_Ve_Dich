@@ -12,6 +12,7 @@
 #include"BossObject.h"
 #include"Menu.h"
 #include"Game.h"
+#include"BossMini.h"
 BaseObject g_background;
 TTF_Font* font_time=NULL;
 
@@ -77,7 +78,7 @@ std::vector<ThreatsObject*>MakeThreatsList()
 {
     std::vector<ThreatsObject*>list_threats;
     ThreatsObject* dynamic_threats = new ThreatsObject[30];
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 30; i++)
     {
         ThreatsObject* p_threats = (dynamic_threats + i);
         if (p_threats != NULL)
@@ -129,8 +130,10 @@ int main(int argc, char* argv[])
         //Boss Threat
         BossObject bossObject;
         int num_boss = 15;
+        bool creat_threat = true;
         MainObject p_player;
         int num_die = 3;
+        bool showboss = false;
         ImpTimer fps_timer;
         Uint32 timegame = 300;
         Uint32 val_time = 300;
@@ -197,8 +200,19 @@ int main(int argc, char* argv[])
         player_brave.SetPos(SCREEN_WIDTH * 0.5 + 200, 10);
 
         std::vector<ThreatsObject*>threats_list = MakeThreatsList();
-
-
+        std::vector<BulletObject> storm(9);
+        for (int i = 0; i < storm.size(); i++)
+        {
+            storm[i].LoadImg("img//boss bullet.png", g_screen);
+            storm[i].set_bullet_dir(BulletObject::DIR_DOWN);
+            storm[i].SetRect(64 + i * 64 * 3, -64);
+            storm[i].set_x_val(0);
+            if (i % 2 == 0)
+            {
+                storm[i].set_y_val(8);
+            }
+            else storm[i].set_y_val(10);
+        }
         ExplosionObject exp_player;
         bool pRet = exp_player.LoadImg("img//exp3.png", g_screen);
         if (!pRet) return -1;
@@ -234,21 +248,34 @@ int main(int argc, char* argv[])
         {
             bool ret = bossObject.LoadImg("img//threat_level.png", g_screen);
             bossObject.set_clips();
-            int xPosBoss = MAX_MAP_X * TILE_SIZE - SCREEN_WIDTH * 0.6;
+            int xPosBoss = MAX_MAP_X* TILE_SIZE - SCREEN_WIDTH * 0.6;//1200;
             bossObject.set_xpos(xPosBoss);
             bossObject.set_ypos(10);
             BulletObject* b_bullet = new BulletObject();
             bossObject.InitBullet(b_bullet, g_screen);
         }
+        BossMini threat1, threat2;
+        bool ret1 = threat1.LoadImg("img//threat_level.png", g_screen);
+        bool ret2 = threat2.LoadImg("img//threat_level.png", g_screen);
+        threat1.set_clips();
+        threat2.set_clips();
+        threat1.set_xpos(bossObject.get_x_pos() + 64);
+        threat2.set_xpos(bossObject.get_x_pos() - 64);
+        threat1.set_ypos(bossObject.get_y_pos());
+        threat2.set_ypos(bossObject.get_y_pos());
+        threat1.set_speed(4);
+        threat2.set_speed(5);
         if (Continue)
         {
             int mnc, br;
-            float xpos, ypos;
-            Game::LoadGame("Game.txt", mnc, br, xpos, ypos, num_boss, num_die, mark_value, timegame);
+            float xpos, ypos, xposboss, yposboss;
+            Game::LoadGame("Game.txt", mnc, br, xpos, ypos, num_boss, num_die, mark_value, timegame,showboss,xposboss, yposboss);
             p_player.set_x_pos(xpos);
             p_player.set_y_pos(ypos);
             p_player.SetBrave(br);
             p_player.SetMoney(mnc);
+            bossObject.set_xpos(xposboss);
+            bossObject.set_ypos(yposboss);
             std::ifstream file("Threat.txt");
             int pos;
             while (file >> pos)
@@ -275,7 +302,8 @@ int main(int argc, char* argv[])
                 if (g_event.type == SDL_QUIT)
                 {
                     Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
-                        , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
+                                    ,p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time,
+                                     showboss,bossObject.get_x_pos(),bossObject.get_y_pos());
                     Game::SaveMap("map//mapcontinue.txt", map_data);
                     std::ofstream file("HaveContinue.txt");
                     if (file.is_open())
@@ -300,7 +328,8 @@ int main(int argc, char* argv[])
                         if (ret == 1)
                         {
                             Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
-                                , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
+                                           ,p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time, showboss,
+                                           bossObject.get_x_pos(),bossObject.get_y_pos());
                             Game::SaveMap("map//mapcontinue.txt", map_data);
                             std::ofstream file("HaveContinue.txt");
                             if (file.is_open())
@@ -318,7 +347,8 @@ int main(int argc, char* argv[])
                         else if (ret == 2)
                         {
                             Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
-                                , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time);
+                                           ,p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time,
+                                           showboss, bossObject.get_x_pos(), bossObject.get_y_pos());
                             Game::SaveMap("map//mapcontinue.txt", map_data);
                             std::ofstream file("HaveContinue.txt");
                             if (file.is_open())
@@ -588,18 +618,22 @@ int main(int argc, char* argv[])
             }
             //Show Boss
             int val = MAX_MAP_X * TILE_SIZE - (map_data.start_x_ + p_player.GetRect().x);
-            if (val < SCREEN_WIDTH)
-            {
-                boss_power.Show(g_screen);
-                std::string boss_power_str = std::to_string(num_boss);
-                boss_live_text.SetText(boss_power_str);
-                boss_live_text.loadFromRenderedText(font_time, g_screen);
-                boss_live_text.RenderText(g_screen, SCREEN_WIDTH * 0.5, 57);
-                if (num_boss != 0)
+            if (val < SCREEN_WIDTH) { showboss = true; }
+           if(showboss)
+           {          
+                if (num_boss > 0)
                 {
-                    bossObject.SetMapXY(map_data.start_x_, map_data.start_y_);
-                    bossObject.DoPlayer(map_data);
 
+                    boss_power.Show(g_screen);
+                    std::string boss_power_str = std::to_string(num_boss);
+                    boss_live_text.SetText(boss_power_str);
+                    boss_live_text.loadFromRenderedText(font_time, g_screen);
+                    boss_live_text.RenderText(g_screen, SCREEN_WIDTH * 0.5, 57);
+                    bossObject.SetMapXY(map_data.start_x_, map_data.start_y_);
+                    bossObject.ImpMoveType(p_player.get_x_pos());
+                    bossObject.DoPlayer(map_data);
+                    game_map.SetMap(map_data);
+                    game_map.DrawMap(g_screen);
                     bossObject.MakeBullet(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT, p_player.get_x_pos(), p_player.get_y_pos(), map_data);
                     bossObject.Show(g_screen);
                     SDL_Rect rect_player = p_player.GetRectFrame();
@@ -666,60 +700,267 @@ int main(int argc, char* argv[])
                                 int ret = Menu::ShowGameOver(g_screen, font_time);
                                 if (ret == 1) {
                                     close();
-                                   
+
                                     is_quit = true;
                                     Playgame = false;
                                 }
                                 else
                                 {
                                     close();
-                                   
+
                                     is_quit = true;
                                 }
                             }
                         }
                     }
-                }
-                std::vector<BulletObject*> bullet_arr = p_player.get_bullet_list();
-                for (int r = 0; r < bullet_arr.size(); r++)
-                {
-                    BulletObject* p_bullet = bullet_arr.at(r);
-                    if (p_bullet != NULL)
+                    std::vector<BulletObject*> bullet_arr = p_player.get_bullet_list();
+                    for (int r = 0; r < bullet_arr.size(); r++)
                     {
-                        SDL_Rect BRect;
-                        BRect.x = bossObject.GetRect().x;
-                        BRect.y = bossObject.GetRect().y;
-                        BRect.w = bossObject.get_width_frame();
-                        BRect.h = bossObject.get_height_frame();
-                        SDL_Rect bRect = p_bullet->GetRect();
-                        bool bCol = SDLCommonFunc::CheckCollision(bRect, BRect);
-                        if (bCol)
+                        BulletObject* p_bullet = bullet_arr.at(r);
+                        if (p_bullet != NULL)
                         {
-                            num_boss--;
-                            for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
+                            SDL_Rect BRect;
+                            BRect.x = bossObject.GetRect().x;
+                            BRect.y = bossObject.GetRect().y;
+                            BRect.w = bossObject.get_width_frame();
+                            BRect.h = bossObject.get_height_frame();
+                            SDL_Rect bRect = p_bullet->GetRect();
+                            bool bCol = SDLCommonFunc::CheckCollision(bRect, BRect);
+                            if (bCol)
                             {
-                                int x_pos = bossObject.GetRect().x - frame_exp_width * 0.5;
-                                int y_pos = bossObject.GetRect().y - frame_exp_heigh * 0.5;
-                                exp_threat.set_frame(ex);
-                                exp_threat.SetRect(x_pos, y_pos);
-                                exp_threat.Show(g_screen);
+                                num_boss--;
+                                for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
+                                {
+                                    int x_pos = bossObject.GetRect().x - frame_exp_width * 0.5;
+                                    int y_pos = bossObject.GetRect().y - frame_exp_heigh * 0.5;
+                                    exp_threat.set_frame(ex);
+                                    exp_threat.SetRect(x_pos, y_pos);
+                                    exp_threat.Show(g_screen);
+                                }
+
+                                bossObject.Free();
+
+                                p_player.RemoveBullet(r);
                             }
-
-                            bossObject.Free();
-
-                            p_player.RemoveBullet(r);
                         }
+                    }
+                    threat1.SetMapXY(map_data.start_x_, map_data.start_y_);
+                    threat1.ImpMoveType(g_screen,p_player.get_x_pos());
+                    threat1.DoPlayer(map_data);
+                    game_map.SetMap(map_data);
+                    game_map.DrawMap(g_screen);
+                    threat1.Show(g_screen);
+                    if(threat1.get_on_ground()){
+                    SDL_Rect rect_player1 = p_player.GetRectFrame();
+                    if (p_player.get_threat_can_fire())
+                    {
 
+                        SDL_Rect rect_boss = threat1.GetRectFrame();
+                        bool BossCol2 = SDLCommonFunc::CheckCollision(rect_player1, rect_boss);
+                        if (BossCol2 == true)
+                        {
+                            int width_exp_frame = exp_player.get_frame_height();
+                            int heiht_exp_height = exp_player.get_frame_width();
+                            for (int ex = 0; ex < 4; ex++)
+                            {
+                                int x_pos = (p_player.GetRect().x + p_player.get_frame_width() * 0.5) - width_exp_frame * 0.5;
+                                int y_pos = (p_player.GetRect().y + p_player.get_frame_height() * 0.5) - heiht_exp_height * 0.5;
 
+                                exp_player.set_frame(ex);
+                                exp_player.SetRect(x_pos, y_pos);
+                                exp_player.Show(g_screen);
+                                SDL_RenderPresent(g_screen);
+                            }
+                            num_die--;
+                            if (num_die != 0)
+                            {
+                                p_player.SetRect(0, 0);
+                                p_player.set_comebeack_time(60);
+                                SDL_Delay(500);
+                                player_power.Decrease();
+                                player_power.Render(g_screen);
+                                continue;
+                            }
+                            else
+                            {
+                                player_power.Decrease();
+                                player_power.Render(g_screen);
 
+                                is_quit = true;
+                                std::ofstream file("HaveContinue.txt");
+                                if (file.is_open())
+                                {
+                                    int x = 0;
+                                    file << x << "\n";
+                                    file.close();
+                                }
+                                else
+                                {
+                                    std::cerr << "Unable to save map to file " << std::endl;
+                                }
+                                int ret = Menu::ShowGameOver(g_screen, font_time);
+                                if (ret == 1) {
+                                    close();
 
+                                    is_quit = true;
+                                    Playgame = false;
+                                }
+                                else
+                                {
+                                    close();
+
+                                    is_quit = true;
+                                }
+                            }
+                        }
+                    }
+                    std::vector<BulletObject*> bullet_arr1 = p_player.get_bullet_list();
+                    for (int r = 0; r < bullet_arr1.size(); r++)
+                    {
+                        BulletObject* p_bullet = bullet_arr1.at(r);
+                        if (p_bullet != NULL)
+                        {
+                            SDL_Rect BRect;
+                            BRect.x = threat1.GetRect().x;
+                            BRect.y = threat1.GetRect().y;
+                            BRect.w = threat1.get_width_frame();
+                            BRect.h = threat1.get_height_frame();
+                            SDL_Rect bRect = p_bullet->GetRect();
+                            bool bCol = SDLCommonFunc::CheckCollision(bRect, BRect);
+                            if (bCol)
+                            {
+                                for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
+                                {
+                                    int x_pos = threat1.GetRect().x - frame_exp_width * 0.5;
+                                    int y_pos = threat1.GetRect().y - frame_exp_heigh * 0.5;
+                                    exp_threat.set_frame(ex);
+                                    exp_threat.SetRect(x_pos, y_pos);
+                                    exp_threat.Show(g_screen);
+                                }
+
+                                threat1.set_clips();
+                                threat1.set_xpos(bossObject.get_x_pos() + 64);
+                                threat1.set_ypos(bossObject.get_y_pos());
+                                threat1.set_think_time(180);
+                                threat1.set_on_ground(false);
+                                p_player.RemoveBullet(r);
+                            }
+                        }
                     }
                 }
+                    
+                    threat2.SetMapXY(map_data.start_x_, map_data.start_y_);
+                    threat2.ImpMoveType(g_screen, p_player.get_x_pos());
+                    threat2.DoPlayer(map_data);
+                    game_map.SetMap(map_data);
+                    game_map.DrawMap(g_screen);
+                    threat2.Show(g_screen);
+                    if (threat2.get_on_ground()) {
+                        SDL_Rect rect_player2 = p_player.GetRectFrame();
+                        if (p_player.get_threat_can_fire())
+                        {
+
+                            SDL_Rect rect_boss = threat2.GetRectFrame();
+                            bool BossCol2 = SDLCommonFunc::CheckCollision(rect_player2, rect_boss);
+                            if (BossCol2 == true)
+                            {
+                                int width_exp_frame = exp_player.get_frame_height();
+                                int heiht_exp_height = exp_player.get_frame_width();
+                                for (int ex = 0; ex < 4; ex++)
+                                {
+                                    int x_pos = (p_player.GetRect().x + p_player.get_frame_width() * 0.5) - width_exp_frame * 0.5;
+                                    int y_pos = (p_player.GetRect().y + p_player.get_frame_height() * 0.5) - heiht_exp_height * 0.5;
+
+                                    exp_player.set_frame(ex);
+                                    exp_player.SetRect(x_pos, y_pos);
+                                    exp_player.Show(g_screen);
+                                    SDL_RenderPresent(g_screen);
+                                }
+                                num_die--;
+                                if (num_die != 0)
+                                {
+                                    p_player.SetRect(0, 0);
+                                    p_player.set_comebeack_time(120);
+                                    SDL_Delay(500);
+                                    player_power.Decrease();
+                                    player_power.Render(g_screen);
+                                    continue;
+                                }
+                                else
+                                {
+                                    player_power.Decrease();
+                                    player_power.Render(g_screen);
+
+                                    is_quit = true;
+                                    std::ofstream file("HaveContinue.txt");
+                                    if (file.is_open())
+                                    {
+                                        int x = 0;
+                                        file << x << "\n";
+                                        file.close();
+                                    }
+                                    else
+                                    {
+                                        std::cerr << "Unable to save map to file " << std::endl;
+                                    }
+                                    int ret = Menu::ShowGameOver(g_screen, font_time);
+                                    if (ret == 1) {
+                                        close();
+
+                                        is_quit = true;
+                                        Playgame = false;
+                                    }
+                                    else
+                                    {
+                                        close();
+
+                                        is_quit = true;
+                                    }
+                                }
+                            }
+                        }
+                        std::vector<BulletObject*> bullet_arr2 = p_player.get_bullet_list();
+                        for (int r = 0; r < bullet_arr2.size(); r++)
+                        {
+                            BulletObject* p_bullet = bullet_arr2.at(r);
+                            if (p_bullet != NULL)
+                            {
+                                SDL_Rect BRect;
+                                BRect.x = threat2.GetRect().x;
+                                BRect.y = threat2.GetRect().y;
+                                BRect.w = threat2.get_width_frame();
+                                BRect.h = threat2.get_height_frame();
+                                SDL_Rect bRect = p_bullet->GetRect();
+                                bool bCol = SDLCommonFunc::CheckCollision(bRect, BRect);
+                                if (bCol)
+                                {
+                                    for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
+                                    {
+                                        int x_pos = threat2.GetRect().x - frame_exp_width * 0.5;
+                                        int y_pos = threat2.GetRect().y - frame_exp_heigh * 0.5;
+                                        exp_threat.set_frame(ex);
+                                        exp_threat.SetRect(x_pos, y_pos);
+                                        exp_threat.Show(g_screen);
+                                    }
+
+                                    threat2.set_clips();
+                                    threat2.set_xpos(bossObject.get_x_pos() + 64);
+                                    threat2.set_ypos(bossObject.get_y_pos());
+                                    threat2.set_think_time(180);
+                                    threat2.set_on_ground(false);
+                                    p_player.RemoveBullet(r);
+                                }
+                            }
+                        }
+                    }
+                }
+               
+
             }
             //Win
             if (p_player.get_x_pos() >= map_data.max_x_ - p_player.get_frame_width() * 2 && p_player.get_on_ground())
             {
-                if (num_boss == 0)
+                if (num_boss <= 0)
                 {
 
                     is_quit = true;
@@ -762,7 +1003,94 @@ int main(int argc, char* argv[])
             val_time = timegame - time_val;
             Uint32 minutes = val_time / 60; // Số phút
             Uint32 seconds = val_time % 60; // Số giây còn lại
+            if (val_time % 50 == 0 && val_time != 300)
+            {
+                for (int i = 0; i < storm.size(); i++)
+                {
+                    storm[i].set_is_move(true);
+                    storm[i].SetRect(64 + i * 64 * 3, -64);
+                }
+            }
+            for (int i = 0; i < storm.size(); i++)
+            {
+                if (storm[i].get_is_move())
+                {
+                    storm[i].HandleMove(SCREEN_WIDTH, SCREEN_HEIGHT, map_data);
+                    storm[i].Render(g_screen);
+                }
+            }
+            if(p_player.get_x_pos()>=map_data.start_x_+SCREEN_WIDTH-TILE_SIZE/4|| p_player.get_x_pos() <= map_data.start_x_ )
+            for (int i = 0; i < storm.size(); i++)
+            {
+                storm[i].set_is_move(false);
+            }
+            SDL_Rect rect_player = p_player.GetRectFrame();
+            bool Col1 = false;
+            for (int i = 0; i < storm.size(); i++)
+            {
+                if (storm[i].get_is_move())
+                {
+                    Col1 = SDLCommonFunc::CheckCollision(storm[i].GetRect(), rect_player);
+                    if (Col1)
+                    {
+                        break;
+                    }
+                }
+            }
+            if (Col1 == true)
+            {
+                int width_exp_frame = exp_player.get_frame_height();
+                int heiht_exp_height = exp_player.get_frame_width();
+                for (int ex = 0; ex < 4; ex++)
+                {
+                    int x_pos = (p_player.GetRect().x + p_player.get_frame_width() * 0.5) - width_exp_frame * 0.5;
+                    int y_pos = (p_player.GetRect().y + p_player.get_frame_height() * 0.5) - heiht_exp_height * 0.5;
 
+                    exp_player.set_frame(ex);
+                    exp_player.SetRect(x_pos, y_pos);
+                    exp_player.Show(g_screen);
+                    SDL_RenderPresent(g_screen);
+                }
+                num_die--;
+                if (num_die != 0)
+                {
+                    p_player.SetRect(0, 0);
+                    p_player.set_comebeack_time(60);
+                    SDL_Delay(500);
+                    player_power.Decrease();
+                    player_power.Render(g_screen);
+                    continue;
+                }
+                else
+                {
+                    player_power.Decrease();
+                    player_power.Render(g_screen);
+                    std::ofstream file("HaveContinue.txt");
+                    if (file.is_open())
+                    {
+                        int x = 0;
+                        file << x << "\n";
+                        file.close();
+                    }
+                    else
+                    {
+                        std::cerr << "Unable to save map to file " << std::endl;
+                    }
+                    int ret = Menu::ShowGameOver(g_screen, font_time);
+                    if (ret == 1) {
+                        close();
+
+                        is_quit = true;
+                        Playgame = false;
+                    }
+                    else
+                    {
+                        close();
+
+                        is_quit = true;
+                    }
+                }
+            }
             if (val_time <= 0)
             {
                 std::ofstream file("HaveContinue.txt");

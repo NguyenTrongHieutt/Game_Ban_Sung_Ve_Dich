@@ -13,6 +13,7 @@
 #define PLAYER_SPEED 2
 #define PLAYER_HIGHT_VAL 18;
 
+#define BOSS_SPEED 3
 #define FRAME_NUM_8 8
 
 class BossObject : public BaseObject
@@ -48,10 +49,11 @@ public:
     void MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit, const float& x2, const float& y2, Map& map_data);
     void RemoveBullet(const int& idx);
     void InitBullet(BulletObject* p_bullet, SDL_Renderer* screen);
+    void ImpMoveType(const float& x);
 private:
     int map_x_;
     int map_y_;
-    int on_ground_;
+    bool on_ground_;
     int think_time_;
     Input input_type_;
     int frame_;
