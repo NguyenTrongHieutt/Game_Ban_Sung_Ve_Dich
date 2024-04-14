@@ -320,6 +320,27 @@ void MainObject::DoPlayer(Map& map_data)
 		}
 	}
 }
+void MainObject::Trap(Map& map_data,const int& x, const int& y)
+{
+	int mapx = x / TILE_SIZE;
+	int mapy = y / TILE_SIZE;
+	for (int i = mapy; i < SCREEN_HEIGHT/TILE_SIZE; i++)
+	{
+		map_data.tile[i][mapx] = 0;
+		map_data.tile[i][mapx-1] = 0;
+		map_data.tile[i][mapx+1] = 0;
+	}
+}
+void MainObject::Trap2(Map& map_data, const int& x, const int& y)
+{
+	int mapx = x / TILE_SIZE;
+	for (int i = y; i>=0 ; i--)
+	{
+		map_data.tile[i][mapx] = 12;
+		map_data.tile[i][mapx - 1] = 12;
+		map_data.tile[i][mapx + 1] = 12;
+	}
+}
 void MainObject::CheckToMap(Map& map_data)
 {
 	int x1 = 0, x2 = 0, y1 = 0, y2 = 0;

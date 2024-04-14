@@ -16,7 +16,8 @@ namespace Game
         UINT32 val_time,
         bool showboss,
         float x_pos_boss,
-        float y_pos_boss)
+        float y_pos_boss,
+        int flagincrease)
   {
         std::ofstream file(filename);
         if (file.is_open()) {
@@ -31,6 +32,7 @@ namespace Game
                 << showboss << " "
                 << x_pos_boss<<" "
                 <<y_pos_boss<< " "
+                << flagincrease<< " "
                 << std::endl;
             file.close();
         }
@@ -49,7 +51,8 @@ namespace Game
             UINT32& val_time,
             bool& showboss,
             float& x_pos_boss,
-            float& y_pos_boss
+            float& y_pos_boss,
+            int& flagincrease
             ) {
         std::ifstream file(filename);
         if (file.is_open()) {
@@ -64,6 +67,7 @@ namespace Game
                 >>showboss
                 >> x_pos_boss
                 >> y_pos_boss
+                >> flagincrease
                 ;
                
             file.close();

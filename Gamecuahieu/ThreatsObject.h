@@ -15,6 +15,7 @@
 
 #define THREAT_SPEED 3
 #define PLAYER_HIGHT_VAL 18;
+#define TRAP_SPEED 9
 
 #define THREATS_NUM_FRAME 8
 
@@ -35,11 +36,16 @@ public:
     void SetMapXY(const int& map_x, const int& map_y) { map_x_ = map_x, map_y_ = map_y; }
   
     void CheckToMap(Map& g_map, SDL_Renderer* screen);
- 
+    void CheckToMap2(Map& map_data, SDL_Renderer* screen);
+
     void DoPlayer(Map& g_map, SDL_Renderer* screen);
- 
+    void DoPlayer2(Map& gMap, SDL_Renderer* screen);
+
     void Show(SDL_Renderer* des);
+    void Show2(SDL_Renderer* des);
+
     bool LoadImg(std::string path, SDL_Renderer* screen);
+    bool LoadImg2(std::string path, SDL_Renderer* screen);
     void set_clips();
 
     int get_width_frame() const { return width_frame_; }
@@ -56,12 +62,17 @@ public:
     }
     void set_input_left(const int& ipLeft) { input_type_.left_ = ipLeft; }
     void ImpMoveType(SDL_Renderer* screen, const float& x, const float& y);
+    void ImpMoveType2(SDL_Renderer* screen, const float& x, const float& y);
     void InitThreats();
     std::vector<BulletObject*> get_bullet_list() const { return bullet_list_; }
     void set_bullet_list(const std::vector<BulletObject*>& am_list) { bullet_list_ = am_list; }
     void InitBullet(BulletObject* p_bullet, SDL_Renderer* screen);
+    void InitBulletTrap(BulletObject* p_bullet, SDL_Renderer* screen);
     void MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit,
                     const float& x2,const float& y2,Map& map_data );
+    void MakeBulletTrap(SDL_Renderer* des, const int& x_limit,
+                        const int& y_limit, const float& x2,
+                        const float& y2, Map& map_data);
     void RemoveBullet(const int& idx);
     SDL_Rect GetRectFrame();
     enum TypeMove

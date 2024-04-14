@@ -106,7 +106,7 @@ std::vector<ThreatsObject*>MakeThreatsList()
             p_threats->LoadImg("img//threat_level.png", g_screen);
             p_threats->set_clips();
             p_threats->set_type_move(ThreatsObject::STATIC_THREAT);
-            p_threats->set_x_pos(10900+ i*700);
+            p_threats->set_x_pos(13900+ i*700);
             p_threats->set_y_pos(250);
             p_threats->set_input_left(0);
             BulletObject* p_bullet = new BulletObject();
@@ -116,10 +116,88 @@ std::vector<ThreatsObject*>MakeThreatsList()
     }
     return list_threats;
 }
-
+std::vector<ThreatsObject*>MakeThreatsList2()
+{
+    std::vector<ThreatsObject*>list_threats;
+    ThreatsObject* dynamic_threats = new ThreatsObject[30];
+    for (int i = 0; i < 30; i++)
+    {
+        ThreatsObject* p_threats = (dynamic_threats + i);
+        if (p_threats != NULL)
+        {
+            p_threats->LoadImg2("img//trap.png", g_screen);
+           
+            p_threats->set_type_move(ThreatsObject::MOVE_IN_SPACE_TH);
+            p_threats->set_x_pos(900 + i * SCREEN_WIDTH / 2);
+            p_threats->set_y_pos(250);
+            
+            int pos1 = p_threats->get_x_pos() - 150;
+            int pos2 = p_threats->get_x_pos() + 150;
+            p_threats->SetAnimationPos(pos1, pos2);  
+            list_threats.push_back(p_threats);
+        }
+    }
+    return list_threats;
+}
+std::vector<ThreatsObject*>MakeThreatsList3()
+{
+    std::vector<ThreatsObject*>list_threats;
+    ThreatsObject* threats_objs = new ThreatsObject[30];
+    for (int i = 0; i < 30; i++)
+    {
+        ThreatsObject* p_threats = (threats_objs + i);
+        if (p_threats != NULL)
+        {
+            p_threats->LoadImg2("img//Gaithang.png", g_screen);
+            p_threats->set_type_move(ThreatsObject::STATIC_THREAT);
+            p_threats->set_x_pos(13050+ i * SCREEN_WIDTH / 2);
+            p_threats->set_y_pos(250);
+            p_threats->set_input_left(0);
+            list_threats.push_back(p_threats);
+        }
+    }
+    return list_threats;
+}
 int main(int argc, char* argv[])
 {
     bool Playgame = true;
+    //Boss Threat
+    BossObject bossObject;
+    int num_boss = NUMBOSS;
+    bool creat_threat = true;
+    MainObject p_player;
+    int num_die = NUMDIE;
+    bool showboss = false;
+    ImpTimer fps_timer;
+    Uint32 timegame = TIMETOTAL;
+    Uint32 val_time = TIMETOTAL;
+    GameMap game_map;
+    int X = 0;
+    PlayerMoney player_money;
+    BossLives boss_power;
+    PlayerBrave player_brave;
+    std::vector<ThreatsObject*>threats_list = MakeThreatsList();
+    std::vector<ThreatsObject*>threats_list2 = MakeThreatsList2();
+    std::vector<ThreatsObject*>threats_list3 = MakeThreatsList3();
+    std::vector<BulletObject> storm(9);
+    ExplosionObject exp_player;
+    ExplosionObject exp_threat;
+    TextObject time_game;
+    TextObject mark_game;
+    UINT mark_value = 0;
+    bool increaselive = true;
+    int flagincrease = 1;
+    TextObject money_game;
+    TextObject numbrave_game;
+    TextObject notification_brave;
+    bool is_quit = false;
+    TextObject boss_live_text;
+    TextObject threat;
+    bool flag_threat = false;
+    BossMini threat1, threat2;
+    PlayerLives player_power;
+    ImpTimer start_game;
+    bool trapmap = true;
     while (Playgame)
     {
         bool Continue = false;
@@ -127,19 +205,8 @@ int main(int argc, char* argv[])
         if (InitData() == false)
             return -1;
 
-        //Boss Threat
-        BossObject bossObject;
-        int num_boss = 15;
-        bool creat_threat = true;
-        MainObject p_player;
-        int num_die = 3;
-        bool showboss = false;
-        ImpTimer fps_timer;
-        Uint32 timegame = 300;
-        Uint32 val_time = 300;
-        GameMap game_map;
+      
         std::ifstream File("HaveContinue.txt");
-        int X = 0;
 
         if (File.is_open()) {
             File >> X;
@@ -154,10 +221,36 @@ int main(int argc, char* argv[])
             {
                 Continue = false;
                 Game::ResetThreatGame();
+                num_boss = NUMBOSS;
+                creat_threat = true;
+                num_die = NUMDIE;
+                showboss = false;
+                timegame = TIMETOTAL;
+                val_time = TIMETOTAL;
+                X = 0;
+                threats_list = MakeThreatsList();
+                threats_list2 = MakeThreatsList2();
+                threats_list3 = MakeThreatsList3();
+                mark_value = 0;
+                is_quit = false;
+                flag_threat = false;
+                p_player.set_x_pos(0);
+                p_player.set_y_pos(0);
+                p_player.SetBrave(0);
+                p_player.SetMoney(0);
+                p_player.set_input_left(0);
+                p_player.set_input_right(0);
+                p_player.set_input_down(0);
+                increaselive = true;
+                flagincrease = 1;
+                trapmap = true;
             }
             else if (ret_menu == 1)
             {
                 Continue = true;
+                is_quit = false;
+                threats_list = MakeThreatsList();
+                
             }
             else
             {
@@ -171,6 +264,29 @@ int main(int argc, char* argv[])
             {
                 Continue = false;
                 Game::ResetThreatGame();
+                num_boss = NUMBOSS;
+                creat_threat = true;
+                num_die = NUMDIE;
+                showboss = false;
+                timegame = TIMETOTAL;
+                val_time = TIMETOTAL;
+                X = 0;
+                threats_list = MakeThreatsList();
+                threats_list2 = MakeThreatsList2();
+                threats_list3 = MakeThreatsList3();
+                mark_value = 0;
+                is_quit = false;
+                flag_threat = false;
+                p_player.set_x_pos(0);
+                p_player.set_y_pos(0);
+                p_player.SetBrave(0);
+                p_player.SetMoney(0);
+                p_player.set_input_left(0);
+                p_player.set_input_right(0);
+                p_player.set_input_down(0);
+                increaselive = true;
+                flagincrease = 1;
+                trapmap = true;
             }
             else
             {
@@ -189,18 +305,16 @@ int main(int argc, char* argv[])
         p_player.LoadImg("img//player_right.png", g_screen);
         p_player.set_clips();
 
-        PlayerMoney player_money;
+       
         player_money.Init(g_screen);
         player_money.SetPos(SCREEN_WIDTH * 0.5 - 300, 8);
-        BossLives boss_power;
+       
         boss_power.Init(g_screen);
         boss_power.SetPos(SCREEN_WIDTH * 0.5 - 50, 50);
-        PlayerBrave player_brave;
+       
         player_brave.Init(g_screen);
         player_brave.SetPos(SCREEN_WIDTH * 0.5 + 200, 10);
 
-        std::vector<ThreatsObject*>threats_list = MakeThreatsList();
-        std::vector<BulletObject> storm(9);
         for (int i = 0; i < storm.size(); i++)
         {
             storm[i].LoadImg("img//boss bullet.png", g_screen);
@@ -213,48 +327,46 @@ int main(int argc, char* argv[])
             }
             else storm[i].set_y_val(10);
         }
-        ExplosionObject exp_player;
+       
         bool pRet = exp_player.LoadImg("img//exp3.png", g_screen);
         if (!pRet) return -1;
         exp_player.set_clips();
-        ExplosionObject exp_threat;
+   
         bool tRet = exp_threat.LoadImg("img//exp3.png", g_screen);
         if (!tRet) return -1;
         exp_threat.set_clips();
 
 
         //Time text
-        TextObject time_game;
+        
         time_game.SetColor(TextObject::WHITE_TEXT);
 
-        TextObject mark_game;
+       
         mark_game.SetColor(TextObject::WHITE_TEXT);
-        UINT mark_value = 0;
-        TextObject money_game;
+    
         money_game.SetColor(TextObject::WHITE_TEXT);
-        TextObject numbrave_game;
+       
         numbrave_game.SetColor(TextObject::WHITE_TEXT);
-        TextObject notification_brave;
+        
         notification_brave.SetColor(TextObject::WHITE_TEXT);
-        bool is_quit = false;
-        TextObject boss_live_text;
+       
         boss_live_text.SetColor(TextObject::RED_TEXT);
-        TextObject threat;
+        
         threat.SetColor(TextObject::WHITE_TEXT);
-        bool flag_threat = false;
+       
 
 
         if (num_boss != 0)
         {
             bool ret = bossObject.LoadImg("img//threat_level.png", g_screen);
             bossObject.set_clips();
-            int xPosBoss = MAX_MAP_X* TILE_SIZE - SCREEN_WIDTH * 0.6;//1200;
+            int xPosBoss = 1200; //MAX_MAP_X* TILE_SIZE - SCREEN_WIDTH * 0.6;1200;
             bossObject.set_xpos(xPosBoss);
             bossObject.set_ypos(10);
             BulletObject* b_bullet = new BulletObject();
             bossObject.InitBullet(b_bullet, g_screen);
         }
-        BossMini threat1, threat2;
+        
         bool ret1 = threat1.LoadImg("img//threat_level.png", g_screen);
         bool ret2 = threat2.LoadImg("img//threat_level.png", g_screen);
         threat1.set_clips();
@@ -269,7 +381,7 @@ int main(int argc, char* argv[])
         {
             int mnc, br;
             float xpos, ypos, xposboss, yposboss;
-            Game::LoadGame("Game.txt", mnc, br, xpos, ypos, num_boss, num_die, mark_value, timegame,showboss,xposboss, yposboss);
+            Game::LoadGame("Game.txt", mnc, br, xpos, ypos, num_boss, num_die, mark_value, timegame,showboss,xposboss, yposboss, flagincrease);
             p_player.set_x_pos(xpos);
             p_player.set_y_pos(ypos);
             p_player.SetBrave(br);
@@ -288,9 +400,9 @@ int main(int argc, char* argv[])
             game_map.SetMap(continuemap);
         }
 
-        PlayerLives player_power;
+        
         player_power.Init(g_screen, num_die);
-        ImpTimer start_game;
+        
         start_game.start();
 
         while (!is_quit)
@@ -303,7 +415,7 @@ int main(int argc, char* argv[])
                 {
                     Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
                                     ,p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time,
-                                     showboss,bossObject.get_x_pos(),bossObject.get_y_pos());
+                                     showboss,bossObject.get_x_pos(),bossObject.get_y_pos(), flagincrease);
                     Game::SaveMap("map//mapcontinue.txt", map_data);
                     std::ofstream file("HaveContinue.txt");
                     if (file.is_open())
@@ -329,7 +441,7 @@ int main(int argc, char* argv[])
                         {
                             Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
                                            ,p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time, showboss,
-                                           bossObject.get_x_pos(),bossObject.get_y_pos());
+                                           bossObject.get_x_pos(),bossObject.get_y_pos(), flagincrease);
                             Game::SaveMap("map//mapcontinue.txt", map_data);
                             std::ofstream file("HaveContinue.txt");
                             if (file.is_open())
@@ -348,7 +460,7 @@ int main(int argc, char* argv[])
                         {
                             Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
                                            ,p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time,
-                                           showboss, bossObject.get_x_pos(), bossObject.get_y_pos());
+                                           showboss, bossObject.get_x_pos(), bossObject.get_y_pos(), flagincrease);
                             Game::SaveMap("map//mapcontinue.txt", map_data);
                             std::ofstream file("HaveContinue.txt");
                             if (file.is_open())
@@ -417,8 +529,78 @@ int main(int argc, char* argv[])
                 }
 
             }
+            if (mark_value >= MARKICRLIVE && mark_value>= flagincrease * MARKICRLIVE && num_die >= 1 && increaselive)
+            {
+                if (num_die < 3)
+                {
+                    num_die++;
+                    player_power.InCrease();
+                    player_power.Render(g_screen);
+                    increaselive = false;
+                    flagincrease++;
+                }
+                else
+                    flagincrease++;
+            }
             p_player.Show(g_screen);
             p_player.HandleBullet(g_screen, map_data);
+            //Trap
+            if (p_player.get_x_pos() >= 3136 && p_player.get_x_pos()<=3264)
+            {
+                p_player.Trap(map_data, 3136 + TILE_SIZE, 384-TILE_SIZE);
+                p_player.set_on_ground(false);
+                if (p_player.get_y_pos() >= 384-2*TILE_SIZE)
+                {
+                    p_player.set_doublejump(false);
+                }
+            }
+            if (p_player.get_x_pos() >= 8256 && p_player.get_x_pos() <= 8448 && p_player.get_y_pos()<=TILE_SIZE*2)
+            {
+                if (trapmap)
+                {
+                    p_player.Trap2(map_data, 8256 + 2 * TILE_SIZE, 1);
+                    num_die--;
+                    if (num_die != 0)
+                    {
+                        p_player.SetRect(0, 0);
+                        p_player.set_comebeack_time(60);
+                        SDL_Delay(500);
+                        player_power.Decrease();
+                        player_power.Render(g_screen);
+                    }
+                    else
+                    {
+                        player_power.Decrease();
+                        player_power.Render(g_screen);
+                        std::ofstream file("HaveContinue.txt");
+                        if (file.is_open())
+                        {
+                            int x = 0;
+                            file << x << "\n";
+                            file.close();
+                        }
+                        else
+                        {
+                            std::cerr << "Unable to save map to file " << std::endl;
+                        }
+                        int ret = Menu::ShowGameOver(g_screen, font_time);
+                        if (ret == 1) {
+                            close();
+
+                            is_quit = true;
+                            Playgame = false;
+                        }
+                        else
+                        {
+                            close();
+
+                            is_quit = true;
+                        }
+                    }
+                    trapmap = false;
+                }   
+            }
+            else{ trapmap = true; }
             game_map.SetMap(map_data);
             game_map.DrawMap(g_screen);
             //DrawGeometric
@@ -433,7 +615,7 @@ int main(int argc, char* argv[])
             player_power.Show(g_screen);
             player_money.Show(g_screen);
             player_brave.Show(g_screen);
-
+            //Threat
             for (int i = 0; i < threats_list.size(); i++)
             {
                 ThreatsObject* p_threat = threats_list.at(i);
@@ -578,6 +760,7 @@ int main(int argc, char* argv[])
                                         obj_threat->get_typemove() == ThreatsObject::MOVE_IN_SPACE_TH)
                                     {
                                         mark_value += 100;
+                                        increaselive = true;
                                         for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
                                         {
                                             int x_pos = obj_threat->GetRect().x - frame_exp_width * 0.5;
@@ -595,6 +778,7 @@ int main(int argc, char* argv[])
                                         obj_threat->get_typemove() == ThreatsObject::STATIC_THREAT)
                                     {
                                         mark_value += 200;
+                                        increaselive = true;
                                         for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
                                         {
                                             int x_pos = obj_threat->GetRect().x - frame_exp_width * 0.5;
@@ -616,6 +800,200 @@ int main(int argc, char* argv[])
                     }
                 }
             }
+            //Trap1
+            for (int i = 0; i < threats_list2.size(); i++)
+            {
+                ThreatsObject* p_threat = threats_list2.at(i);
+                if (map_data.start_x_ > p_threat->get_x_pos())
+                {
+                    continue;
+                }
+                else if (map_data.start_x_ + SCREEN_WIDTH < p_threat->get_x_pos())
+                {
+                    break;
+                }
+                else {
+                    if (p_threat != NULL)
+                    {
+                        p_threat->SetMapXY(map_data.start_x_, map_data.start_y_);
+                        p_threat->ImpMoveType2(g_screen, p_player.get_x_pos(), p_player.get_y_pos());
+                       
+                        p_threat->DoPlayer2(map_data, g_screen);
+                        p_threat->Show2(g_screen);
+                        SDL_Rect rect_player = p_player.GetRectFrame();
+                       
+                        if (p_player.get_threat_can_fire())
+                        {
+                            
+                            SDL_Rect rect_threat = p_threat->GetRectFrame();
+                            bool bCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_threat);
+                            if ( bCol2 == true)
+                            {
+                                int width_exp_frame = exp_player.get_frame_height();
+                                int heiht_exp_height = exp_player.get_frame_width();
+                                for (int ex = 0; ex < 4; ex++)
+                                {
+                                    int x_pos = (p_player.GetRect().x + p_player.get_frame_width() * 0.5) - width_exp_frame * 0.5;
+                                    int y_pos = (p_player.GetRect().y + p_player.get_frame_height() * 0.5) - heiht_exp_height * 0.5;
+
+                                    exp_player.set_frame(ex);
+                                    exp_player.SetRect(x_pos, y_pos);
+                                    exp_player.Show(g_screen);
+                                    SDL_RenderPresent(g_screen);
+                                }
+                                num_die--;
+                                if (num_die != 0)
+                                {
+                                    p_player.SetRect(0, 0);
+                                    p_player.set_comebeack_time(60);
+                                    SDL_Delay(500);
+                                    player_power.Decrease();
+                                    player_power.Render(g_screen);
+                                    continue;
+                                }
+                                else
+                                {
+                                    player_power.Decrease();
+                                    player_power.Render(g_screen);
+                                    std::ofstream file("HaveContinue.txt");
+                                    if (file.is_open())
+                                    {
+                                        int x = 0;
+                                        file << x << "\n";
+                                        file.close();
+                                    }
+                                    else
+                                    {
+                                        std::cerr << "Unable to save map to file " << std::endl;
+                                    }
+                                    int ret = Menu::ShowGameOver(g_screen, font_time);
+                                    if (ret == 1) {
+                                        close();
+
+                                        is_quit = true;
+                                        Playgame = false;
+                                    }
+                                    else
+                                    {
+                                        close();
+
+                                        is_quit = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+           //Trap2
+            for (int i = 0; i < threats_list3.size(); i++)
+            {
+                ThreatsObject* p_threat = threats_list3.at(i);
+                if (map_data.start_x_ > p_threat->get_x_pos())
+                {
+                    continue;
+                }
+                else if (map_data.start_x_ + SCREEN_WIDTH < p_threat->get_x_pos())
+                {
+                    break;
+                }
+                else {
+                    if (p_threat != NULL)
+                    {
+                        p_threat->SetMapXY(map_data.start_x_, map_data.start_y_);
+                        p_threat->ImpMoveType2(g_screen, p_player.get_x_pos(), p_player.get_y_pos());
+                        p_threat->DoPlayer2(map_data, g_screen);
+                        p_threat->Show2(g_screen);
+                        float xposplayer = p_player.get_x_pos();
+                        float xposthreat = p_threat->get_x_pos();  
+                        if (xposplayer >= xposthreat - 128 && xposplayer <= xposthreat + 128)
+                        {
+                            BulletObject* p_bullet = new BulletObject();
+                            p_threat->InitBulletTrap(p_bullet, g_screen);
+                        }
+                            p_threat->MakeBulletTrap(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT, p_player.get_x_pos(), p_player.get_y_pos(), map_data);
+                            if (xposplayer >= xposthreat - 128 && xposplayer <= xposthreat + 128)
+                            {
+                            SDL_Rect rect_player = p_player.GetRectFrame();
+                            bool bCol1 = false;
+                            if (p_player.get_threat_can_fire())
+                            {
+                                std::vector<BulletObject*>tBullet_list = p_threat->get_bullet_list();
+                                for (int jj = 0; jj < tBullet_list.size(); jj++)
+                                {
+                                    BulletObject* pt_bullet = tBullet_list.at(jj);
+                                    if (pt_bullet)
+                                    {
+                                        bCol1 = SDLCommonFunc::IsInside(pt_bullet->GetRect(), rect_player);
+
+                                    }
+                                    if (bCol1)
+                                    {
+                                        break;
+                                    }
+                                }
+                                SDL_Rect rect_threat = p_threat->GetRectFrame();
+                                bool bCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_threat);
+                                if (bCol1 == true || bCol2 == true)
+                                {
+                                    int width_exp_frame = exp_player.get_frame_height();
+                                    int heiht_exp_height = exp_player.get_frame_width();
+                                    for (int ex = 0; ex < 4; ex++)
+                                    {
+                                        int x_pos = (p_player.GetRect().x + p_player.get_frame_width() * 0.5) - width_exp_frame * 0.5;
+                                        int y_pos = (p_player.GetRect().y + p_player.get_frame_height() * 0.5) - heiht_exp_height * 0.5;
+
+                                        exp_player.set_frame(ex);
+                                        exp_player.SetRect(x_pos, y_pos);
+                                        exp_player.Show(g_screen);
+                                        SDL_RenderPresent(g_screen);
+                                    }
+                                    num_die--;
+                                    if (num_die != 0)
+                                    {
+                                        p_player.SetRect(0, 0);
+                                        p_player.set_comebeack_time(60);
+                                        SDL_Delay(500);
+                                        player_power.Decrease();
+                                        player_power.Render(g_screen);
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        player_power.Decrease();
+                                        player_power.Render(g_screen);
+                                        std::ofstream file("HaveContinue.txt");
+                                        if (file.is_open())
+                                        {
+                                            int x = 0;
+                                            file << x << "\n";
+                                            file.close();
+                                        }
+                                        else
+                                        {
+                                            std::cerr << "Unable to save map to file " << std::endl;
+                                        }
+                                        int ret = Menu::ShowGameOver(g_screen, font_time);
+                                        if (ret == 1) {
+                                            close();
+
+                                            is_quit = true;
+                                            Playgame = false;
+                                        }
+                                        else
+                                        {
+                                            close();
+
+                                            is_quit = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
             //Show Boss
             int val = MAX_MAP_X * TILE_SIZE - (map_data.start_x_ + p_player.GetRect().x);
             if (val < SCREEN_WIDTH) { showboss = true; }
@@ -829,6 +1207,8 @@ int main(int argc, char* argv[])
                             bool bCol = SDLCommonFunc::CheckCollision(bRect, BRect);
                             if (bCol)
                             {
+                                mark_value += 250;
+                                increaselive = true;
                                 for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
                                 {
                                     int x_pos = threat1.GetRect().x - frame_exp_width * 0.5;
@@ -837,7 +1217,6 @@ int main(int argc, char* argv[])
                                     exp_threat.SetRect(x_pos, y_pos);
                                     exp_threat.Show(g_screen);
                                 }
-
                                 threat1.set_clips();
                                 threat1.set_xpos(bossObject.get_x_pos() + 64);
                                 threat1.set_ypos(bossObject.get_y_pos());
@@ -934,6 +1313,8 @@ int main(int argc, char* argv[])
                                 bool bCol = SDLCommonFunc::CheckCollision(bRect, BRect);
                                 if (bCol)
                                 {
+                                    mark_value += 250;
+                                    increaselive = true;
                                     for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
                                     {
                                         int x_pos = threat2.GetRect().x - frame_exp_width * 0.5;
@@ -1003,7 +1384,7 @@ int main(int argc, char* argv[])
             val_time = timegame - time_val;
             Uint32 minutes = val_time / 60; // Số phút
             Uint32 seconds = val_time % 60; // Số giây còn lại
-            if (val_time % 50 == 0 && val_time != 300)
+            if (val_time % 50 == 0 && val_time != TIMETOTAL)
             {
                 for (int i = 0; i < storm.size(); i++)
                 {
@@ -1025,69 +1406,72 @@ int main(int argc, char* argv[])
                 storm[i].set_is_move(false);
             }
             SDL_Rect rect_player = p_player.GetRectFrame();
-            bool Col1 = false;
-            for (int i = 0; i < storm.size(); i++)
+            if (p_player.get_threat_can_fire())
             {
-                if (storm[i].get_is_move())
+                bool Col1 = false;
+                for (int i = 0; i < storm.size(); i++)
                 {
-                    Col1 = SDLCommonFunc::CheckCollision(storm[i].GetRect(), rect_player);
-                    if (Col1)
+                    if (storm[i].get_is_move())
                     {
-                        break;
+                        Col1 = SDLCommonFunc::CheckCollision(storm[i].GetRect(), rect_player);
+                        if (Col1)
+                        {
+                            break;
+                        }
                     }
                 }
-            }
-            if (Col1 == true)
-            {
-                int width_exp_frame = exp_player.get_frame_height();
-                int heiht_exp_height = exp_player.get_frame_width();
-                for (int ex = 0; ex < 4; ex++)
+                if (Col1 == true)
                 {
-                    int x_pos = (p_player.GetRect().x + p_player.get_frame_width() * 0.5) - width_exp_frame * 0.5;
-                    int y_pos = (p_player.GetRect().y + p_player.get_frame_height() * 0.5) - heiht_exp_height * 0.5;
-
-                    exp_player.set_frame(ex);
-                    exp_player.SetRect(x_pos, y_pos);
-                    exp_player.Show(g_screen);
-                    SDL_RenderPresent(g_screen);
-                }
-                num_die--;
-                if (num_die != 0)
-                {
-                    p_player.SetRect(0, 0);
-                    p_player.set_comebeack_time(60);
-                    SDL_Delay(500);
-                    player_power.Decrease();
-                    player_power.Render(g_screen);
-                    continue;
-                }
-                else
-                {
-                    player_power.Decrease();
-                    player_power.Render(g_screen);
-                    std::ofstream file("HaveContinue.txt");
-                    if (file.is_open())
+                    int width_exp_frame = exp_player.get_frame_height();
+                    int heiht_exp_height = exp_player.get_frame_width();
+                    for (int ex = 0; ex < 4; ex++)
                     {
-                        int x = 0;
-                        file << x << "\n";
-                        file.close();
+                        int x_pos = (p_player.GetRect().x + p_player.get_frame_width() * 0.5) - width_exp_frame * 0.5;
+                        int y_pos = (p_player.GetRect().y + p_player.get_frame_height() * 0.5) - heiht_exp_height * 0.5;
+
+                        exp_player.set_frame(ex);
+                        exp_player.SetRect(x_pos, y_pos);
+                        exp_player.Show(g_screen);
+                        SDL_RenderPresent(g_screen);
+                    }
+                    num_die--;
+                    if (num_die != 0)
+                    {
+                        p_player.SetRect(0, 0);
+                        p_player.set_comebeack_time(60);
+                        SDL_Delay(500);
+                        player_power.Decrease();
+                        player_power.Render(g_screen);
+                        continue;
                     }
                     else
                     {
-                        std::cerr << "Unable to save map to file " << std::endl;
-                    }
-                    int ret = Menu::ShowGameOver(g_screen, font_time);
-                    if (ret == 1) {
-                        close();
+                        player_power.Decrease();
+                        player_power.Render(g_screen);
+                        std::ofstream file("HaveContinue.txt");
+                        if (file.is_open())
+                        {
+                            int x = 0;
+                            file << x << "\n";
+                            file.close();
+                        }
+                        else
+                        {
+                            std::cerr << "Unable to save map to file " << std::endl;
+                        }
+                        int ret = Menu::ShowGameOver(g_screen, font_time);
+                        if (ret == 1) {
+                            close();
 
-                        is_quit = true;
-                        Playgame = false;
-                    }
-                    else
-                    {
-                        close();
+                            is_quit = true;
+                            Playgame = false;
+                        }
+                        else
+                        {
+                            close();
 
-                        is_quit = true;
+                            is_quit = true;
+                        }
                     }
                 }
             }
@@ -1187,6 +1571,28 @@ int main(int argc, char* argv[])
                 p_threats = NULL;
             }
         }
+        for (int i = 0; i < threats_list2.size(); i++)
+        {
+            ThreatsObject* p_threats = threats_list2.at(i);
+            if (p_threats)
+            {
+                p_threats->Free();
+                p_threats = NULL;
+            }
+        }
+        for (int i = 0; i < threats_list3.size(); i++)
+        {
+            ThreatsObject* p_threats = threats_list3.at(i);
+            if (p_threats)
+            {
+                for (int i = 0; i < p_threats->get_bullet_list().size(); i++)
+                {
+                    p_threats->RemoveBullet(i);
+                }
+                p_threats->Free();
+                p_threats = NULL;
+            }
+        }
         for (int i = 0; i < bossObject.get_bullet_list().size(); i++)
         {
             bossObject.RemoveBullet(i);
@@ -1195,7 +1601,19 @@ int main(int argc, char* argv[])
         {
             threats_list.clear();
         }
+        if (!threats_list2.empty())
+        {
+            threats_list2.clear();
+        }
+        if (!threats_list3.empty())
+        {
+            threats_list3.clear();
+        }
         bossObject.Free();
+        for (int i = 0; i < storm.size(); i++)
+        {
+            storm[i].SetRect(64 + i * 64 * 3, -64);
+        }
         close();
     }
     return 0;

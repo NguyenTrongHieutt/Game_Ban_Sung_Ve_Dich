@@ -29,6 +29,10 @@ const int RENDER_DRAW_COLOR = 0xff;
 #define STATE_MONEY 4
 #define ITEM_BRAVE 11
 #define BRAVE 10
+#define TIMETOTAL 600
+#define MARKICRLIVE 500
+#define NUMBOSS 10
+#define NUMDIE 3
 
 typedef struct Map 
 {

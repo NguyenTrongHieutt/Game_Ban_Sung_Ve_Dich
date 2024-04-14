@@ -57,7 +57,7 @@ void PlayerLives::Decrease()
 
 void PlayerLives::InCrease()
 {
-    number_++;
+    
     int last_post = pos_list_.back();
     last_post += 40;
     pos_list_.push_back(last_post);

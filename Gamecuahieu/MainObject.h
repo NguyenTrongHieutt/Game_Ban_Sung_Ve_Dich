@@ -58,13 +58,21 @@ public:
 	void SetBrave(int br) { num_brave = br; }
 	void set_x_pos(const float& xps) { x_pos_ = xps; }
 	void set_y_pos(const float& yps) { y_pos_ = yps; }
-
+	void set_on_ground(bool x) { on_ground = x; }
+	void set_doublejump(bool x) { doublejump = x; }
 	bool get_threat_can_fire() { return Threat_can_fire; }
 	bool get_out_area() { return out_area; }
 	bool get_on_ground() { return on_ground; }
 
 	void DoBrave(Map& map_data);
 	bool get_brave() { return brave; }
+
+	void set_input_left(const int& ipLeft) { input_type_.left_ = ipLeft; }
+	void set_input_right(const int& ipLeft) { input_type_.right_ = ipLeft; }
+	void set_input_down(const int& ipLeft) { input_type_.down_ = ipLeft; }
+
+	void Trap(Map& map_data,const int& x, const int& y);
+	void Trap2(Map& map_data, const int& x, const int& y);
 private:
 	bool out_area;
 	bool Threat_can_fire;
