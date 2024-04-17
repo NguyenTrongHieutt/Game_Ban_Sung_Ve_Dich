@@ -12,6 +12,7 @@ public:
 	int get_ticks();
 	bool is_paused();
 	bool is_started();
+	int get_start_tick() { return start_tick_; }
 private:
 	int start_tick_;
 	int paused_tick_;

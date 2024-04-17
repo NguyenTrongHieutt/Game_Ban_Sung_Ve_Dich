@@ -17,7 +17,10 @@ namespace Game
         bool showboss,
         float x_pos_boss,
         float y_pos_boss,
-        int flagincrease)
+        int flagincrease,
+        bool shieldon,
+        bool flag_shield,
+        UINT32 valshield_time)
   {
         std::ofstream file(filename);
         if (file.is_open()) {
@@ -33,6 +36,9 @@ namespace Game
                 << x_pos_boss<<" "
                 <<y_pos_boss<< " "
                 << flagincrease<< " "
+                << shieldon << " "
+                << flag_shield << " "
+                << valshield_time << " "
                 << std::endl;
             file.close();
         }
@@ -52,7 +58,10 @@ namespace Game
             bool& showboss,
             float& x_pos_boss,
             float& y_pos_boss,
-            int& flagincrease
+            int& flagincrease,
+            bool& shieldon,
+            bool& flag_shield,
+            UINT32& valshield_time
             ) {
         std::ifstream file(filename);
         if (file.is_open()) {
@@ -68,6 +77,9 @@ namespace Game
                 >> x_pos_boss
                 >> y_pos_boss
                 >> flagincrease
+                >> shieldon
+                >> flag_shield
+                >> valshield_time
                 ;
                
             file.close();

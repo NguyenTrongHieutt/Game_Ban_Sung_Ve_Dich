@@ -158,6 +158,24 @@ std::vector<ThreatsObject*>MakeThreatsList3()
     }
     return list_threats;
 }
+std::vector<ThreatsObject*>MakeThreatsList4()
+{
+    std::vector<ThreatsObject*>list_threats;
+    ThreatsObject* threats_objs = new ThreatsObject[20];
+    for (int i = 0; i < 20; i++)
+    {
+        ThreatsObject* p_threats = (threats_objs + i);
+        if (p_threats != NULL)
+        {
+            p_threats->LoadImg2("img//cotgai.png", g_screen);
+            p_threats->set_type_move(ThreatsObject::MOVE_IN_SPACE_TH);
+            p_threats->set_x_pos(SCREEN_WIDTH / 4 + i * SCREEN_WIDTH / 2);
+            p_threats->set_y_pos(0);
+            list_threats.push_back(p_threats);
+        }
+    }
+    return list_threats;
+}
 int main(int argc, char* argv[])
 {
     bool Playgame = true;
@@ -169,21 +187,30 @@ int main(int argc, char* argv[])
     int num_die = NUMDIE;
     bool showboss = false;
     ImpTimer fps_timer;
+    ImpTimer shield_time;
+    ImpTimer start_game;
+    ImpTimer flagshield_time;
     Uint32 timegame = TIMETOTAL;
     Uint32 val_time = TIMETOTAL;
+    Uint32 valshield_time = TIMESHIELD;
+    Uint32 timeshieldgame = TIMESHIELD;
     GameMap game_map;
     int X = 0;
     PlayerMoney player_money;
     BossLives boss_power;
     PlayerBrave player_brave;
+
     std::vector<ThreatsObject*>threats_list = MakeThreatsList();
     std::vector<ThreatsObject*>threats_list2 = MakeThreatsList2();
     std::vector<ThreatsObject*>threats_list3 = MakeThreatsList3();
+    std::vector<ThreatsObject*>threats_list4 = MakeThreatsList4();
     std::vector<BulletObject> storm(9);
+
     ExplosionObject exp_player;
     ExplosionObject exp_threat;
     TextObject time_game;
     TextObject mark_game;
+    TextObject shield_game;
     UINT mark_value = 0;
     bool increaselive = true;
     int flagincrease = 1;
@@ -196,8 +223,10 @@ int main(int argc, char* argv[])
     bool flag_threat = false;
     BossMini threat1, threat2;
     PlayerLives player_power;
-    ImpTimer start_game;
     bool trapmap = true;
+    BaseObject shield;
+    bool shieldon = false;
+    bool flagshield = true;
     while (Playgame)
     {
         bool Continue = false;
@@ -231,6 +260,7 @@ int main(int argc, char* argv[])
                 threats_list = MakeThreatsList();
                 threats_list2 = MakeThreatsList2();
                 threats_list3 = MakeThreatsList3();
+                threats_list4 = MakeThreatsList4();
                 mark_value = 0;
                 is_quit = false;
                 flag_threat = false;
@@ -244,13 +274,18 @@ int main(int argc, char* argv[])
                 increaselive = true;
                 flagincrease = 1;
                 trapmap = true;
+                shieldon = false;
+                flagshield = true;
             }
             else if (ret_menu == 1)
             {
                 Continue = true;
                 is_quit = false;
                 threats_list = MakeThreatsList();
-                
+                threats_list2 = MakeThreatsList2();
+                threats_list3 = MakeThreatsList3();
+                threats_list4 = MakeThreatsList4();
+                shieldon = false;
             }
             else
             {
@@ -274,6 +309,7 @@ int main(int argc, char* argv[])
                 threats_list = MakeThreatsList();
                 threats_list2 = MakeThreatsList2();
                 threats_list3 = MakeThreatsList3();
+                threats_list4 = MakeThreatsList4();
                 mark_value = 0;
                 is_quit = false;
                 flag_threat = false;
@@ -287,6 +323,8 @@ int main(int argc, char* argv[])
                 increaselive = true;
                 flagincrease = 1;
                 trapmap = true;
+                shieldon = false;
+                flagshield = true;
             }
             else
             {
@@ -314,6 +352,8 @@ int main(int argc, char* argv[])
        
         player_brave.Init(g_screen);
         player_brave.SetPos(SCREEN_WIDTH * 0.5 + 200, 10);
+        shield.LoadImg("img//khien.png", g_screen);
+        
 
         for (int i = 0; i < storm.size(); i++)
         {
@@ -360,7 +400,7 @@ int main(int argc, char* argv[])
         {
             bool ret = bossObject.LoadImg("img//threat_level.png", g_screen);
             bossObject.set_clips();
-            int xPosBoss = 1200; //MAX_MAP_X* TILE_SIZE - SCREEN_WIDTH * 0.6;1200;
+            int xPosBoss = MAX_MAP_X* TILE_SIZE - SCREEN_WIDTH * 0.6;//1200;
             bossObject.set_xpos(xPosBoss);
             bossObject.set_ypos(10);
             BulletObject* b_bullet = new BulletObject();
@@ -381,7 +421,7 @@ int main(int argc, char* argv[])
         {
             int mnc, br;
             float xpos, ypos, xposboss, yposboss;
-            Game::LoadGame("Game.txt", mnc, br, xpos, ypos, num_boss, num_die, mark_value, timegame,showboss,xposboss, yposboss, flagincrease);
+            Game::LoadGame("Game.txt", mnc, br, xpos, ypos, num_boss, num_die, mark_value, timegame,showboss,xposboss, yposboss, flagincrease, shieldon, flagshield, timeshieldgame);
             p_player.set_x_pos(xpos);
             p_player.set_y_pos(ypos);
             p_player.SetBrave(br);
@@ -415,7 +455,7 @@ int main(int argc, char* argv[])
                 {
                     Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
                                     ,p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time,
-                                     showboss,bossObject.get_x_pos(),bossObject.get_y_pos(), flagincrease);
+                                     showboss,bossObject.get_x_pos(),bossObject.get_y_pos(), flagincrease,shieldon,flagshield, valshield_time);
                     Game::SaveMap("map//mapcontinue.txt", map_data);
                     std::ofstream file("HaveContinue.txt");
                     if (file.is_open())
@@ -436,12 +476,15 @@ int main(int argc, char* argv[])
                     switch (g_event.key.keysym.sym)
                     {
                     case SDLK_p:
-                        int ret = Menu::ShowPause(g_screen, font_time,&start_game);
+                    {
+                        shield_time.paused();
+                        flagshield_time.paused();
+                        int ret = Menu::ShowPause(g_screen, font_time, &start_game);
                         if (ret == 1)
                         {
                             Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
-                                           ,p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time, showboss,
-                                           bossObject.get_x_pos(),bossObject.get_y_pos(), flagincrease);
+                                , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time, showboss,
+                                bossObject.get_x_pos(), bossObject.get_y_pos(), flagincrease, shieldon, flagshield, valshield_time);
                             Game::SaveMap("map//mapcontinue.txt", map_data);
                             std::ofstream file("HaveContinue.txt");
                             if (file.is_open())
@@ -459,8 +502,8 @@ int main(int argc, char* argv[])
                         else if (ret == 2)
                         {
                             Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
-                                           ,p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time,
-                                           showboss, bossObject.get_x_pos(), bossObject.get_y_pos(), flagincrease);
+                                , p_player.get_x_pos(), p_player.get_y_pos(), num_boss, num_die, mark_value, val_time,
+                                showboss, bossObject.get_x_pos(), bossObject.get_y_pos(), flagincrease, shieldon, flagshield, valshield_time);
                             Game::SaveMap("map//mapcontinue.txt", map_data);
                             std::ofstream file("HaveContinue.txt");
                             if (file.is_open())
@@ -475,8 +518,20 @@ int main(int argc, char* argv[])
                             }
                             is_quit = true;
                             Playgame = false;
-                        } 
+                        }
                         start_game.unpaused();
+                        shield_time.unpaused();
+                        flagshield_time.unpaused();
+                        break;
+                    }
+                    case SDLK_o:
+                        if (flagshield)
+                        {
+                            shieldon = true;
+                            shield_time.start();
+                            flagshield = false;
+                            flagshield_time.start();
+                        }
                         break;
                     }
                 }
@@ -529,6 +584,7 @@ int main(int argc, char* argv[])
                 }
 
             }
+                //Increase live
             if (mark_value >= MARKICRLIVE && mark_value>= flagincrease * MARKICRLIVE && num_die >= 1 && increaselive)
             {
                 if (num_die < 3)
@@ -544,6 +600,42 @@ int main(int argc, char* argv[])
             }
             p_player.Show(g_screen);
             p_player.HandleBullet(g_screen, map_data);
+            //Shield
+            if(shieldon)
+            {
+                shield.SetRect(p_player.get_x_pos() - map_data.start_x_ - 20, p_player.get_y_pos() - map_data.start_y_ - 20);
+                shield.Render(g_screen);
+            }
+            if (shield_time.get_ticks() > 5000)
+            {
+                shieldon = false;
+            }
+            if (flagshield == false)
+            {
+                
+                std::string str_time = "Shield: ";
+                Uint32 shieldtime = flagshield_time.get_ticks() / 1000;
+                valshield_time = timeshieldgame - shieldtime;
+                Uint32 minutes = valshield_time / 60; // Số phút
+                Uint32 seconds = valshield_time % 60; // Số giây còn lại
+                if (valshield_time != 0)
+                {
+                    std::string str_min = std::to_string(minutes);
+                    std::string str_sec = std::to_string(seconds);
+                    if (seconds < 10) {
+                        str_sec = "0" + str_sec;
+                    }
+
+                    str_time += str_min + ":" + str_sec;
+                    shield_game.SetText(str_time);
+                    shield_game.loadFromRenderedText(font_time, g_screen);
+                    shield_game.RenderText(g_screen, SCREEN_WIDTH * 0.5 + 250, 60);
+                }
+                else
+                {
+                    flagshield = true;
+                }
+            }
             //Trap
             if (p_player.get_x_pos() >= 3136 && p_player.get_x_pos()<=3264)
             {
@@ -615,7 +707,7 @@ int main(int argc, char* argv[])
             player_power.Show(g_screen);
             player_money.Show(g_screen);
             player_brave.Show(g_screen);
-            //Threat
+            //Threat1
             for (int i = 0; i < threats_list.size(); i++)
             {
                 ThreatsObject* p_threat = threats_list.at(i);
@@ -670,7 +762,7 @@ int main(int argc, char* argv[])
                             }
                             SDL_Rect rect_threat = p_threat->GetRectFrame();
                             bool bCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_threat);
-                            if (bCol1 == true || bCol2 == true)
+                            if ((bCol1 == true || bCol2 == true)&& !shieldon)
                             {
                                 int width_exp_frame = exp_player.get_frame_height();
                                 int heiht_exp_height = exp_player.get_frame_width();
@@ -800,6 +892,89 @@ int main(int argc, char* argv[])
                     }
                 }
             }
+            //Threat2
+            for (int i = 0; i < threats_list4.size(); i++)
+            {
+                ThreatsObject* p_threat = threats_list4.at(i);
+                if (map_data.start_x_ > p_threat->get_x_pos())
+                {
+                    continue;
+                }
+                else if (map_data.start_x_ + SCREEN_WIDTH < p_threat->get_x_pos())
+                {
+                    break;
+                }
+                else {
+                    if (p_threat != NULL)
+                    {
+                        p_threat->SetMapXY(map_data.start_x_, map_data.start_y_);
+                        p_threat->DoPlayer3(map_data, g_screen);
+                        p_threat->Show2(g_screen);
+                        SDL_Rect rect_player = p_player.GetRectFrame();
+
+                        if (p_player.get_threat_can_fire())
+                        {
+
+                            SDL_Rect rect_threat = p_threat->GetRectFrame();
+                            bool bCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_threat);
+                            if (bCol2 == true && !shieldon)
+                            {
+                                int width_exp_frame = exp_player.get_frame_height();
+                                int heiht_exp_height = exp_player.get_frame_width();
+                                for (int ex = 0; ex < 4; ex++)
+                                {
+                                    int x_pos = (p_player.GetRect().x + p_player.get_frame_width() * 0.5) - width_exp_frame * 0.5;
+                                    int y_pos = (p_player.GetRect().y + p_player.get_frame_height() * 0.5) - heiht_exp_height * 0.5;
+
+                                    exp_player.set_frame(ex);
+                                    exp_player.SetRect(x_pos, y_pos);
+                                    exp_player.Show(g_screen);
+                                    SDL_RenderPresent(g_screen);
+                                }
+                                num_die--;
+                                if (num_die != 0)
+                                {
+                                    p_player.SetRect(0, 0);
+                                    p_player.set_comebeack_time(60);
+                                    SDL_Delay(500);
+                                    player_power.Decrease();
+                                    player_power.Render(g_screen);
+                                    continue;
+                                }
+                                else
+                                {
+                                    player_power.Decrease();
+                                    player_power.Render(g_screen);
+                                    std::ofstream file("HaveContinue.txt");
+                                    if (file.is_open())
+                                    {
+                                        int x = 0;
+                                        file << x << "\n";
+                                        file.close();
+                                    }
+                                    else
+                                    {
+                                        std::cerr << "Unable to save map to file " << std::endl;
+                                    }
+                                    int ret = Menu::ShowGameOver(g_screen, font_time);
+                                    if (ret == 1) {
+                                        close();
+
+                                        is_quit = true;
+                                        Playgame = false;
+                                    }
+                                    else
+                                    {
+                                        close();
+
+                                        is_quit = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             //Trap1
             for (int i = 0; i < threats_list2.size(); i++)
             {
@@ -827,7 +1002,7 @@ int main(int argc, char* argv[])
                             
                             SDL_Rect rect_threat = p_threat->GetRectFrame();
                             bool bCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_threat);
-                            if ( bCol2 == true)
+                            if ( bCol2 == true&&!shieldon)
                             {
                                 int width_exp_frame = exp_player.get_frame_height();
                                 int heiht_exp_height = exp_player.get_frame_width();
@@ -934,7 +1109,7 @@ int main(int argc, char* argv[])
                                 }
                                 SDL_Rect rect_threat = p_threat->GetRectFrame();
                                 bool bCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_threat);
-                                if (bCol1 == true || bCol2 == true)
+                                if ((bCol1 == true || bCol2 == true) && !shieldon)
                                 {
                                     int width_exp_frame = exp_player.get_frame_height();
                                     int heiht_exp_height = exp_player.get_frame_width();
@@ -1034,7 +1209,7 @@ int main(int argc, char* argv[])
                         }
                         SDL_Rect rect_boss = bossObject.GetRectFrame();
                         bool BossCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_boss);
-                        if (BossCol1 == true || BossCol2 == true)
+                        if ((BossCol1 == true || BossCol2 == true)&& !shieldon)
                         {
                             int width_exp_frame = exp_player.get_frame_height();
                             int heiht_exp_height = exp_player.get_frame_width();
@@ -1135,7 +1310,7 @@ int main(int argc, char* argv[])
 
                         SDL_Rect rect_boss = threat1.GetRectFrame();
                         bool BossCol2 = SDLCommonFunc::CheckCollision(rect_player1, rect_boss);
-                        if (BossCol2 == true)
+                        if (BossCol2 == true&& !shieldon)
                         {
                             int width_exp_frame = exp_player.get_frame_height();
                             int heiht_exp_height = exp_player.get_frame_width();
@@ -1241,7 +1416,7 @@ int main(int argc, char* argv[])
 
                             SDL_Rect rect_boss = threat2.GetRectFrame();
                             bool BossCol2 = SDLCommonFunc::CheckCollision(rect_player2, rect_boss);
-                            if (BossCol2 == true)
+                            if (BossCol2 == true&& !shieldon)
                             {
                                 int width_exp_frame = exp_player.get_frame_height();
                                 int heiht_exp_height = exp_player.get_frame_width();
@@ -1420,7 +1595,7 @@ int main(int argc, char* argv[])
                         }
                     }
                 }
-                if (Col1 == true)
+                if (Col1 == true&& !shieldon)
                 {
                     int width_exp_frame = exp_player.get_frame_height();
                     int heiht_exp_height = exp_player.get_frame_width();
@@ -1593,6 +1768,15 @@ int main(int argc, char* argv[])
                 p_threats = NULL;
             }
         }
+        for (int i = 0; i < threats_list4.size(); i++)
+        {
+            ThreatsObject* p_threats = threats_list4.at(i);
+            if (p_threats)
+            {
+                p_threats->Free();
+                p_threats = NULL;
+            }
+        }
         for (int i = 0; i < bossObject.get_bullet_list().size(); i++)
         {
             bossObject.RemoveBullet(i);
@@ -1612,7 +1796,7 @@ int main(int argc, char* argv[])
         bossObject.Free();
         for (int i = 0; i < storm.size(); i++)
         {
-            storm[i].SetRect(64 + i * 64 * 3, -64);
+            storm[i].Free();
         }
         close();
     }

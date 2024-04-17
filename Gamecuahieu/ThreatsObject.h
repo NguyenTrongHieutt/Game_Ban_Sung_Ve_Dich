@@ -16,6 +16,7 @@
 #define THREAT_SPEED 3
 #define PLAYER_HIGHT_VAL 18;
 #define TRAP_SPEED 9
+#define THREAT2_SPEED 0.09
 
 #define THREATS_NUM_FRAME 8
 
@@ -37,9 +38,11 @@ public:
   
     void CheckToMap(Map& g_map, SDL_Renderer* screen);
     void CheckToMap2(Map& map_data, SDL_Renderer* screen);
+    void CheckToMap3(Map& map_data, SDL_Renderer* screen);
 
     void DoPlayer(Map& g_map, SDL_Renderer* screen);
     void DoPlayer2(Map& gMap, SDL_Renderer* screen);
+    void DoPlayer3(Map& g_map, SDL_Renderer* screen);
 
     void Show(SDL_Renderer* des);
     void Show2(SDL_Renderer* des);

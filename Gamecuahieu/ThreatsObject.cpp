@@ -195,6 +195,20 @@ void ThreatsObject:: DoPlayer2(Map& gMap, SDL_Renderer* screen)
 		}
 	}
 }
+void ThreatsObject::DoPlayer3(Map& gMap, SDL_Renderer* screen)
+{
+	x_val_ = 0;
+	if (input_type_.up_ == 1)
+	{
+		y_val_ -= THREAT2_SPEED;
+	}
+
+	else if (input_type_.down_== 1)
+	{
+		y_val_ += THREAT2_SPEED;
+	}
+	CheckToMap3(gMap, screen);
+}
 void ThreatsObject::InitThreats()
 {
 	x_val_ = 0;
@@ -441,6 +455,68 @@ void ThreatsObject::CheckToMap2(Map& map_data, SDL_Renderer* screen)
 	{
 		on_ground = false;
 		come_back_time_ = 50;
+	}
+}
+void ThreatsObject::CheckToMap3(Map& map_data, SDL_Renderer* screen)
+{
+	int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+	int height_min = height_frame_ < TILE_SIZE ? height_frame_ : TILE_SIZE;
+	int width_min = width_frame_ < TILE_SIZE ? width_frame_ : TILE_SIZE;
+	// Xử lý va chạm theo chiều dọc
+	x1 = (int)(x_pos_) / TILE_SIZE;
+	x2 = (int)(x_pos_ + width_min) / TILE_SIZE;
+
+	y1 = (int)(y_pos_ + y_val_) / TILE_SIZE;
+	y2 = (int)(y_pos_ + y_val_ + height_frame_ - 1) / TILE_SIZE;
+
+	// Kiểm tra va chạm với tile theo chiều dọc
+	if (x1 >= 0 && x2 < MAX_MAP_X && y1 >= 0 && y2 < MAX_MAP_Y)
+	{
+		if (y_val_ > 0) // Rơi xuống
+		{
+			int val1 = map_data.tile[y2][x1];
+			int val2 = map_data.tile[y2][x2];
+
+			if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
+			{
+				// Đặt lại vị trí y để tránh va chạm
+				y_pos_ = y2 * TILE_SIZE - height_frame_ - 1;
+				y_val_ = 0;
+				input_type_.down_ = 0;
+				input_type_.up_ = 1;
+
+			}
+
+		}
+		else if (y_val_ < 0) // Nhảy lên
+		{
+			int val1 = map_data.tile[y1][x1];
+			int val2 = map_data.tile[y1][x2];
+
+			if ((val1 != BLANK_TILE && val1 != STATE_MONEY && val1 != ITEM_BRAVE) || (val2 != BLANK_TILE && val2 != STATE_MONEY && val2 != ITEM_BRAVE))
+			{
+				// Đặt lại vị trí y để tránh va chạm
+				y_pos_ = (y1 + 1) * TILE_SIZE;
+				y_val_ = 0;
+				input_type_.down_ = 1;
+				input_type_.up_ = 0;
+			}
+
+		}
+	}
+
+	// Cập nhật vị trí mới của nhân vật
+	x_pos_ += x_val_;
+	y_pos_ += y_val_;
+	if (y_pos_+height_frame_ >= map_data.max_y_)
+	{
+		input_type_.down_ = 0;
+		input_type_.up_ = 1;
+	}
+	else if (y_pos_ <= 0)
+	{
+		input_type_.down_ = 1;
+		input_type_.up_ = 0;
 	}
 }
 void ThreatsObject::ImpMoveType(SDL_Renderer* screen,const float& x,const float& y)
