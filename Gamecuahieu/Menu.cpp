@@ -1,6 +1,6 @@
 ﻿#include<iostream>
 #include"Menu.h"
-int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
+int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool &onaudio)
 {
     BaseObject g_img_menu;
     bool ret = g_img_menu.LoadImg("img//background_menu_hascon.png", des);
@@ -91,12 +91,25 @@ int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
             }
             break;
             case SDL_KEYDOWN:
-                if (m_event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                if (m_event.key.keysym.sym == SDLK_u)
                 {
-                    g_img_menu.Free();
-                    return 1;
+                    if (onaudio)
+                    {
+                        Mix_Volume(-1, 0);       // Tắt tất cả các channel
+                        Mix_VolumeMusic(0);      // Tắt music
+                        onaudio = false;
+                    }
+                    else if (!onaudio)
+                    {
+                        Mix_Volume(-1, 100);       // Bật tất cả các channel
+                        Mix_VolumeMusic(100);      // Bật music
+                        onaudio = true;
+                    }
+
                 }
                 break;
+            }
             }
         }
         text_menu[0].loadFromRenderedText(font, des);
@@ -111,13 +124,13 @@ int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
    
     return 1;
 }
-int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
+int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool& onaudio)
 {
     BaseObject g_img_menu;
     bool ret = g_img_menu.LoadImg("img//background_menu.png", des);
     if (ret == false)
     {
-        return 2;
+        return 1;
     }
     SDL_SetRenderDrawColor(des, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
     SDL_RenderClear(des);
@@ -147,7 +160,7 @@ int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
             switch (m_event.type)
             {
             case SDL_QUIT:
-                return 2;
+                return 1;
             case SDL_MOUSEMOTION:
             {
                 xm = m_event.motion.x;
@@ -197,12 +210,25 @@ int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
             }
             break;
             case SDL_KEYDOWN:
-                if (m_event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                if (m_event.key.keysym.sym == SDLK_u)
                 {
-                    g_img_menu.Free();
-                    return 1;
+                    if (onaudio)
+                    {
+                        Mix_Volume(-1, 0);       // Tắt tất cả các channel
+                        Mix_VolumeMusic(0);      // Tắt music
+                        onaudio = false;
+                    }
+                    else if (!onaudio)
+                    {
+                        Mix_Volume(-1, 100);       // Bật tất cả các channel
+                        Mix_VolumeMusic(100);      // Bật music
+                        onaudio = true;
+                    }
+
                 }
                 break;
+            }
             }
         }
         text_menu[0].loadFromRenderedText(font, des);
@@ -215,7 +241,7 @@ int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
 
     return 1;
 }
-int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time, Mix_Chunk* sound)
+int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time, Mix_Chunk* sound, bool& onaudio)
 {
     BaseObject g_img_menu;
     bool ret = g_img_menu.LoadImg("img//background_continue.png", des);
@@ -307,12 +333,25 @@ int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time, Mix_Chunk*
             }
             break;
             case SDL_KEYDOWN:
-                if (m_event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                if (m_event.key.keysym.sym == SDLK_u)
                 {
-                    g_img_menu.Free();
-                    return 1;
+                    if (onaudio)
+                    {
+                        Mix_Volume(-1, 0);       // Tắt tất cả các channel
+                        Mix_VolumeMusic(0);      // Tắt music
+                        onaudio = false;
+                    }
+                    else if (!onaudio)
+                    {
+                        Mix_Volume(-1, 100);       // Bật tất cả các channel
+                        Mix_VolumeMusic(100);      // Bật music
+                        onaudio = true;
+                    }
+
                 }
                 break;
+            }
             }
         }
         text_menu[0].loadFromRenderedText(font, des);
@@ -327,7 +366,7 @@ int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time, Mix_Chunk*
 
     return 1;
 }
-int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
+int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool& onaudio)
 {
     BaseObject vicotry;
     bool ret = vicotry.LoadImg("img//BackgroundVTR.png", des);
@@ -415,12 +454,25 @@ int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
             }
             break;
             case SDL_KEYDOWN:
-                if (m_event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                if (m_event.key.keysym.sym == SDLK_u)
                 {
-                    vicotry.Free();
-                    return 1;
+                    if (onaudio)
+                    {
+                        Mix_Volume(-1, 0);       // Tắt tất cả các channel
+                        Mix_VolumeMusic(0);      // Tắt music
+                        onaudio = false;
+                    }
+                    else if (!onaudio)
+                    {
+                        Mix_Volume(-1, 100);       // Bật tất cả các channel
+                        Mix_VolumeMusic(100);      // Bật music
+                        onaudio = true;
+                    }
+
                 }
                 break;
+            }
             }
         }
         text_menu[0].loadFromRenderedText(font, des);
@@ -431,7 +483,7 @@ int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
         SDL_RenderPresent(des);
     }
 }
-    int Menu::ShowGameOver(SDL_Renderer * des, TTF_Font * font, Mix_Chunk* sound)
+    int Menu::ShowGameOver(SDL_Renderer * des, TTF_Font * font, Mix_Chunk* sound, bool& onaudio)
     {
         BaseObject game_over;
         bool ret = game_over.LoadImg("img//BackgroundGOV.png", des);
@@ -519,12 +571,25 @@ int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
                 }
                 break;
                 case SDL_KEYDOWN:
-                    if (m_event.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    if (m_event.key.keysym.sym == SDLK_u)
                     {
-                        game_over.Free();
-                        return 1;
+                        if (onaudio)
+                        {
+                            Mix_Volume(-1, 0);       // Tắt tất cả các channel
+                            Mix_VolumeMusic(0);      // Tắt music
+                            onaudio = false;
+                        }
+                        else if (!onaudio)
+                        {
+                            Mix_Volume(-1, 100);       // Bật tất cả các channel
+                            Mix_VolumeMusic(100);      // Bật music
+                            onaudio = true;
+                        }
+
                     }
                     break;
+                }
                 }
             }
             text_menu[0].loadFromRenderedText(font, des);

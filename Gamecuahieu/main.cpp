@@ -202,13 +202,16 @@ std::vector<ThreatsObject*>MakeThreatsList4()
 int main(int argc, char* argv[])
 {
     bool Playgame = true;
+    //AUDIO
+    bool onaudio = true;
     //Boss Threat
     BossObject bossObject;
     int num_boss = NUMBOSS;
-    bool creat_threat = true;
+   //MAIN
     MainObject p_player;
     int num_die = NUMDIE;
     bool showboss = false;
+    //TIME
     ImpTimer fps_timer;
     ImpTimer shield_time;
     ImpTimer start_game;
@@ -217,6 +220,7 @@ int main(int argc, char* argv[])
     Uint32 val_time = TIMETOTAL;
     Uint32 valshield_time = TIMESHIELD;
     Uint32 timeshieldgame = TIMESHIELD;
+
     GameMap game_map;
     int X = 0;
     PlayerMoney player_money;
@@ -269,14 +273,13 @@ int main(int argc, char* argv[])
         }
         if (X == 1) {
             Mix_PlayMusic(g_sound_music[0], -1);
-            int ret_menu = Menu::ShowMenu(g_screen, font_time, g_sound_coin[0]);
+            int ret_menu = Menu::ShowMenu(g_screen, font_time, g_sound_coin[0],onaudio);
 
             if (ret_menu == 0)
             {
                 Continue = false;
                 Game::ResetThreatGame();
                 num_boss = NUMBOSS;
-                creat_threat = true;
                 num_die = NUMDIE;
                 showboss = false;
                 timegame = TIMETOTAL;
@@ -289,7 +292,7 @@ int main(int argc, char* argv[])
                 mark_value = 0;
                 is_quit = false;
                 flag_threat = false;
-                p_player.set_x_pos(SCREEN_WIDTH * MAX_MAP_X- 1500);// SCREEN_WIDTH* MAX_MAP_X - 500
+                p_player.set_x_pos(0);// SCREEN_WIDTH* MAX_MAP_X - 500
                 p_player.set_y_pos(0);
                 p_player.SetBrave(0);
                 p_player.SetMoney(0);
@@ -320,13 +323,12 @@ int main(int argc, char* argv[])
         else
         {
             Mix_PlayMusic(g_sound_music[0], -1);
-            int ret_menu = Menu::ShowMenuNoCon(g_screen, font_time, g_sound_coin[0]);
+            int ret_menu = Menu::ShowMenuNoCon(g_screen, font_time, g_sound_coin[0],onaudio);
             if (ret_menu == 0)
             {
                 Continue = false;
                 Game::ResetThreatGame();
                 num_boss = NUMBOSS;
-                creat_threat = true;
                 num_die = NUMDIE;
                 showboss = false;
                 timegame = TIMETOTAL;
@@ -505,7 +507,7 @@ int main(int argc, char* argv[])
                     {
                         shield_time.paused();
                         flagshield_time.paused();
-                        int ret = Menu::ShowPause(g_screen, font_time, &start_game, g_sound_coin[0]);
+                        int ret = Menu::ShowPause(g_screen, font_time, &start_game, g_sound_coin[0], onaudio);
                         if (ret == 1)
                         {
                             Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
@@ -551,6 +553,7 @@ int main(int argc, char* argv[])
                         break;
                     }
                     case SDLK_o:
+                    {
                         if (flagshield)
                         {
                             Mix_PlayChannel(CHANNEL_GUN, g_sound_player[3], 0);
@@ -560,6 +563,24 @@ int main(int argc, char* argv[])
                             flagshield_time.start();
                         }
                         break;
+                    }
+                    case SDLK_u:
+                    {
+                        if (onaudio)
+                        {
+                            Mix_Volume(-1, 0);       // Tắt tất cả các channel
+                            Mix_VolumeMusic(0);      // Tắt music
+                            onaudio = false;
+                        }
+                        else if(!onaudio)
+                        {
+                            Mix_Volume(-1, 100);       // Bật tất cả các channel
+                            Mix_VolumeMusic(100);      // Bật music
+                            onaudio = true;
+                        }
+
+                        break;
+                    }
                     }
                 }
                 p_player.HandelInputAction(g_event, g_screen, g_sound_player);
@@ -597,7 +618,7 @@ int main(int argc, char* argv[])
                 }
                 Mix_HaltMusic();
                 Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
-                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
+                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0], onaudio);
                 if (ret == 1) {
                     close();
 
@@ -709,7 +730,7 @@ int main(int argc, char* argv[])
                         }
                         Mix_HaltMusic();
                         Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
-                        int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
+                        int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0], onaudio);
                         if (ret == 1) {
                             close();
 
@@ -838,7 +859,7 @@ int main(int argc, char* argv[])
                                     }
                                     Mix_HaltMusic();
                                     Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
-                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
+                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0], onaudio);
                                     if (ret == 1) {
                                         close();
                                         
@@ -998,7 +1019,7 @@ int main(int argc, char* argv[])
                                     }
                                     Mix_HaltMusic();
                                     Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
-                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
+                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0], onaudio);
                                     if (ret == 1) {
                                         close();
 
@@ -1086,7 +1107,7 @@ int main(int argc, char* argv[])
                                     }
                                     Mix_HaltMusic();
                                     Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
-                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
+                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0], onaudio);
                                     if (ret == 1) {
                                         close();
 
@@ -1196,7 +1217,7 @@ int main(int argc, char* argv[])
                                         }
                                         Mix_HaltMusic();
                                         Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
-                                        int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
+                                        int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0], onaudio);
                                         if (ret == 1) {
                                             close();
 
@@ -1309,7 +1330,7 @@ int main(int argc, char* argv[])
                                 }
                                 Mix_HaltMusic();
                                 Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
-                                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
+                                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0], onaudio);
                                 if (ret == 1) {
                                     close();
 
@@ -1414,7 +1435,7 @@ int main(int argc, char* argv[])
                                 }
                                 Mix_HaltMusic();
                                 Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
-                                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
+                                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0], onaudio);
                                 if (ret == 1) {
                                     close();
 
@@ -1524,7 +1545,7 @@ int main(int argc, char* argv[])
                                     }
                                     Mix_HaltMusic();
                                     Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
-                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
+                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0], onaudio);
                                     if (ret == 1) {
                                         close();
 
@@ -1601,7 +1622,7 @@ int main(int argc, char* argv[])
                     }
                     Mix_HaltMusic();
                     Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[0], 0);
-                    int ret = Menu::ShowVitory(g_screen, font_time, g_sound_coin[0]);
+                    int ret = Menu::ShowVitory(g_screen, font_time, g_sound_coin[0], onaudio);
                     if (ret == 1) {
                         close();
                         
@@ -1708,7 +1729,7 @@ int main(int argc, char* argv[])
                         }
                         Mix_HaltMusic();
                         Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
-                        int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
+                        int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0], onaudio);
                         if (ret == 1) {
                             close();
 
@@ -1740,7 +1761,7 @@ int main(int argc, char* argv[])
                 is_quit = true;
                 Mix_HaltMusic();
                 Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
-                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
+                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0], onaudio);
                 if (ret == 1) {
                     is_quit = true;
                     Playgame = false;

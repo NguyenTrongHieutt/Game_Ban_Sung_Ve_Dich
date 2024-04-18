@@ -19,6 +19,7 @@ static Mix_Chunk* g_sound_event[3];
 static Mix_Music* g_sound_music[3];
 static Mix_Chunk* g_sound_endgame[2];
 //audio
+const int TOTAL_CHANNEL = 8;
 const int CHANNEL_GUN= 0;
 const int CHANNEL_EXP = 1;
 const int CHANNEL_COIN = 3;
