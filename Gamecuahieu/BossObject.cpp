@@ -316,7 +316,7 @@ void BossObject::CheckToMap(Map& g_map)
         think_time_ = 60;
     }
 }
-void BossObject::MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit, const float& x2, const float& y2, Map& map_data)
+void BossObject::MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit, const float& x2, const float& y2, Map& map_data,Mix_Chunk* soundevent[3])
 {
     if (x2 <= x_pos_)
     {
@@ -340,6 +340,7 @@ void BossObject::MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_
             }
             else
             {
+                Mix_PlayChannel(CHANNEL_BOSS1, soundevent[1], 0);
                 p_bullet->set_is_move(true);
                 p_bullet->SetRect(rect_.x, rect_.y);
             }

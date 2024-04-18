@@ -1,9 +1,9 @@
 ﻿#include<iostream>
 #include"Menu.h"
-int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font)
+int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
 {
     BaseObject g_img_menu;
-    bool ret = g_img_menu.LoadImg("img//background_menu.png", des);
+    bool ret = g_img_menu.LoadImg("img//background_menu_hascon.png", des);
     if (ret == false)
     {
         return 2;
@@ -84,7 +84,8 @@ int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font)
                     if (CheckFocusWithRect(xm, ym,rect))
                     {
                         g_img_menu.Free();
-                        return i;
+                        Mix_PlayChannel(CHANNEL_EVENT, sound, 0);
+                        return i;                       
                     }
                 }
             }
@@ -110,7 +111,7 @@ int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font)
    
     return 1;
 }
-int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font)
+int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
 {
     BaseObject g_img_menu;
     bool ret = g_img_menu.LoadImg("img//background_menu.png", des);
@@ -189,6 +190,7 @@ int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font)
                     if (CheckFocusWithRect(xm, ym, rect))
                     {
                         g_img_menu.Free();
+                        Mix_PlayChannel(CHANNEL_EVENT, sound, 0);
                         return i;
                     }
                 }
@@ -213,10 +215,10 @@ int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font)
 
     return 1;
 }
-int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time)
+int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time, Mix_Chunk* sound)
 {
     BaseObject g_img_menu;
-    bool ret = g_img_menu.LoadImg("img//background_menu.png", des);
+    bool ret = g_img_menu.LoadImg("img//background_continue.png", des);
     if (ret == false)
     {
         return 2;
@@ -298,6 +300,7 @@ int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time)
                     if (CheckFocusWithRect(xm, ym, rect))
                     {
                         g_img_menu.Free();
+                        Mix_PlayChannel(CHANNEL_EVENT, sound, 0);
                         return i;
                     }
                 }
@@ -324,7 +327,7 @@ int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time)
 
     return 1;
 }
-int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font)
+int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound)
 {
     BaseObject vicotry;
     bool ret = vicotry.LoadImg("img//BackgroundVTR.png", des);
@@ -405,6 +408,7 @@ int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font)
                     if (CheckFocusWithRect(xm, ym, rect))
                     {
                         vicotry.Free();
+                        Mix_PlayChannel(CHANNEL_EVENT, sound, 0);
                         return i;
                     }
                 }
@@ -427,7 +431,7 @@ int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font)
         SDL_RenderPresent(des);
     }
 }
-    int Menu::ShowGameOver(SDL_Renderer * des, TTF_Font * font)
+    int Menu::ShowGameOver(SDL_Renderer * des, TTF_Font * font, Mix_Chunk* sound)
     {
         BaseObject game_over;
         bool ret = game_over.LoadImg("img//BackgroundGOV.png", des);
@@ -508,6 +512,7 @@ int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font)
                         if (CheckFocusWithRect(xm, ym, rect))
                         {
                             game_over.Free();
+                            Mix_PlayChannel(CHANNEL_EVENT, sound, 0);
                             return i;
                         }
                     }

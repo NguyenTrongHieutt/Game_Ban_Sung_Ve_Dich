@@ -21,7 +21,7 @@ TTF_Font* font_time=NULL;
 bool InitData()
 {
     bool success = true;
-    int ret = SDL_Init(SDL_INIT_VIDEO);
+    int ret = SDL_Init(SDL_INIT_VIDEO| SDL_INIT_AUDIO);
     if (ret < 0)
         return false;
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
@@ -56,6 +56,29 @@ bool InitData()
             success = false;
         }
     }
+    Mix_Init(MIX_INIT_MP3);
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) ==-1)
+    {
+        return false;
+    }
+    //Readfileaudio
+    g_sound_player[0] = Mix_LoadWAV("Gun+1.wav");
+    g_sound_player[1] = Mix_LoadWAV("Gun+Silencer.wav");
+    g_sound_exp[0] = Mix_LoadWAV("Explosion+7.wav");
+    g_sound_exp[1] = Mix_LoadWAV("Yell+2.wav");
+    g_sound_coin[0] = Mix_LoadWAV("coins.wav");
+    g_sound_coin[1] = Mix_LoadWAV("liveup.wav");
+    g_sound_player[2]= Mix_LoadWAV("jump.wav");
+    g_sound_player[3] = Mix_LoadWAV("shield.wav");
+    g_sound_player[4] = Mix_LoadWAV("switchgun.wav");
+    g_sound_player[5] = Mix_LoadWAV("block.wav");
+    g_sound_event[0] = Mix_LoadWAV("canhbao.wav");
+    g_sound_event[1] = Mix_LoadWAV("Fireball+1.wav");
+    g_sound_event[2] = Mix_LoadWAV("boss.wav");
+    g_sound_music[0] = Mix_LoadMUS("menu.mp3");
+    g_sound_music[1] = Mix_LoadMUS("play.mp3");
+    g_sound_endgame[0] = Mix_LoadWAV("wingame.wav");
+    g_sound_endgame[1] = Mix_LoadWAV("gameover.wav");
     return success;
 }
 bool LoadBackground()
@@ -245,7 +268,9 @@ int main(int argc, char* argv[])
             std::cerr << "Unable to open file." << std::endl;
         }
         if (X == 1) {
-            int ret_menu = Menu::ShowMenu(g_screen, font_time);
+            Mix_PlayMusic(g_sound_music[0], -1);
+            int ret_menu = Menu::ShowMenu(g_screen, font_time, g_sound_coin[0]);
+
             if (ret_menu == 0)
             {
                 Continue = false;
@@ -264,7 +289,7 @@ int main(int argc, char* argv[])
                 mark_value = 0;
                 is_quit = false;
                 flag_threat = false;
-                p_player.set_x_pos(0);
+                p_player.set_x_pos(SCREEN_WIDTH * MAX_MAP_X- 1500);// SCREEN_WIDTH* MAX_MAP_X - 500
                 p_player.set_y_pos(0);
                 p_player.SetBrave(0);
                 p_player.SetMoney(0);
@@ -294,7 +319,8 @@ int main(int argc, char* argv[])
         }
         else
         {
-            int ret_menu = Menu::ShowMenuNoCon(g_screen, font_time);
+            Mix_PlayMusic(g_sound_music[0], -1);
+            int ret_menu = Menu::ShowMenuNoCon(g_screen, font_time, g_sound_coin[0]);
             if (ret_menu == 0)
             {
                 Continue = false;
@@ -331,7 +357,7 @@ int main(int argc, char* argv[])
                 return 0;
             }
         }
-
+        Mix_PlayMusic(g_sound_music[1], -1);
         if (LoadBackground() == false)
         {
             return -1;
@@ -479,7 +505,7 @@ int main(int argc, char* argv[])
                     {
                         shield_time.paused();
                         flagshield_time.paused();
-                        int ret = Menu::ShowPause(g_screen, font_time, &start_game);
+                        int ret = Menu::ShowPause(g_screen, font_time, &start_game, g_sound_coin[0]);
                         if (ret == 1)
                         {
                             Game::SaveGame("Game.txt", p_player.GetMoneyCount(), p_player.GetNumBrave()
@@ -527,6 +553,7 @@ int main(int argc, char* argv[])
                     case SDLK_o:
                         if (flagshield)
                         {
+                            Mix_PlayChannel(CHANNEL_GUN, g_sound_player[3], 0);
                             shieldon = true;
                             shield_time.start();
                             flagshield = false;
@@ -535,20 +562,21 @@ int main(int argc, char* argv[])
                         break;
                     }
                 }
-                p_player.HandelInputAction(g_event, g_screen);
+                p_player.HandelInputAction(g_event, g_screen, g_sound_player);
             }
             SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
             SDL_RenderClear(g_screen);
             g_background.Render(g_screen, NULL);
 
             p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
-            p_player.DoPlayer(map_data);
+            p_player.DoPlayer(map_data,g_sound_coin[0],g_sound_player);
             if (p_player.get_brave() && p_player.GetNumBrave() > 0)
             {
-                p_player.DoBrave(map_data);
+                p_player.DoBrave(map_data,g_sound_player);
             }
             if (p_player.get_out_area())
             {
+                Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[1], 0);
                 num_die--;
                 player_power.Decrease();
                 player_power.Render(g_screen);
@@ -567,7 +595,9 @@ int main(int argc, char* argv[])
                 {
                     std::cerr << "Unable to save map to file " << std::endl;
                 }
-                int ret = Menu::ShowGameOver(g_screen, font_time);
+                Mix_HaltMusic();
+                Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
+                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
                 if (ret == 1) {
                     close();
 
@@ -584,11 +614,12 @@ int main(int argc, char* argv[])
                 }
 
             }
-                //Increase live
+            //Increase live
             if (mark_value >= MARKICRLIVE && mark_value>= flagincrease * MARKICRLIVE && num_die >= 1 && increaselive)
             {
                 if (num_die < 3)
                 {
+                    Mix_PlayChannel(CHANNEL_COIN, g_sound_coin[1], 0);
                     num_die++;
                     player_power.InCrease();
                     player_power.Render(g_screen);
@@ -651,6 +682,7 @@ int main(int argc, char* argv[])
                 if (trapmap)
                 {
                     p_player.Trap2(map_data, 8256 + 2 * TILE_SIZE, 1);
+                    Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[1], 0);
                     num_die--;
                     if (num_die != 0)
                     {
@@ -675,7 +707,9 @@ int main(int argc, char* argv[])
                         {
                             std::cerr << "Unable to save map to file " << std::endl;
                         }
-                        int ret = Menu::ShowGameOver(g_screen, font_time);
+                        Mix_HaltMusic();
+                        Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
+                        int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
                         if (ret == 1) {
                             close();
 
@@ -776,6 +810,7 @@ int main(int argc, char* argv[])
                                     exp_player.Show(g_screen);
                                     SDL_RenderPresent(g_screen);
                                 }
+                                Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[1], 0);
                                 num_die--;
                                 if (num_die != 0)
                                 {
@@ -801,7 +836,9 @@ int main(int argc, char* argv[])
                                     {
                                         std::cerr << "Unable to save map to file " << std::endl;
                                     }
-                                    int ret = Menu::ShowGameOver(g_screen, font_time);
+                                    Mix_HaltMusic();
+                                    Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
+                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
                                     if (ret == 1) {
                                         close();
                                         
@@ -851,6 +888,7 @@ int main(int argc, char* argv[])
                                     if (p_bullet->get_bullet_type() == BulletObject::SPHERE_BULLET &&
                                         obj_threat->get_typemove() == ThreatsObject::MOVE_IN_SPACE_TH)
                                     {
+                                        Mix_PlayChannel(CHANNEL_EXP,g_sound_exp[0], 0);
                                         mark_value += 100;
                                         increaselive = true;
                                         for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
@@ -869,6 +907,7 @@ int main(int argc, char* argv[])
                                     else if (p_bullet->get_bullet_type() == BulletObject::LASER_BULLET &&
                                         obj_threat->get_typemove() == ThreatsObject::STATIC_THREAT)
                                     {
+                                        Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[0], 0);
                                         mark_value += 200;
                                         increaselive = true;
                                         for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
@@ -917,7 +956,7 @@ int main(int argc, char* argv[])
 
                             SDL_Rect rect_threat = p_threat->GetRectFrame();
                             bool bCol2 = SDLCommonFunc::CheckCollision(rect_player, rect_threat);
-                            if (bCol2 == true && !shieldon)
+                            if (bCol2 == true && !shieldon&& p_threat->get_y_pos()>=0)
                             {
                                 int width_exp_frame = exp_player.get_frame_height();
                                 int heiht_exp_height = exp_player.get_frame_width();
@@ -932,6 +971,7 @@ int main(int argc, char* argv[])
                                     SDL_RenderPresent(g_screen);
                                 }
                                 num_die--;
+                                Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[1], 0);
                                 if (num_die != 0)
                                 {
                                     p_player.SetRect(0, 0);
@@ -956,7 +996,9 @@ int main(int argc, char* argv[])
                                     {
                                         std::cerr << "Unable to save map to file " << std::endl;
                                     }
-                                    int ret = Menu::ShowGameOver(g_screen, font_time);
+                                    Mix_HaltMusic();
+                                    Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
+                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
                                     if (ret == 1) {
                                         close();
 
@@ -1016,6 +1058,7 @@ int main(int argc, char* argv[])
                                     exp_player.Show(g_screen);
                                     SDL_RenderPresent(g_screen);
                                 }
+                                Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[1], 0);
                                 num_die--;
                                 if (num_die != 0)
                                 {
@@ -1041,7 +1084,9 @@ int main(int argc, char* argv[])
                                     {
                                         std::cerr << "Unable to save map to file " << std::endl;
                                     }
-                                    int ret = Menu::ShowGameOver(g_screen, font_time);
+                                    Mix_HaltMusic();
+                                    Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
+                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
                                     if (ret == 1) {
                                         close();
 
@@ -1123,6 +1168,7 @@ int main(int argc, char* argv[])
                                         exp_player.Show(g_screen);
                                         SDL_RenderPresent(g_screen);
                                     }
+                                    Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[1], 0);
                                     num_die--;
                                     if (num_die != 0)
                                     {
@@ -1148,7 +1194,9 @@ int main(int argc, char* argv[])
                                         {
                                             std::cerr << "Unable to save map to file " << std::endl;
                                         }
-                                        int ret = Menu::ShowGameOver(g_screen, font_time);
+                                        Mix_HaltMusic();
+                                        Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
+                                        int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
                                         if (ret == 1) {
                                             close();
 
@@ -1171,12 +1219,20 @@ int main(int argc, char* argv[])
             
             //Show Boss
             int val = MAX_MAP_X * TILE_SIZE - (map_data.start_x_ + p_player.GetRect().x);
-            if (val < SCREEN_WIDTH) { showboss = true; }
+            if (val < SCREEN_WIDTH) { 
+                if (!showboss)
+                {
+                    Mix_PlayChannel(CHANNEL_EVENT, g_sound_event[0], 0);
+                }
+                showboss = true; }
            if(showboss)
            {          
                 if (num_boss > 0)
                 {
-
+                    if ((start_game.get_ticks()/1000)%5==0)
+                    {
+                        Mix_PlayChannel(CHANNEL_BOSS2, g_sound_event[2], 0);
+                    }
                     boss_power.Show(g_screen);
                     std::string boss_power_str = std::to_string(num_boss);
                     boss_live_text.SetText(boss_power_str);
@@ -1187,7 +1243,7 @@ int main(int argc, char* argv[])
                     bossObject.DoPlayer(map_data);
                     game_map.SetMap(map_data);
                     game_map.DrawMap(g_screen);
-                    bossObject.MakeBullet(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT, p_player.get_x_pos(), p_player.get_y_pos(), map_data);
+                    bossObject.MakeBullet(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT, p_player.get_x_pos(), p_player.get_y_pos(), map_data,g_sound_event);
                     bossObject.Show(g_screen);
                     SDL_Rect rect_player = p_player.GetRectFrame();
                     if (p_player.get_threat_can_fire())
@@ -1224,6 +1280,7 @@ int main(int argc, char* argv[])
                                 SDL_RenderPresent(g_screen);
                             }
                             num_die--;
+                            Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[1], 0);
                             if (num_die != 0)
                             {
                                 p_player.SetRect(0, 0);
@@ -1250,7 +1307,9 @@ int main(int argc, char* argv[])
                                 {
                                     std::cerr << "Unable to save map to file " << std::endl;
                                 }
-                                int ret = Menu::ShowGameOver(g_screen, font_time);
+                                Mix_HaltMusic();
+                                Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
+                                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
                                 if (ret == 1) {
                                     close();
 
@@ -1281,6 +1340,7 @@ int main(int argc, char* argv[])
                             bool bCol = SDLCommonFunc::CheckCollision(bRect, BRect);
                             if (bCol)
                             {
+                                Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[0], 0);
                                 num_boss--;
                                 for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
                                 {
@@ -1325,6 +1385,7 @@ int main(int argc, char* argv[])
                                 SDL_RenderPresent(g_screen);
                             }
                             num_die--;
+                            Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[1], 0);
                             if (num_die != 0)
                             {
                                 p_player.SetRect(0, 0);
@@ -1351,7 +1412,9 @@ int main(int argc, char* argv[])
                                 {
                                     std::cerr << "Unable to save map to file " << std::endl;
                                 }
-                                int ret = Menu::ShowGameOver(g_screen, font_time);
+                                Mix_HaltMusic();
+                                Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
+                                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
                                 if (ret == 1) {
                                     close();
 
@@ -1382,6 +1445,7 @@ int main(int argc, char* argv[])
                             bool bCol = SDLCommonFunc::CheckCollision(bRect, BRect);
                             if (bCol)
                             {
+                                Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[0], 0);
                                 mark_value += 250;
                                 increaselive = true;
                                 for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
@@ -1431,6 +1495,7 @@ int main(int argc, char* argv[])
                                     SDL_RenderPresent(g_screen);
                                 }
                                 num_die--;
+                                Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[1], 0);
                                 if (num_die != 0)
                                 {
                                     p_player.SetRect(0, 0);
@@ -1457,7 +1522,9 @@ int main(int argc, char* argv[])
                                     {
                                         std::cerr << "Unable to save map to file " << std::endl;
                                     }
-                                    int ret = Menu::ShowGameOver(g_screen, font_time);
+                                    Mix_HaltMusic();
+                                    Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
+                                    int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
                                     if (ret == 1) {
                                         close();
 
@@ -1488,6 +1555,7 @@ int main(int argc, char* argv[])
                                 bool bCol = SDLCommonFunc::CheckCollision(bRect, BRect);
                                 if (bCol)
                                 {
+                                    Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[0], 0);
                                     mark_value += 250;
                                     increaselive = true;
                                     for (int ex = 0; ex < NUM_FRAME_EXP; ex++)
@@ -1531,8 +1599,9 @@ int main(int argc, char* argv[])
                     {
                         std::cerr << "Unable to save map to file " << std::endl;
                     }
-
-                    int ret = Menu::ShowVitory(g_screen, font_time);
+                    Mix_HaltMusic();
+                    Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[0], 0);
+                    int ret = Menu::ShowVitory(g_screen, font_time, g_sound_coin[0]);
                     if (ret == 1) {
                         close();
                         
@@ -1561,8 +1630,9 @@ int main(int argc, char* argv[])
             Uint32 seconds = val_time % 60; // Số giây còn lại
             if (val_time % 50 == 0 && val_time != TIMETOTAL)
             {
+                Mix_PlayChannel(CHANNEL_EVENT, g_sound_event[1], 0);
                 for (int i = 0; i < storm.size(); i++)
-                {
+                { 
                     storm[i].set_is_move(true);
                     storm[i].SetRect(64 + i * 64 * 3, -64);
                 }
@@ -1571,6 +1641,7 @@ int main(int argc, char* argv[])
             {
                 if (storm[i].get_is_move())
                 {
+                  
                     storm[i].HandleMove(SCREEN_WIDTH, SCREEN_HEIGHT, map_data);
                     storm[i].Render(g_screen);
                 }
@@ -1589,7 +1660,7 @@ int main(int argc, char* argv[])
                     if (storm[i].get_is_move())
                     {
                         Col1 = SDLCommonFunc::CheckCollision(storm[i].GetRect(), rect_player);
-                        if (Col1)
+                        if (Col1&& storm[i].get_rect_y()>=0)
                         {
                             break;
                         }
@@ -1610,6 +1681,7 @@ int main(int argc, char* argv[])
                         SDL_RenderPresent(g_screen);
                     }
                     num_die--;
+                    Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[1], 0);
                     if (num_die != 0)
                     {
                         p_player.SetRect(0, 0);
@@ -1634,7 +1706,9 @@ int main(int argc, char* argv[])
                         {
                             std::cerr << "Unable to save map to file " << std::endl;
                         }
-                        int ret = Menu::ShowGameOver(g_screen, font_time);
+                        Mix_HaltMusic();
+                        Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
+                        int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
                         if (ret == 1) {
                             close();
 
@@ -1664,7 +1738,9 @@ int main(int argc, char* argv[])
                     std::cerr << "Unable to save map to file " << std::endl;
                 }
                 is_quit = true;
-                int ret = Menu::ShowGameOver(g_screen, font_time);
+                Mix_HaltMusic();
+                Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[1], 0);
+                int ret = Menu::ShowGameOver(g_screen, font_time, g_sound_coin[0]);
                 if (ret == 1) {
                     is_quit = true;
                     Playgame = false;
@@ -1716,7 +1792,7 @@ int main(int argc, char* argv[])
 
             if (num_brave == 0)
             {
-                std::string notification = "NO BRAVE";
+                std::string notification = "NO";
                 notification_brave.SetText(notification);
                 notification_brave.loadFromRenderedText(font_time, g_screen);
                 notification_brave.RenderText(g_screen, SCREEN_WIDTH * 0.5 + 270, 15);
@@ -1800,5 +1876,28 @@ int main(int argc, char* argv[])
         }
         close();
     }
+    //Giải phóng bộ nhớ âm thanh 
+    for (int i = 0; i < 5; i++)
+    {
+        Mix_FreeChunk(g_sound_player[i]);
+   }
+    for (int i = 0; i < 3; i++)
+    {
+        Mix_FreeChunk(g_sound_event[i]);
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        Mix_FreeChunk(g_sound_endgame[i]);
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        Mix_FreeMusic(g_sound_music[i]);
+    }
+    Mix_FreeChunk(g_sound_exp[0]);
+    Mix_FreeChunk(g_sound_exp[1]);
+    Mix_FreeChunk(g_sound_coin[0]);
+    Mix_FreeChunk(g_sound_coin[1]);
+    Mix_CloseAudio();
+    Mix_Quit();
     return 0;
 }

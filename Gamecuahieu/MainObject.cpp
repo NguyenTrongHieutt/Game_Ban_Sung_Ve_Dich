@@ -116,7 +116,7 @@ void MainObject::Show(SDL_Renderer* des)
 		SDL_RenderCopy(des, p_object_, current_clip, &renderQuad);
 	}
 }
-void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
+void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen, Mix_Chunk* bullet_sound[6])
 {
 	if (events.type == SDL_KEYDOWN)
 	{
@@ -137,6 +137,7 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 			break;
 		case SDLK_l:
 			ChangeBullet(sellect_bullet_);
+			Mix_PlayChannel(CHANNEL_GUN, bullet_sound[4], 0);
 			break;
 		case SDLK_w:
 			input_type_.up_ = 1;
@@ -151,6 +152,14 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen)
 			brave = true;
 			break;
 		case SDLK_k:
+		if (sellect_bullet_ == BulletObject::SPHERE_BULLET)
+			{
+				int ret= Mix_PlayChannel(CHANNEL_GUN,bullet_sound[0], 0);
+			}
+			else
+			{
+			int ret = Mix_PlayChannel(CHANNEL_GUN,bullet_sound[1], 0);
+			}
 			BulletObject* p_bullet = new BulletObject();
 			p_bullet->set_bullet_type(sellect_bullet_);
 			p_bullet->LoadImgBullet(screen);
@@ -261,7 +270,7 @@ void MainObject::RemoveBullet(const int& idx)
 		}
 	}
 }
-void MainObject::DoPlayer(Map& map_data)
+void MainObject::DoPlayer(Map& map_data, Mix_Chunk* coin, Mix_Chunk* bullet_sound[6])
 {
 	out_area = false;
 	if (come_back_time_ == 0)
@@ -284,18 +293,20 @@ void MainObject::DoPlayer(Map& map_data)
 		{
 			if (on_ground == true)
 			{
+				Mix_PlayChannel(CHANNEL_GUN, bullet_sound[2], 0);
 				y_val_ = -PLAYER_JUMP_VAL;
 				on_ground = false;
 			}
 			else if (on_ground == false && doublejump == true)
 			{
+				Mix_PlayChannel(CHANNEL_GUN, bullet_sound[2], 0);
 				y_val_ = -PLAYER_JUMP_VAL;
 				doublejump = false;
 			}
 			
 			input_type_.jump_ = 0;
 		}
-		CheckToMap(map_data);
+		CheckToMap(map_data,coin);
 		CenterEntityOnmap(map_data);
 	}
 	if (come_back_time_ > 0)
@@ -341,7 +352,7 @@ void MainObject::Trap2(Map& map_data, const int& x, const int& y)
 		map_data.tile[i][mapx + 1] = 12;
 	}
 }
-void MainObject::CheckToMap(Map& map_data)
+void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin)
 {
 	int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
 	int height_min = height_frame_ < TILE_SIZE ? height_frame_ : TILE_SIZE;
@@ -366,16 +377,18 @@ void MainObject::CheckToMap(Map& map_data)
 				map_data.tile[y1][x2] = 0;
 				map_data.tile[y2][x2] = 0;
 				IncreaseMoney();
+				Mix_PlayChannel(CHANNEL_COIN,coin,0);
 			}
 			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
 			{
 				map_data.tile[y1][x2] = 0;
 				map_data.tile[y2][x2] = 0;
 				num_brave++;
+				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
 			}
 			else
 			{
-				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
+				if ((val1 != BLANK_TILE || val2 != BLANK_TILE)&& (val1 != FLAG || val2 != FLAG))
 				{
 					// Đặt lại vị trí x để tránh va chạm
 					x_pos_ = x2 * TILE_SIZE - width_frame_ - 1;
@@ -389,19 +402,22 @@ void MainObject::CheckToMap(Map& map_data)
 			int val2 = map_data.tile[y2][x1];
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
+				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
 				map_data.tile[y1][x1] = 0;
 				map_data.tile[y2][x1] = 0;
 				IncreaseMoney();
 			}
 			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
 			{
+				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
 				map_data.tile[y1][x1] = 0;
 				map_data.tile[y2][x1] = 0;
 				num_brave++;
+				
 			}
 			else
 			{
-				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
+				if ((val1 != BLANK_TILE || val2 != BLANK_TILE) && (val1 != FLAG || val2 != FLAG))
 				{
 					// Đặt lại vị trí x để tránh va chạm
 					x_pos_ = (x1 + 1) * TILE_SIZE;
@@ -427,19 +443,23 @@ void MainObject::CheckToMap(Map& map_data)
 			int val2 = map_data.tile[y2][x2];
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
+				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
 				map_data.tile[y2][x1] = 0;
 				map_data.tile[y2][x2] = 0;
 				IncreaseMoney();
+			
 			}
 			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
 			{
+				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
 				map_data.tile[y2][x1] = 0;
 				map_data.tile[y2][x2] = 0;
 				num_brave++;
+			
 			}
 			else
 			{
-				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
+				if ((val1 != BLANK_TILE || val2 != BLANK_TILE) && (val1 != FLAG || val2 != FLAG))
 				{
 					// Đặt lại vị trí y để tránh va chạm
 					y_pos_ = y2 * TILE_SIZE - height_frame_ - 1;
@@ -461,19 +481,23 @@ void MainObject::CheckToMap(Map& map_data)
 			int val2 = map_data.tile[y1][x2];
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
+				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
 				map_data.tile[y1][x1] = 0;
 				map_data.tile[y1][x2] = 0;
 				IncreaseMoney();
+				
 			}
 			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
 			{
+				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
 				map_data.tile[y1][x1] = 0;
 				map_data.tile[y1][x2] = 0;
 				num_brave++;
+				
 			}
 			else
 			{
-				if (val1 != BLANK_TILE || val2 != BLANK_TILE)
+				if ((val1 != BLANK_TILE || val2 != BLANK_TILE) && (val1 != FLAG || val2 != FLAG))
 				{
 					// Đặt lại vị trí y để tránh va chạm
 					y_pos_ = (y1 + 1) * TILE_SIZE;
@@ -563,7 +587,7 @@ void MainObject::ChangeBullet(const int& sellectbullet)
 		sellect_bullet_ = BulletObject::SPHERE_BULLET;
 	}
 }
-void MainObject::DoBrave(Map& map_data)
+void MainObject::DoBrave(Map& map_data,Mix_Chunk* bullet_sound[6])
 {
 	
 	int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
@@ -587,6 +611,7 @@ void MainObject::DoBrave(Map& map_data)
 			if(val2 !=BLANK_TILE && val1 == BLANK_TILE)
 			{
 				map_data.tile[y2][x2] = BRAVE;
+				Mix_PlayChannel(CHANNEL_GUN, bullet_sound[5], 0);
 				num_brave--;
 			}
 		}
@@ -596,6 +621,7 @@ void MainObject::DoBrave(Map& map_data)
 			int val2 = map_data.tile[y2][x1-2];
 			if (val1 != BLANK_TILE && val2==BLANK_TILE)
 			{
+				Mix_PlayChannel(CHANNEL_GUN, bullet_sound[5], 0);
 				map_data.tile[y2][x1 - 2] = BRAVE;
 				num_brave--;
 			}

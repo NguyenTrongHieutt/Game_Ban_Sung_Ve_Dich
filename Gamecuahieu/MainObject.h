@@ -23,11 +23,11 @@ public:
 	~MainObject();
 	bool LoadImg(std::string path, SDL_Renderer* screen);
 	void Show(SDL_Renderer* des);
-	void HandelInputAction(SDL_Event events, SDL_Renderer* screen);
+	void HandelInputAction(SDL_Event events, SDL_Renderer* screen,Mix_Chunk* bullet_sound[2]);
 	void set_clips();
 
-	void DoPlayer(Map& map_data);
-	void CheckToMap(Map&map_data);
+	void DoPlayer(Map& map_data,Mix_Chunk*coin, Mix_Chunk* bullet_sound[6]);
+	void CheckToMap(Map&map_data, Mix_Chunk* coin);
 	void SetMapXY(const int&map_x, const int&map_y)
 	{
 		map_x_ = map_x;
@@ -64,7 +64,7 @@ public:
 	bool get_out_area() { return out_area; }
 	bool get_on_ground() { return on_ground; }
 
-	void DoBrave(Map& map_data);
+	void DoBrave(Map& map_data, Mix_Chunk* bullet_sound[6]);
 	bool get_brave() { return brave; }
 
 	void set_input_left(const int& ipLeft) { input_type_.left_ = ipLeft; }

@@ -46,7 +46,7 @@ public:
     void set_bullet_list(const std::vector<BulletObject*>& am_list) { bullet_list_ = am_list; }
     std::vector<BulletObject*> get_bullet_list() const { return bullet_list_; }
     void InitBullet(SDL_Renderer* screen);
-    void MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit, const float& x2, const float& y2, Map& map_data);
+    void MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit, const float& x2, const float& y2, Map& map_data,Mix_Chunk*soundevent[3]);
     void RemoveBullet(const int& idx);
     void InitBullet(BulletObject* p_bullet, SDL_Renderer* screen);
     void ImpMoveType(const float& x);

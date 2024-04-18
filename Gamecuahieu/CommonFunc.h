@@ -12,6 +12,20 @@
 static SDL_Window* g_window = NULL;
 static SDL_Renderer* g_screen = NULL;
 static SDL_Event g_event;
+static Mix_Chunk* g_sound_player[6];
+static Mix_Chunk* g_sound_exp[2];
+static Mix_Chunk* g_sound_coin[2];
+static Mix_Chunk* g_sound_event[3];
+static Mix_Music* g_sound_music[3];
+static Mix_Chunk* g_sound_endgame[2];
+//audio
+const int CHANNEL_GUN= 0;
+const int CHANNEL_EXP = 1;
+const int CHANNEL_COIN = 3;
+const int CHANNEL_JUMP = 4;
+const int CHANNEL_EVENT = 5;
+const int CHANNEL_BOSS1 = 6;
+const int CHANNEL_BOSS2 = 7;
 //screen
 const int FRAME_PER_SECOND = 25.2;//fps
 const int SCREEN_WIDTH = 1280;
@@ -34,6 +48,7 @@ const int RENDER_DRAW_COLOR = 0xff;
 #define MARKICRLIVE 500
 #define NUMBOSS 10
 #define NUMDIE 3
+#define FLAG 15
 
 typedef struct Map 
 {
