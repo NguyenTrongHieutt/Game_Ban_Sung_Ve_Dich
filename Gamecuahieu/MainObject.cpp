@@ -388,7 +388,8 @@ void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin)
 			}
 			else
 			{
-				if ((val1 != BLANK_TILE || val2 != BLANK_TILE)&& (val1 != FLAG || val2 != FLAG))
+				if ((val1 != BLANK_TILE || val2 != BLANK_TILE)&& (val1 != FLAG || val2 != FLAG)
+					&&(val1 != BLANK_TILE || val2 != FLAG)&& (val1 != FLAG || val2 != BLANK_TILE))
 				{
 					// Đặt lại vị trí x để tránh va chạm
 					x_pos_ = x2 * TILE_SIZE - width_frame_ - 1;
@@ -417,7 +418,8 @@ void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin)
 			}
 			else
 			{
-				if ((val1 != BLANK_TILE || val2 != BLANK_TILE) && (val1 != FLAG || val2 != FLAG))
+				if ((val1 != BLANK_TILE || val2 != BLANK_TILE) && (val1 != FLAG || val2 != FLAG)
+					&& (val1 != BLANK_TILE || val2 != FLAG) && (val1 != FLAG || val2 != BLANK_TILE))
 				{
 					// Đặt lại vị trí x để tránh va chạm
 					x_pos_ = (x1 + 1) * TILE_SIZE;
@@ -459,7 +461,8 @@ void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin)
 			}
 			else
 			{
-				if ((val1 != BLANK_TILE || val2 != BLANK_TILE) && (val1 != FLAG || val2 != FLAG))
+				if ((val1 != BLANK_TILE || val2 != BLANK_TILE) && (val1 != FLAG || val2 != FLAG)
+					&& (val1 != BLANK_TILE || val2 != FLAG) && (val1 != FLAG || val2 != BLANK_TILE))
 				{
 					// Đặt lại vị trí y để tránh va chạm
 					y_pos_ = y2 * TILE_SIZE - height_frame_ - 1;
@@ -497,7 +500,8 @@ void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin)
 			}
 			else
 			{
-				if ((val1 != BLANK_TILE || val2 != BLANK_TILE) && (val1 != FLAG || val2 != FLAG))
+				if ((val1 != BLANK_TILE || val2 != BLANK_TILE) && (val1 != FLAG || val2 != FLAG)
+					&& (val1 != BLANK_TILE || val2 != FLAG) && (val1 != FLAG || val2 != BLANK_TILE))
 				{
 					// Đặt lại vị trí y để tránh va chạm
 					y_pos_ = (y1 + 1) * TILE_SIZE;

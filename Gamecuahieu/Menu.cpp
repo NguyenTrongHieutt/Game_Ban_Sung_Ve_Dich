@@ -3,6 +3,8 @@
 int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool &onaudio)
 {
     BaseObject g_img_menu;
+    BaseObject imgaudio;
+    imgaudio.SetRect(SCREEN_WIDTH - 45, 3);
     bool ret = g_img_menu.LoadImg("img//background_menu_hascon.png", des);
     if (ret == false)
     {
@@ -69,8 +71,8 @@ int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool &on
                         }
                     }
                 }
+                break;
             }
-            break;
             case SDL_MOUSEBUTTONDOWN:
             {
                 xm = m_event.button.x;
@@ -88,8 +90,25 @@ int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool &on
                         return i;                       
                     }
                 }
+                SDL_Rect rect = imgaudio.GetRect();
+                if (CheckFocusWithRect(xm, ym, rect))
+                {
+                    if (onaudio)
+                    {
+                        Mix_Volume(-1, 0);       // Tắt tất cả các channel
+                        Mix_VolumeMusic(0);      // Tắt music
+                        onaudio = false;
+                    }
+                    else if (!onaudio)
+                    {
+                        Mix_Volume(-1, 100);       // Bật tất cả các channel
+                        Mix_VolumeMusic(100);      // Bật music
+                        Mix_PlayChannel(CHANNEL_EVENT, sound, 0);
+                        onaudio = true;
+                    }
+                }
+                break;
             }
-            break;
             case SDL_KEYDOWN:
             {
                 if (m_event.key.keysym.sym == SDLK_u)
@@ -112,13 +131,25 @@ int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool &on
             }
             }
         }
+        if (onaudio)
+        {
+            SDL_RenderClear(des);
+            imgaudio.LoadImg("img//onaudio.png", des);
+        }
+        else if (!onaudio)
+        {
+            SDL_RenderClear(des);
+            imgaudio.LoadImg("img//offaudio.png", des);
+        }
+  
+        g_img_menu.Render(des, NULL);
+        imgaudio.Render(des);
         text_menu[0].loadFromRenderedText(font, des);
         text_menu[0].RenderText(des, pos_arr[0].x, pos_arr[0].y);
         text_menu[1].loadFromRenderedText(font, des);
         text_menu[1].RenderText(des, pos_arr[1].x, pos_arr[1].y);
         text_menu[2].loadFromRenderedText(font, des);
         text_menu[2].RenderText(des, pos_arr[2].x, pos_arr[2].y);
-
         SDL_RenderPresent(des);
     }
    
@@ -127,6 +158,8 @@ int Menu::ShowMenu(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool &on
 int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool& onaudio)
 {
     BaseObject g_img_menu;
+    BaseObject imgaudio;
+    imgaudio.SetRect(SCREEN_WIDTH - 45, 3);
     bool ret = g_img_menu.LoadImg("img//background_menu.png", des);
     if (ret == false)
     {
@@ -188,8 +221,8 @@ int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, boo
                         }
                     }
                 }
+                break;
             }
-            break;
             case SDL_MOUSEBUTTONDOWN:
             {
                 xm = m_event.button.x;
@@ -207,8 +240,25 @@ int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, boo
                         return i;
                     }
                 }
+                SDL_Rect rect = imgaudio.GetRect();
+                if (CheckFocusWithRect(xm, ym, rect))
+                {
+                    if (onaudio)
+                    {
+                        Mix_Volume(-1, 0);       // Tắt tất cả các channel
+                        Mix_VolumeMusic(0);      // Tắt music
+                        onaudio = false;
+                    }
+                    else if (!onaudio)
+                    {
+                        Mix_Volume(-1, 100);       // Bật tất cả các channel
+                        Mix_VolumeMusic(100);      // Bật music
+                        Mix_PlayChannel(CHANNEL_EVENT, sound, 0);
+                        onaudio = true;
+                    }
+                }
+                break;
             }
-            break;
             case SDL_KEYDOWN:
             {
                 if (m_event.key.keysym.sym == SDLK_u)
@@ -231,6 +281,19 @@ int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, boo
             }
             }
         }
+        if (onaudio)
+        {
+            SDL_RenderClear(des);
+            imgaudio.LoadImg("img//onaudio.png", des);
+        }
+        else if (!onaudio)
+        {
+            SDL_RenderClear(des);
+            imgaudio.LoadImg("img//offaudio.png", des);
+        }
+
+        g_img_menu.Render(des, NULL);
+        imgaudio.Render(des);
         text_menu[0].loadFromRenderedText(font, des);
         text_menu[0].RenderText(des, pos_arr[0].x, pos_arr[0].y);
         text_menu[1].loadFromRenderedText(font, des);
@@ -244,6 +307,8 @@ int Menu::ShowMenuNoCon(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, boo
 int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time, Mix_Chunk* sound, bool& onaudio)
 {
     BaseObject g_img_menu;
+    BaseObject imgaudio;
+    imgaudio.SetRect(SCREEN_WIDTH - 45, 3);
     bool ret = g_img_menu.LoadImg("img//background_continue.png", des);
     if (ret == false)
     {
@@ -311,8 +376,8 @@ int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time, Mix_Chunk*
                         }
                     }
                 }
+                break;
             }
-            break;
             case SDL_MOUSEBUTTONDOWN:
             {
                 xm = m_event.button.x;
@@ -330,8 +395,25 @@ int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time, Mix_Chunk*
                         return i;
                     }
                 }
+                SDL_Rect rect = imgaudio.GetRect();
+                if (CheckFocusWithRect(xm, ym, rect))
+                {
+                    if (onaudio)
+                    {
+                        Mix_Volume(-1, 0);       // Tắt tất cả các channel
+                        Mix_VolumeMusic(0);      // Tắt music
+                        onaudio = false;
+                    }
+                    else if (!onaudio)
+                    {
+                        Mix_Volume(-1, 100);       // Bật tất cả các channel
+                        Mix_VolumeMusic(100);      // Bật music
+                        Mix_PlayChannel(CHANNEL_EVENT, sound, 0);
+                        onaudio = true;
+                    }
+                }
+                break;
             }
-            break;
             case SDL_KEYDOWN:
             {
                 if (m_event.key.keysym.sym == SDLK_u)
@@ -354,6 +436,19 @@ int Menu::ShowPause(SDL_Renderer* des, TTF_Font* font,ImpTimer* time, Mix_Chunk*
             }
             }
         }
+        if (onaudio)
+        {
+            SDL_RenderClear(des);
+            imgaudio.LoadImg("img//onaudio.png", des);
+        }
+        else if (!onaudio)
+        {
+            SDL_RenderClear(des);
+            imgaudio.LoadImg("img//offaudio.png", des);
+        }
+
+        g_img_menu.Render(des, NULL);
+        imgaudio.Render(des);
         text_menu[0].loadFromRenderedText(font, des);
         text_menu[0].RenderText(des, pos_arr[0].x, pos_arr[0].y);
         text_menu[1].loadFromRenderedText(font, des);
@@ -432,8 +527,8 @@ int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool& 
                         }
                     }
                 }
+                break;
             }
-            break;
             case SDL_MOUSEBUTTONDOWN:
             {
                 xm = m_event.button.x;
@@ -451,8 +546,9 @@ int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool& 
                         return i;
                     }
                 }
-            }
             break;
+            }
+
             case SDL_KEYDOWN:
             {
                 if (m_event.key.keysym.sym == SDLK_u)
@@ -549,8 +645,8 @@ int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool& 
                             }
                         }
                     }
-                }
                 break;
+                }
                 case SDL_MOUSEBUTTONDOWN:
                 {
                     xm = m_event.button.x;
@@ -568,8 +664,8 @@ int Menu::ShowVitory(SDL_Renderer* des, TTF_Font* font, Mix_Chunk* sound, bool& 
                             return i;
                         }
                     }
-                }
                 break;
+                }
                 case SDL_KEYDOWN:
                 {
                     if (m_event.key.keysym.sym == SDLK_u)

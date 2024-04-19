@@ -204,6 +204,8 @@ int main(int argc, char* argv[])
     bool Playgame = true;
     //AUDIO
     bool onaudio = true;
+    BaseObject imgaudio;
+    imgaudio.SetRect(SCREEN_WIDTH - 45, 3);
     //Boss Threat
     BossObject bossObject;
     int num_boss = NUMBOSS;
@@ -475,7 +477,7 @@ int main(int argc, char* argv[])
 
         while (!is_quit)
         {
-            fps_timer.start();
+            fps_timer.start();//fps
             Map map_data = game_map.getMap();
             while (SDL_PollEvent(&g_event) != 0)
             {
@@ -578,11 +580,32 @@ int main(int argc, char* argv[])
                             Mix_VolumeMusic(100);      // Bật music
                             onaudio = true;
                         }
-
                         break;
                     }
+
                     }
                 }
+                if (g_event.type == SDL_MOUSEBUTTONDOWN)
+                {
+                   int xm = g_event.button.x;
+                   int ym = g_event.button.y;
+                   SDL_Rect rect = imgaudio.GetRect();
+                        if (Menu::CheckFocusWithRect(xm, ym, rect))
+                        {
+                            if (onaudio)
+                            {
+                                Mix_Volume(-1, 0);       // Tắt tất cả các channel
+                                Mix_VolumeMusic(0);      // Tắt music
+                                onaudio = false;
+                            }
+                            else if (!onaudio)
+                            {
+                                Mix_Volume(-1, 100);       // Bật tất cả các channel
+                                Mix_VolumeMusic(100);      // Bật music
+                                onaudio = true;
+                            }
+                        }                  
+                }              
                 p_player.HandelInputAction(g_event, g_screen, g_sound_player);
             }
             SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
@@ -1803,6 +1826,16 @@ int main(int argc, char* argv[])
             money_game.SetText(money_str);
             money_game.loadFromRenderedText(font_time, g_screen);
             money_game.RenderText(g_screen, SCREEN_WIDTH * 0.5 - 250, 15);
+            //audioimg
+            if (onaudio)
+            {
+                imgaudio.LoadImg("img//onaudio.png", g_screen);
+            }
+            else if (!onaudio)
+            {
+                imgaudio.LoadImg("img//offaudio.png", g_screen);
+            }
+            imgaudio.Render(g_screen);
 
             if (flag_threat)
             {
