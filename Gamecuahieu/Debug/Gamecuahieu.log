@@ -1,14 +1,4 @@
-﻿  Menu.cpp
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(31,30): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  (compiling source file 'Menu.cpp')
-  
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(64,2): warning C4091: 'typedef ': ignored on left of 'Map' when no variable is declared
-  (compiling source file 'Menu.cpp')
-  
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(72,2): warning C4091: 'typedef ': ignored on left of 'Input' when no variable is declared
-  (compiling source file 'Menu.cpp')
-  
-  main.cpp
+﻿  main.cpp
 C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\CommonFunc.h(31,30): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   (compiling source file 'main.cpp')
   
@@ -77,66 +67,62 @@ C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(681,73
 C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(707,73): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(789,31): warning C4018: '<': signed/unsigned mismatch
 C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(795,39): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(798,111): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(798,71): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
 C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(805,39): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(808,111): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(808,71): warning C4244: 'argument': conversion from 'float' to 'const int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(828,49): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(849,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(850,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(907,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(912,39): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(940,55): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(941,55): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(959,55): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(960,55): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(979,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1009,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1010,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1065,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1097,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1098,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1153,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1186,53): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1207,51): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1208,51): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1284,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1297,45): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1318,43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1319,43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1373,39): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1391,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1392,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1423,43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1424,43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1478,39): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1497,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1498,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1533,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1534,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1588,43): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1607,51): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1608,51): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1666,68): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1678,35): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1684,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1694,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1702,35): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1719,35): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1720,35): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1816,63): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1822,67): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1828,64): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1844,64): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1852,76): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1866,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1871,35): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1879,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1888,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1893,35): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1901,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1910,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1927,27): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(826,47): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(836,49): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(857,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(858,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(915,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(920,39): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(948,55): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(949,55): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(967,55): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(968,55): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(987,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1017,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1018,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1073,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1105,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1106,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1161,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1194,53): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1215,51): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1216,51): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1292,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1305,45): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1326,43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1327,43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1381,39): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1399,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1400,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1431,43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1432,43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1486,39): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1505,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1506,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1541,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1542,47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1596,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1615,51): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1616,51): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1674,68): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1686,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1692,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1702,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1710,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1727,35): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1728,35): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1824,63): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1830,67): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1836,64): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1852,64): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1860,76): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1874,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1879,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1887,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1896,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1901,35): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1909,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1918,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Gamecuahieu\main.cpp(1935,27): warning C4018: '<': signed/unsigned mismatch
   Gamecuahieu.vcxproj -> C:\Users\HIEU\Documents\GitHub\Game_Ban_Sung_Ve_Dich\Debug\Gamecuahieu.exe

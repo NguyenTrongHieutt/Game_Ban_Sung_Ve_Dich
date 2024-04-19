@@ -597,8 +597,7 @@ void ThreatsObject::InitBullet(BulletObject* p_bullet, SDL_Renderer* screen)
 		bool ret= p_bullet-> LoadImgBullet(screen);
 		if (ret)
 		{
-			p_bullet->set_is_move(true);
-			p_bullet->SetRect(rect_.x, rect_.y);
+			p_bullet->set_is_move(false);			
 			bullet_list_.push_back(p_bullet);
 		}
 	}

@@ -110,7 +110,7 @@ std::vector<ThreatsObject*>MakeThreatsList()
             p_threats->set_clips();
             p_threats->set_type_move(ThreatsObject::MOVE_IN_SPACE_TH);
             p_threats->set_x_pos(1000 + i * SCREEN_WIDTH/2);
-            p_threats->set_y_pos(250);
+            p_threats->set_y_pos(300);
             p_threats->set_input_left(1);
             int pos1 = p_threats->get_x_pos() - 60;
             int pos2 = p_threats->get_x_pos() + 60;
@@ -795,7 +795,7 @@ int main(int argc, char* argv[])
                     for (int i = 0; i < bullet_LIST.size(); i++)
                     {
                         bullet_LIST[i]->set_is_move(false);
-                        bullet_LIST[i]->SetRect(p_threat->get_x_pos() - map_data.start_x_, p_threat->get_y_pos());
+                        
                     }
                     continue;
                 }
@@ -805,7 +805,7 @@ int main(int argc, char* argv[])
                     for (int i = 0; i < bullet_LIST.size(); i++)
                     {
                         bullet_LIST[i]->set_is_move(false);
-                        bullet_LIST[i]->SetRect(p_threat->get_x_pos() - map_data.start_x_, p_threat->get_y_pos());
+                        
                     }
                     break;
                 }
@@ -815,11 +815,19 @@ int main(int argc, char* argv[])
                         p_threat->SetMapXY(map_data.start_x_, map_data.start_y_);
                         p_threat->ImpMoveType(g_screen, p_player.get_x_pos(), p_player.get_y_pos());
                         p_threat->DoPlayer(map_data, g_screen);
+                        p_threat->Show(g_screen);
                         if (p_threat->get_on_ground())
                         {
                             p_threat->MakeBullet(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT, p_player.get_x_pos(), p_player.get_y_pos(), map_data);
                         }
-                        p_threat->Show(g_screen);
+                        else
+                        {
+                            std::vector<BulletObject*> bullet_LIST = p_threat->get_bullet_list();
+                            for (int i = 0; i < bullet_LIST.size(); i++)
+                            {
+                                bullet_LIST[i]->set_is_move(false);
+                            }
+                        }
                         SDL_Rect rect_player = p_player.GetRectFrame();
                         bool bCol1 = false;
                         if (p_player.get_threat_can_fire())
