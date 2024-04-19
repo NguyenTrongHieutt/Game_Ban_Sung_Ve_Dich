@@ -17,3 +17,4 @@ Game bắn súng về đích.
 +Xử lí va chạm giữa đạn và chướng ngại vật.
 +Thêm tính năng cho nhân vật: đổi đạn, bật khiên, hồi máu, đặt tường chắn.
 +Xây dựng boss: triệu hồi boss mini , bắn lửa, phá tường, di chuyển đến gần nhân vật.
++Thêm audio.
