@@ -299,7 +299,7 @@ int main(int argc, char* argv[])
                 mark_value = 0;
                 is_quit = false;
                 flag_threat = false;
-                p_player.set_x_pos(SCREEN_WIDTH * MAX_MAP_X - 500);// SCREEN_WIDTH* MAX_MAP_X - 500
+                p_player.set_x_pos(0);// SCREEN_WIDTH* MAX_MAP_X - 500
                 p_player.set_y_pos(0);
                 p_player.SetBrave(0);
                 p_player.SetMoney(0);
