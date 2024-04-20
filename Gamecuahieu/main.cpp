@@ -120,8 +120,8 @@ std::vector<ThreatsObject*>MakeThreatsList()
             list_threats.push_back(p_threats);
         }
     }
-    ThreatsObject* threats_objs = new ThreatsObject[30];
-    for (int i = 0; i < 30; i++)
+    ThreatsObject* threats_objs = new ThreatsObject[7];
+    for (int i = 0; i < 7; i++)
     {
         ThreatsObject* p_threats = (threats_objs + i);
         if (p_threats != NULL)
@@ -129,7 +129,7 @@ std::vector<ThreatsObject*>MakeThreatsList()
             p_threats->LoadImg("img//threat_level.png", g_screen);
             p_threats->set_clips();
             p_threats->set_type_move(ThreatsObject::STATIC_THREAT);
-            p_threats->set_x_pos(13900+ i*700);
+            p_threats->set_x_pos(19428+i*700);
             p_threats->set_y_pos(250);
             p_threats->set_input_left(0);
             BulletObject* p_bullet = new BulletObject();
@@ -233,7 +233,12 @@ int main(int argc, char* argv[])
     std::vector<ThreatsObject*>threats_list2 = MakeThreatsList2();
     std::vector<ThreatsObject*>threats_list3 = MakeThreatsList3();
     std::vector<ThreatsObject*>threats_list4 = MakeThreatsList4();
-    std::vector<BulletObject> storm(9);
+    std::vector<BulletObject*> storm;
+    for (int i = 0; i < 9; i++)
+    {
+        BulletObject* sstorm = new BulletObject;
+        storm.push_back(sstorm);
+    }
 
     ExplosionObject exp_player;
     ExplosionObject exp_threat;
@@ -301,6 +306,7 @@ int main(int argc, char* argv[])
                 p_player.set_input_left(0);
                 p_player.set_input_right(0);
                 p_player.set_input_down(0);
+                p_player.set_threatcanfire(false);
                 increaselive = true;
                 flagincrease = 1;
                 trapmap = true;
@@ -350,6 +356,7 @@ int main(int argc, char* argv[])
                 p_player.set_input_left(0);
                 p_player.set_input_right(0);
                 p_player.set_input_down(0);
+                p_player.set_threatcanfire(false);
                 increaselive = true;
                 flagincrease = 1;
                 trapmap = true;
@@ -387,15 +394,15 @@ int main(int argc, char* argv[])
 
         for (int i = 0; i < storm.size(); i++)
         {
-            storm[i].LoadImg("img//boss bullet.png", g_screen);
-            storm[i].set_bullet_dir(BulletObject::DIR_DOWN);
-            storm[i].SetRect(64 + i * 64 * 3, -64);
-            storm[i].set_x_val(0);
+            storm[i]->LoadImg("img//boss bullet.png", g_screen);
+            storm[i]->set_bullet_dir(BulletObject::DIR_DOWN);
+            storm[i]->SetRect(64 + i * 64 * 3, -64);
+            storm[i]->set_x_val(0);
             if (i % 2 == 0)
             {
-                storm[i].set_y_val(8);
+                storm[i]->set_y_val(8);
             }
-            else storm[i].set_y_val(10);
+            else  storm[i]->set_y_val(10);
         }
        
         bool pRet = exp_player.LoadImg("img//exp3.png", g_screen);
@@ -613,12 +620,12 @@ int main(int argc, char* argv[])
             g_background.Render(g_screen, NULL);
             //Player
             p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
-            p_player.DoPlayer(map_data,g_sound_coin[0],g_sound_player, bossObject.get_bullet_list());
+            p_player.DoPlayer(map_data,g_sound_coin[0],g_sound_player, bossObject.get_bullet_list(), storm);
             if (p_player.get_brave() && p_player.GetNumBrave() > 0)
             {
                 p_player.DoBrave(map_data,g_sound_player);
             }
-            if (p_player.get_out_area())
+            if (p_player.get_out_area()) 
             {
                 Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[1], 0);
                 num_die--;
@@ -674,7 +681,7 @@ int main(int argc, char* argv[])
                     flagincrease++;
             }
             p_player.Show(g_screen);
-            p_player.HandleBullet(g_screen, map_data);
+            p_player.HandleBullet(g_screen, map_data);  
             //Shield
             if(shieldon)
             {
@@ -1293,6 +1300,7 @@ int main(int argc, char* argv[])
                     bossObject.SetMapXY(map_data.start_x_, map_data.start_y_);
                     bossObject.ImpMoveType(p_player.get_x_pos());
                     bossObject.DoPlayer(map_data);
+                    bossObject.Show(g_screen);
                     game_map.SetMap(map_data);
                     game_map.DrawMap(g_screen);
                     if (p_player.get_threat_can_fire())
@@ -1309,7 +1317,6 @@ int main(int argc, char* argv[])
                             pt_bullet->set_flagbullet(true);
                         }
                     }
-                    bossObject.Show(g_screen);
                     SDL_Rect rect_player = p_player.GetRectFrame();
                     if (p_player.get_threat_can_fire())
                     {
@@ -1425,8 +1432,7 @@ int main(int argc, char* argv[])
                     threat1.SetMapXY(map_data.start_x_, map_data.start_y_);
                     threat1.ImpMoveType(g_screen,p_player.get_x_pos());
                     threat1.DoPlayer(map_data);
-                    game_map.SetMap(map_data);
-                    game_map.DrawMap(g_screen);
+                   
                     threat1.Show(g_screen);
                     if(threat1.get_on_ground()){
                     SDL_Rect rect_player1 = p_player.GetRectFrame();
@@ -1535,8 +1541,7 @@ int main(int argc, char* argv[])
                     threat2.SetMapXY(map_data.start_x_, map_data.start_y_);
                     threat2.ImpMoveType(g_screen, p_player.get_x_pos());
                     threat2.DoPlayer(map_data);
-                    game_map.SetMap(map_data);
-                    game_map.DrawMap(g_screen);
+                   
                     threat2.Show(g_screen);
                     if (threat2.get_on_ground()) {
                         SDL_Rect rect_player2 = p_player.GetRectFrame();
@@ -1698,23 +1703,18 @@ int main(int argc, char* argv[])
                 Mix_PlayChannel(CHANNEL_EVENT, g_sound_event[1], 0);
                 for (int i = 0; i < storm.size(); i++)
                 { 
-                    storm[i].set_is_move(true);
-                    storm[i].SetRect(64 + i * 64 * 3, -64);
+                    storm[i]->set_is_move(true);
+                    storm[i]->SetRect(64 + i * 64 * 3, -64);
                 }
             }
             for (int i = 0; i < storm.size(); i++)
             {
-                if (storm[i].get_is_move())
+                if (storm[i]->get_is_move())
                 {
                   
-                    storm[i].HandleMove(SCREEN_WIDTH, SCREEN_HEIGHT, map_data);
-                    storm[i].Render(g_screen);
+                    storm[i]->HandleMove(SCREEN_WIDTH, SCREEN_HEIGHT, map_data);
+                    storm[i]->Render(g_screen);
                 }
-            }
-            if(p_player.get_x_pos()>=map_data.start_x_+SCREEN_WIDTH-TILE_SIZE/4|| p_player.get_x_pos() <= map_data.start_x_ )
-            for (int i = 0; i < storm.size(); i++)
-            {
-                storm[i].set_is_move(false);
             }
             SDL_Rect rect_player = p_player.GetRectFrame();
             if (p_player.get_threat_can_fire())
@@ -1722,10 +1722,10 @@ int main(int argc, char* argv[])
                 bool Col1 = false;
                 for (int i = 0; i < storm.size(); i++)
                 {
-                    if (storm[i].get_is_move())
+                    if (storm[i]->get_is_move())
                     {
-                        Col1 = SDLCommonFunc::CheckCollision(storm[i].GetRect(), rect_player);
-                        if (Col1&& storm[i].get_rect_y()>=0)
+                        Col1 = SDLCommonFunc::CheckCollision(storm[i]->GetRect(), rect_player);
+                        if (Col1&& storm[i]->get_rect_y()>=0)
                         {
                             break;
                         }
@@ -1884,6 +1884,23 @@ int main(int argc, char* argv[])
                 }
             }
         }
+        //Reset
+        time_game.Free();
+        mark_game.Free();
+        numbrave_game.Free();
+        money_game.Free();
+        threat.Free();
+        notification_brave.Free();
+
+        p_player.Free();
+        exp_player.Free();
+
+        imgaudio.Free();
+
+        player_money.Free();
+        boss_power.Free();
+        player_brave.Free();
+
         for (int i = 0; i < threats_list.size(); i++)
         {
             ThreatsObject* p_threats = threats_list.at(i);
@@ -1947,9 +1964,19 @@ int main(int argc, char* argv[])
         bossObject.Free();
         for (int i = 0; i < storm.size(); i++)
         {
-            storm[i].Free();
+            storm[i]->Free();
         }
         close();
+    }
+    //Firestorm
+    for (int i = 0; i < storm.size(); i++)
+    {
+        BulletObject* sstorm = storm.at(i);
+        if (sstorm)
+        {
+           sstorm->Free();
+           sstorm = NULL;
+        }
     }
     //Giải phóng bộ nhớ âm thanh 
     for (int i = 0; i < 5; i++)

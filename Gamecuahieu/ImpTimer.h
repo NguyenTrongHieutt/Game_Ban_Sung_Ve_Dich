@@ -13,6 +13,7 @@ public:
 	bool is_paused();
 	bool is_started();
 	int get_start_tick() { return start_tick_; }
+	void reset_time(){ start_tick_ = 0; }
 private:
 	int start_tick_;
 	int paused_tick_;

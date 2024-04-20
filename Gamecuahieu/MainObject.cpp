@@ -252,6 +252,7 @@ void MainObject::HandleBullet(SDL_Renderer* des,Map& map_data)
 					delete p_bullet;
 					p_bullet = NULL;
 				}
+				i--;
 			}
 	    }
 	}
@@ -270,7 +271,8 @@ void MainObject::RemoveBullet(const int& idx)
 		}
 	}
 }
-void MainObject::DoPlayer(Map& map_data, Mix_Chunk* coin, Mix_Chunk* bullet_sound[6], std::vector<BulletObject*>bBullet_list)
+void MainObject::DoPlayer(Map& map_data, Mix_Chunk* coin, Mix_Chunk* bullet_sound[6],
+	                      std::vector<BulletObject*>bBullet_list, std::vector<BulletObject*>firestorm_list)
 {
 	out_area = false;
 	if (come_back_time_ == 0)
@@ -306,7 +308,7 @@ void MainObject::DoPlayer(Map& map_data, Mix_Chunk* coin, Mix_Chunk* bullet_soun
 			
 			input_type_.jump_ = 0;
 		}
-		CheckToMap(map_data,coin, bBullet_list);
+		CheckToMap(map_data,coin, bBullet_list,firestorm_list);
 		CenterEntityOnmap(map_data);
 	}
 	if (come_back_time_ > 0)
@@ -357,7 +359,8 @@ void MainObject::Trap2(Map& map_data, const int& x, const int& y)
 		map_data.tile[i][mapx + 1] = 12;
 	}
 }
-void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin, std::vector<BulletObject*>bBullet_list)
+void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin, std::vector<BulletObject*>bBullet_list,
+	                        std::vector<BulletObject*>firestorm_list)
 {
 	int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
 	int height_min = height_frame_ < TILE_SIZE ? height_frame_ : TILE_SIZE;
@@ -379,17 +382,33 @@ void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin, std::vector<BulletOb
 			int val2 = map_data.tile[y2][x2];
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
-				map_data.tile[y1][x2] = 0;
-				map_data.tile[y2][x2] = 0;
-				IncreaseMoney();
-				Mix_PlayChannel(CHANNEL_COIN,coin,0);
+				if (val1 == STATE_MONEY)
+				{
+					map_data.tile[y1][x2] = 0;
+					IncreaseMoney();
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+				}
+				if(val2 == STATE_MONEY)
+				{
+					map_data.tile[y2][x2] = 0;
+					IncreaseMoney();
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+				}
 			}
 			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
 			{
-				map_data.tile[y1][x2] = 0;
-				map_data.tile[y2][x2] = 0;
-				num_brave++;
-				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+				if(val1 == ITEM_BRAVE)
+				{
+					map_data.tile[y1][x2] = 0;
+					num_brave++;
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+				}
+				if(val2 == ITEM_BRAVE)
+				{
+					map_data.tile[y2][x2] = 0;
+					num_brave++;
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+				}
 			}
 			else
 			{
@@ -408,18 +427,33 @@ void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin, std::vector<BulletOb
 			int val2 = map_data.tile[y2][x1];
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
-				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
-				map_data.tile[y1][x1] = 0;
-				map_data.tile[y2][x1] = 0;
-				IncreaseMoney();
+				if(val1 == STATE_MONEY)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y1][x1] = 0;
+					IncreaseMoney();
+				}
+				if (val2 == STATE_MONEY)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y2][x1] = 0;
+					IncreaseMoney();
+				}
 			}
 			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
 			{
-				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
-				map_data.tile[y1][x1] = 0;
-				map_data.tile[y2][x1] = 0;
-				num_brave++;
-				
+				if(val1 == ITEM_BRAVE)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y1][x1] = 0;				
+					num_brave++;
+				}
+				if (val2 == ITEM_BRAVE)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y2][x1] = 0;
+					num_brave++;
+				}
 			}
 			else
 			{
@@ -450,19 +484,33 @@ void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin, std::vector<BulletOb
 			int val2 = map_data.tile[y2][x2];
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
-				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
-				map_data.tile[y2][x1] = 0;
-				map_data.tile[y2][x2] = 0;
-				IncreaseMoney();
-			
+				if (val1 == STATE_MONEY)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y2][x1] = 0;
+					IncreaseMoney();
+				}
+				if(val2 == STATE_MONEY)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y2][x2] = 0;
+					IncreaseMoney();
+				}
 			}
 			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
 			{
-				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
-				map_data.tile[y2][x1] = 0;
-				map_data.tile[y2][x2] = 0;
-				num_brave++;
-			
+				if (val1 == ITEM_BRAVE)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y2][x1] = 0;
+					num_brave++;
+				}
+				if(val2 == ITEM_BRAVE)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y2][x2] = 0;
+					num_brave++;
+				}
 			}
 			else
 			{
@@ -489,19 +537,33 @@ void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin, std::vector<BulletOb
 			int val2 = map_data.tile[y1][x2];
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY)
 			{
-				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
-				map_data.tile[y1][x1] = 0;
-				map_data.tile[y1][x2] = 0;
-				IncreaseMoney();
-				
+				if (val1 == STATE_MONEY)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y1][x1] = 0;
+					IncreaseMoney();
+				}
+				if (val2 == STATE_MONEY)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y1][x2] = 0;
+					IncreaseMoney();
+				}
 			}
 			else if (val1 == ITEM_BRAVE || val2 == ITEM_BRAVE)
 			{
-				Mix_PlayChannel(CHANNEL_COIN, coin, 0);
-				map_data.tile[y1][x1] = 0;
-				map_data.tile[y1][x2] = 0;
-				num_brave++;
-				
+				if (val1 == ITEM_BRAVE)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y1][x1] = 0;
+					num_brave++;
+				}
+				if(val2 == ITEM_BRAVE)
+				{
+					Mix_PlayChannel(CHANNEL_COIN, coin, 0);
+					map_data.tile[y1][x2] = 0;
+					num_brave++;
+				}
 			}
 			else
 			{
@@ -527,16 +589,30 @@ void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin, std::vector<BulletOb
 	{
 		x_pos_ = map_data.max_x_ - width_frame_ - 1;
 	}
-	if (x_pos_ >= map_data.start_x_+SCREEN_WIDTH- width_frame_ || x_pos_ <map_data.start_x_+1)
+	if (x_pos_ >=map_data.start_x_+SCREEN_WIDTH - width_frame_ / 2 || x_pos_ <map_data.start_x_ - width_frame_ / 2)
 	{
 		for (int r = 0; r < p_bullet_list_.size(); r++)
 		{
-			RemoveBullet(r);
+				BulletObject* p_bullet = p_bullet_list_.at(r);
+				if (p_bullet != NULL)
+				{
+						p_bullet_list_.erase(p_bullet_list_.begin() + r);
+						if (p_bullet != NULL)
+						{
+							delete p_bullet;
+							p_bullet = NULL;
+						}
+						r--;
+				}			
 		}
 		for (int jj = 0; jj < bBullet_list.size(); jj++)
 		{
 			BulletObject* pt_bullet = bBullet_list.at(jj);
 			pt_bullet->set_is_move(false);
+		}
+		for (int i = 0; i < firestorm_list.size(); i++)
+		{
+			firestorm_list[i]->set_is_move(false);
 		}
 	}
 	if (y_pos_ > map_data.max_y_)
