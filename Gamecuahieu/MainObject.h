@@ -26,8 +26,8 @@ public:
 	void HandelInputAction(SDL_Event events, SDL_Renderer* screen,Mix_Chunk* bullet_sound[2]);
 	void set_clips();
 
-	void DoPlayer(Map& map_data,Mix_Chunk*coin, Mix_Chunk* bullet_sound[6]);
-	void CheckToMap(Map&map_data, Mix_Chunk* coin);
+	void DoPlayer(Map& map_data,Mix_Chunk*coin, Mix_Chunk* bullet_sound[6], std::vector<BulletObject*>bBullet_list);
+	void CheckToMap(Map&map_data, Mix_Chunk* coin, std::vector<BulletObject*>bBullet_list);
 	void SetMapXY(const int&map_x, const int&map_y)
 	{
 		map_x_ = map_x;
@@ -63,6 +63,7 @@ public:
 	bool get_threat_can_fire() { return Threat_can_fire; }
 	bool get_out_area() { return out_area; }
 	bool get_on_ground() { return on_ground; }
+	int get_comeback_time() { return come_back_time_; }
 
 	void DoBrave(Map& map_data, Mix_Chunk* bullet_sound[6]);
 	bool get_brave() { return brave; }

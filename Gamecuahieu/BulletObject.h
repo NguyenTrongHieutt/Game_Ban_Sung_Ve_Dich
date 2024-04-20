@@ -46,7 +46,7 @@ public:
 
     void set_bullet_dir(const unsigned int& bulletDir) { bullet_dir_ = bulletDir; }
     unsigned int get_bullet_dir() const { return bullet_dir_; }
-
+    void set_flagbullet(bool x) { flag_bullet = x; }
     void set_bullet_type(const unsigned int& bulletType) { bullet_type_ = bulletType; }
     unsigned int get_bullet_type() const { return bullet_type_; }
 

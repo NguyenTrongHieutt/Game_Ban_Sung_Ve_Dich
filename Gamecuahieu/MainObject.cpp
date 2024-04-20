@@ -270,7 +270,7 @@ void MainObject::RemoveBullet(const int& idx)
 		}
 	}
 }
-void MainObject::DoPlayer(Map& map_data, Mix_Chunk* coin, Mix_Chunk* bullet_sound[6])
+void MainObject::DoPlayer(Map& map_data, Mix_Chunk* coin, Mix_Chunk* bullet_sound[6], std::vector<BulletObject*>bBullet_list)
 {
 	out_area = false;
 	if (come_back_time_ == 0)
@@ -306,7 +306,7 @@ void MainObject::DoPlayer(Map& map_data, Mix_Chunk* coin, Mix_Chunk* bullet_soun
 			
 			input_type_.jump_ = 0;
 		}
-		CheckToMap(map_data,coin);
+		CheckToMap(map_data,coin, bBullet_list);
 		CenterEntityOnmap(map_data);
 	}
 	if (come_back_time_ > 0)
@@ -328,6 +328,11 @@ void MainObject::DoPlayer(Map& map_data, Mix_Chunk* coin, Mix_Chunk* bullet_soun
 			y_pos_ = 0;
 			x_val_ = 0;
 			y_val_ = 0;
+			for (int jj = 0; jj < bBullet_list.size(); jj++)
+			{
+				BulletObject* pt_bullet = bBullet_list.at(jj);
+				pt_bullet->set_is_move(false);
+			}
 		}
 	}
 }
@@ -352,7 +357,7 @@ void MainObject::Trap2(Map& map_data, const int& x, const int& y)
 		map_data.tile[i][mapx + 1] = 12;
 	}
 }
-void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin)
+void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin, std::vector<BulletObject*>bBullet_list)
 {
 	int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
 	int height_min = height_frame_ < TILE_SIZE ? height_frame_ : TILE_SIZE;
@@ -521,6 +526,18 @@ void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin)
 	else if (x_pos_ + width_frame_ > map_data.max_x_)
 	{
 		x_pos_ = map_data.max_x_ - width_frame_ - 1;
+	}
+	if (x_pos_ >= map_data.start_x_+SCREEN_WIDTH- width_frame_ || x_pos_ <map_data.start_x_+1)
+	{
+		for (int r = 0; r < p_bullet_list_.size(); r++)
+		{
+			RemoveBullet(r);
+		}
+		for (int jj = 0; jj < bBullet_list.size(); jj++)
+		{
+			BulletObject* pt_bullet = bBullet_list.at(jj);
+			pt_bullet->set_is_move(false);
+		}
 	}
 	if (y_pos_ > map_data.max_y_)
 	{

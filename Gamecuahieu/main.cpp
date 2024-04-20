@@ -294,7 +294,7 @@ int main(int argc, char* argv[])
                 mark_value = 0;
                 is_quit = false;
                 flag_threat = false;
-                p_player.set_x_pos(0);// SCREEN_WIDTH* MAX_MAP_X - 500
+                p_player.set_x_pos(SCREEN_WIDTH * MAX_MAP_X - 500);// SCREEN_WIDTH* MAX_MAP_X - 500
                 p_player.set_y_pos(0);
                 p_player.SetBrave(0);
                 p_player.SetMoney(0);
@@ -611,9 +611,9 @@ int main(int argc, char* argv[])
             SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
             SDL_RenderClear(g_screen);
             g_background.Render(g_screen, NULL);
-
+            //Player
             p_player.SetMapXY(map_data.start_x_, map_data.start_y_);
-            p_player.DoPlayer(map_data,g_sound_coin[0],g_sound_player);
+            p_player.DoPlayer(map_data,g_sound_coin[0],g_sound_player, bossObject.get_bullet_list());
             if (p_player.get_brave() && p_player.GetNumBrave() > 0)
             {
                 p_player.DoBrave(map_data,g_sound_player);
@@ -1295,7 +1295,20 @@ int main(int argc, char* argv[])
                     bossObject.DoPlayer(map_data);
                     game_map.SetMap(map_data);
                     game_map.DrawMap(g_screen);
-                    bossObject.MakeBullet(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT, p_player.get_x_pos(), p_player.get_y_pos(), map_data,g_sound_event);
+                    if (p_player.get_threat_can_fire())
+                    {
+                        bossObject.MakeBullet(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT, p_player.get_x_pos(), p_player.get_y_pos(), map_data, g_sound_event);
+                    }
+                    else
+                    {
+                        std::vector<BulletObject*>bBullet_list = bossObject.get_bullet_list();
+                        for (int jj = 0; jj < bBullet_list.size(); jj++)
+                        {
+                            BulletObject* pt_bullet = bBullet_list.at(jj);
+                            pt_bullet->set_is_move(false);
+                            pt_bullet->set_flagbullet(true);
+                        }
+                    }
                     bossObject.Show(g_screen);
                     SDL_Rect rect_player = p_player.GetRectFrame();
                     if (p_player.get_threat_can_fire())
