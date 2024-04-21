@@ -1314,7 +1314,7 @@ int main(int argc, char* argv[])
                     boss_live_text.loadFromRenderedText(font_time, g_screen);
                     boss_live_text.RenderText(g_screen, SCREEN_WIDTH * 0.5, 57);
                     bossObject.SetMapXY(map_data.start_x_, map_data.start_y_);
-                    bossObject.ImpMoveType(p_player.get_x_pos());
+                    bossObject.ImpMoveType(p_player.get_x_pos(),g_screen);
                     bossObject.DoPlayer(map_data);
                     bossObject.Show(g_screen);
                     game_map.SetMap(map_data);
@@ -1670,7 +1670,7 @@ int main(int argc, char* argv[])
             //Stormfire
             Uint32 time_val = start_game.get_ticks() / 1000;
             val_time = timegame - time_val;
-            if (val_time % 10 == 0 && val_time != TIMETOTAL)
+            if (val_time % 50 == 0 && val_time != TIMETOTAL)
             {
                 Mix_PlayChannel(CHANNEL_STORM, g_sound_event[1], 0);
                 for (int i = 0; i < storm.size(); i++)
@@ -1854,7 +1854,7 @@ int main(int argc, char* argv[])
                 }
 
                 str_time += str_min + ":" + str_sec;
-                if (val_time % 10 == 0 && val_time != TIMETOTAL)
+                if (val_time % 50 == 0 && val_time != TIMETOTAL)
                 {
                     time_game.SetColor(TextObject::RED_TEXT);                  
                 }

@@ -75,7 +75,7 @@ void BossObject::Show(SDL_Renderer* des)
         SDL_RenderCopy(des, p_object_, currentClip, &renderQuad);
     }
 }
-void BossObject::ImpMoveType( const float& x)
+void BossObject::ImpMoveType( const float& x, SDL_Renderer* des)
 {
         if (on_ground_ == true)
         {
@@ -83,13 +83,14 @@ void BossObject::ImpMoveType( const float& x)
             {
                 input_type_.left_ = 1;
                 input_type_.right_ = 0;
-                
+               
+                    LoadImg("img//threat_level.png", des);                
             }
             else if (x_pos_ < x)
             {
                 input_type_.right_ = 1;
                 input_type_.left_ = 0;
-              
+                LoadImg("img//threat_level_right.png", des);
             }
         }
 }

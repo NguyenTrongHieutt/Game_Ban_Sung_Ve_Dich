@@ -49,7 +49,7 @@ public:
     void MakeBullet(SDL_Renderer* des, const int& x_limit, const int& y_limit, const float& x2, const float& y2, Map& map_data,Mix_Chunk*soundevent[3]);
     void RemoveBullet(const int& idx);
     void InitBullet(BulletObject* p_bullet, SDL_Renderer* screen);
-    void ImpMoveType(const float& x);
+    void ImpMoveType(const float& x, SDL_Renderer* des);
 private:
     int map_x_;
     int map_y_;

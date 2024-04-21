@@ -347,6 +347,8 @@ void ThreatsObject::CheckToMap(Map& map_data,SDL_Renderer* screen)
 	{
 		on_ground = false;
 		come_back_time_ = 50;
+		x_pos_ = 0;
+		y_pos_ = 0;
 	}
 }
 void ThreatsObject::CheckToMap2(Map& map_data, SDL_Renderer* screen)
