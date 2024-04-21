@@ -183,7 +183,7 @@ void BossObject::CenterEntityOnMap(Map& g_map)
 void BossObject::RemoveBullet(const int& idx)
 {
     int size = bullet_list_.size();
-    if (size > 0 && idx < size)
+    if (size > 0 && idx < size && !bullet_list_.empty())
     {
         BulletObject* p_bullet = bullet_list_.at(idx);
         bullet_list_.erase(bullet_list_.begin() + idx);

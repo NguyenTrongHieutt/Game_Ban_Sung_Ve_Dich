@@ -312,6 +312,10 @@ int main(int argc, char* argv[])
                 trapmap = true;
                 shieldon = false;
                 flagshield = true;
+                for (int i = 0; i < storm.size(); i++)
+                {
+                    storm[i]->set_is_move(false);
+                }
             }
             else if (ret_menu == 1)
             {
@@ -322,6 +326,10 @@ int main(int argc, char* argv[])
                 threats_list3 = MakeThreatsList3();
                 threats_list4 = MakeThreatsList4();
                 shieldon = false;
+                for (int i = 0; i < storm.size(); i++)
+                {
+                    storm[i]->set_is_move(false);
+                }
             }
             else
             {
@@ -362,6 +370,10 @@ int main(int argc, char* argv[])
                 trapmap = true;
                 shieldon = false;
                 flagshield = true;
+                for (int i = 0; i < storm.size(); i++)
+                {
+                    storm[i]->set_is_move(false);
+                }
             }
             else
             {
@@ -683,7 +695,7 @@ int main(int argc, char* argv[])
             p_player.Show(g_screen);
             p_player.HandleBullet(g_screen, map_data);  
             //Shield
-            if(shieldon)
+            if(shieldon && p_player.get_comeback_time()==0)
             {
                 shield.SetRect(p_player.get_x_pos() - map_data.start_x_ - 20, p_player.get_y_pos() - map_data.start_y_ - 20);
                 shield.Render(g_screen);
@@ -780,18 +792,6 @@ int main(int argc, char* argv[])
             else{ trapmap = true; }
             game_map.SetMap(map_data);
             game_map.DrawMap(g_screen);
-            //DrawGeometric
-            GeometricFormat rectangle_size(0, 0, SCREEN_WIDTH, 40);
-            ColorData color_data(94, 94, 94);
-            Geometric::RenderRectange(rectangle_size, color_data, g_screen);
-
-            GeometricFormat outLineSize(1, 1, SCREEN_WIDTH - 1, 38);
-            ColorData color_data2(255, 255, 255);
-            Geometric::RenderOutline(outLineSize, color_data2, g_screen);
-            //Icons
-            player_power.Show(g_screen);
-            player_money.Show(g_screen);
-            player_brave.Show(g_screen);
             //Threat1
             for (int i = 0; i < threats_list.size(); i++)
             {
@@ -1070,6 +1070,22 @@ int main(int argc, char* argv[])
 
                                         is_quit = true;
                                     }
+                                }
+                            }
+                        }
+                        std::vector<BulletObject*> bullet_arr1 = p_player.get_bullet_list();
+                        for (int r = 0; r < bullet_arr1.size(); r++)
+                        {
+                            BulletObject* p_bullet = bullet_arr1.at(r);
+                            if (p_bullet != NULL)
+                            {
+                                SDL_Rect rect_threat = p_threat->GetRectFrame();
+                                SDL_Rect bRect = p_bullet->GetRect();
+                                bool bCol = SDLCommonFunc::CheckCollision(bRect, rect_threat);
+                                if (bCol)
+                                {
+                                    Mix_PlayChannel(CHANNEL_EXP, g_sound_exp[0], 0);
+                                    p_player.RemoveBullet(r);
                                 }
                             }
                         }
@@ -1651,58 +1667,14 @@ int main(int argc, char* argv[])
                
 
             }
-            //Win
-            if (p_player.get_x_pos() >= map_data.max_x_ - p_player.get_frame_width() * 2 && p_player.get_on_ground())
-            {
-                if (num_boss <= 0)
-                {
-
-                    is_quit = true;
-                    std::ofstream file("HaveContinue.txt");
-                    if (file.is_open())
-                    {
-                        int x = 0;
-                        file << x << "\n";
-                        file.close();
-                    }
-                    else
-                    {
-                        std::cerr << "Unable to save map to file " << std::endl;
-                    }
-                    Mix_HaltMusic();
-                    Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[0], 0);
-                    int ret = Menu::ShowVitory(g_screen, font_time, g_sound_coin[0], onaudio);
-                    if (ret == 1) {
-                        close();
-                        
-                        is_quit = true;
-                        Playgame = false;
-                    }
-                    else
-                    {
-                        close();
-                        
-                        is_quit = true;
-                    }
-                }
-                else
-                {
-                    threat.SetText("BAN CAN TIEU DIET BOSS!");
-                    threat.loadFromRenderedText(font_time, g_screen);
-                    threat.RenderText(g_screen, SCREEN_WIDTH * 0.5 - 150, 100);
-                }
-            }
-            //Show game time
-            std::string str_time = "TIME: ";
+            //Stormfire
             Uint32 time_val = start_game.get_ticks() / 1000;
             val_time = timegame - time_val;
-            Uint32 minutes = val_time / 60; // Số phút
-            Uint32 seconds = val_time % 60; // Số giây còn lại
-            if (val_time % 50 == 0 && val_time != TIMETOTAL)
+            if (val_time % 10 == 0 && val_time != TIMETOTAL)
             {
-                Mix_PlayChannel(CHANNEL_EVENT, g_sound_event[1], 0);
+                Mix_PlayChannel(CHANNEL_STORM, g_sound_event[1], 0);
                 for (int i = 0; i < storm.size(); i++)
-                { 
+                {
                     storm[i]->set_is_move(true);
                     storm[i]->SetRect(64 + i * 64 * 3, -64);
                 }
@@ -1711,7 +1683,7 @@ int main(int argc, char* argv[])
             {
                 if (storm[i]->get_is_move())
                 {
-                  
+
                     storm[i]->HandleMove(SCREEN_WIDTH, SCREEN_HEIGHT, map_data);
                     storm[i]->Render(g_screen);
                 }
@@ -1725,13 +1697,13 @@ int main(int argc, char* argv[])
                     if (storm[i]->get_is_move())
                     {
                         Col1 = SDLCommonFunc::CheckCollision(storm[i]->GetRect(), rect_player);
-                        if (Col1&& storm[i]->get_rect_y()>=0)
+                        if (Col1 && storm[i]->get_rect_y() >= 0)
                         {
                             break;
                         }
                     }
                 }
-                if (Col1 == true&& !shieldon)
+                if (Col1 == true && !shieldon)
                 {
                     int width_exp_frame = exp_player.get_frame_height();
                     int heiht_exp_height = exp_player.get_frame_width();
@@ -1789,6 +1761,64 @@ int main(int argc, char* argv[])
                     }
                 }
             }
+            //DrawGeometric
+            GeometricFormat rectangle_size(0, 0, SCREEN_WIDTH, 40);
+            ColorData color_data(94, 94, 94);
+            Geometric::RenderRectange(rectangle_size, color_data, g_screen);
+
+            GeometricFormat outLineSize(1, 1, SCREEN_WIDTH - 1, 38);
+            ColorData color_data2(255, 255, 255);
+            Geometric::RenderOutline(outLineSize, color_data2, g_screen);
+            //Icons
+            player_power.Show(g_screen);
+            player_money.Show(g_screen);
+            player_brave.Show(g_screen);
+
+            //Win
+            if (p_player.get_x_pos() >= map_data.max_x_ - p_player.get_frame_width() * 2 && p_player.get_on_ground())
+            {
+                if (num_boss <= 0)
+                {
+
+                    is_quit = true;
+                    std::ofstream file("HaveContinue.txt");
+                    if (file.is_open())
+                    {
+                        int x = 0;
+                        file << x << "\n";
+                        file.close();
+                    }
+                    else
+                    {
+                        std::cerr << "Unable to save map to file " << std::endl;
+                    }
+                    Mix_HaltMusic();
+                    Mix_PlayChannel(CHANNEL_EVENT, g_sound_endgame[0], 0);
+                    int ret = Menu::ShowVitory(g_screen, font_time, g_sound_coin[0], onaudio);
+                    if (ret == 1) {
+                        close();
+                        
+                        is_quit = true;
+                        Playgame = false;
+                    }
+                    else
+                    {
+                        close();
+                        
+                        is_quit = true;
+                    }
+                }
+                else
+                {
+                    threat.SetText("BAN CAN TIEU DIET BOSS!");
+                    threat.loadFromRenderedText(font_time, g_screen);
+                    threat.RenderText(g_screen, SCREEN_WIDTH * 0.5 - 150, 100);
+                }
+            }
+            //Show game time
+            std::string str_time = "TIME: ";
+            Uint32 minutes = val_time / 60; // Số phút
+            Uint32 seconds = val_time % 60; // Số giây còn lại
             if (val_time <= 0)
             {
                 std::ofstream file("HaveContinue.txt");
@@ -1824,6 +1854,14 @@ int main(int argc, char* argv[])
                 }
 
                 str_time += str_min + ":" + str_sec;
+                if (val_time % 10 == 0 && val_time != TIMETOTAL)
+                {
+                    time_game.SetColor(TextObject::RED_TEXT);                  
+                }
+                else
+                {
+                    time_game.SetColor(TextObject::WHITE_TEXT);
+                }
                 time_game.SetText(str_time);
                 time_game.loadFromRenderedText(font_time, g_screen);
                 time_game.RenderText(g_screen, SCREEN_WIDTH - 200, 15);

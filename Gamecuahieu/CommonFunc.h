@@ -22,6 +22,7 @@ static Mix_Chunk* g_sound_endgame[2];
 const int TOTAL_CHANNEL = 8;
 const int CHANNEL_GUN= 0;
 const int CHANNEL_EXP = 1;
+const int CHANNEL_STORM = 2;
 const int CHANNEL_COIN = 3;
 const int CHANNEL_JUMP = 4;
 const int CHANNEL_EVENT = 5;
@@ -50,6 +51,7 @@ const int RENDER_DRAW_COLOR = 0xff;
 #define NUMBOSS 10
 #define NUMDIE 3
 #define FLAG 15
+#define PLAYER_START_Y 38
 
 typedef struct Map 
 {

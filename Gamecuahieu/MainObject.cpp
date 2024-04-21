@@ -224,6 +224,9 @@ void MainObject::HandelInputAction(SDL_Event events, SDL_Renderer* screen, Mix_C
 		case SDLK_s:
 			input_type_.down_ = 0;
 			break;
+		case SDLK_j:
+			input_type_.jump_ = 0;
+			break;
 		case SDLK_i:
 			brave = false;
 			break;
@@ -327,7 +330,7 @@ void MainObject::DoPlayer(Map& map_data, Mix_Chunk* coin, Mix_Chunk* bullet_soun
 			{
 				x_pos_ = 0;
 			}
-			y_pos_ = 0;
+			y_pos_ = PLAYER_START_Y;
 			x_val_ = 0;
 			y_val_ = 0;
 			for (int jj = 0; jj < bBullet_list.size(); jj++)
@@ -619,6 +622,10 @@ void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin, std::vector<BulletOb
 	{
 		out_area = true;
 		come_back_time_ = 50;
+	}
+	if (y_pos_ < PLAYER_START_Y)
+	{
+		y_pos_ = PLAYER_START_Y;
 	}
 }
 void MainObject::CenterEntityOnmap(Map& map_data) const
