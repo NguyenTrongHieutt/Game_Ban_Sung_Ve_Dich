@@ -1,20 +1,33 @@
 # Game_Ban_Sung_Ve_Dich
-Game bắn súng về đích.
-1.Nguyễn Trọng Hiếu, mã sinh viên 23020069.
-2.Game xây dựng nhân vật vượt chướng ngại vật, tiêu diệt kẻ địch ,boss đề về đích.
-3.Ngưỡng điểm thấy xứng đáng: 8-8,5.
-4.Lý do:
--Nộp bài đều đặn tại github.
--Game lấy cơ sở từ code mẫu những có thay đổi về nội dung và bổ sung đáng kể các tính năng:
-+Thay đổi nhiều tính năng cho phù hợp.
-+Xây dựng nhân vật vượt chướng ngại vật, phải tiêu diệt được boss mới chiến thắng.
-+Tính năng menu.
-+Tính năng pause.
-+Thêm các trap
-+Thêm các chướng ngại vật
-+Thêm mưa thiên thạch
-+Xử lí đạn bắn đến vị trí nhân vật đang đứng.
-+Xử lí va chạm giữa đạn và chướng ngại vật.
-+Thêm tính năng cho nhân vật: đổi đạn, bật khiên, hồi máu, đặt tường chắn.
-+Xây dựng boss: triệu hồi boss mini , bắn lửa, phá tường, di chuyển đến gần nhân vật.
-+Thêm audio.
+The game uses `SDL 2`libraries and `C`, `C++`.
+# Information
+Implementer: Nguyễn Trọng Hiếu.\
+ID: 23020069.\
+Email: nguyentronghieu2kk5@gmail.com
+# Game
+The game builds characters to overcome obstacles, destroy enemies and bosses to reach the finish line.
+## Main Player
+Use `A`, `D` to move.\
+Use `J` to jump.\
+Use `K` to shoot bullets.\
+Use `L` to change bullets.\
+Use `I` to place the wall.\
+Use `O` to turn on the shield.\
+## Other Objects
+### Enemy
+### Obstacles
+### Boss
+### Items
+### Game photos
+# Demo
+# Credits
+## Thanks to:
+All teachers in course INT2215 51 - Advanced Programming.\
+[Phattrienphanmem123az](https://phattrienphanmem123az.com/) guide to SDL 2 libraries.\
+[SDL2](https://www.libsdl.org/) for their library.
+## In this game, I used:
+Images on Internet.\
+Canva for creating images.\
+[Fonts](https://fonts.google.com/) for some text in my game.\
+[Music](https://poki.com/en/music)\
+[Sound effects](https://mixkit.co/free-sound-effects/game/)
