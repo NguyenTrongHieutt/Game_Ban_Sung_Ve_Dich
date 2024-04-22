@@ -358,7 +358,7 @@ int main(int argc, char* argv[])
                 is_quit = false;
                 flag_threat = false;
                 p_player.set_x_pos(0);
-                p_player.set_y_pos(0);
+                p_player.set_y_pos(0); 
                 p_player.SetBrave(0);
                 p_player.SetMoney(0);
                 p_player.set_input_left(0);
