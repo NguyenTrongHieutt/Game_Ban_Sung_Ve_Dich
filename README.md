@@ -5,21 +5,35 @@ Implementer: Nguyễn Trọng Hiếu.\
 ID: 23020069.\
 Email: nguyentronghieu2kk5@gmail.com
 # Game
-The game builds characters to overcome obstacles, destroy enemies and bosses to reach the finish line.
+The game builds characters to overcome obstacles, trap, destroy enemies and bosses to reach the finish line.
 ## Main Player
 Use `A`, `D` to move.\
 Use `J` to jump.\
 Use `K` to shoot bullets.\
 Use `L` to change bullets.\
 Use `I` to place the wall.\
-Use `O` to turn on the shield.\
+Use `O` to turn on the shield.
 ## Other Objects
 ### Enemy
+![](Enemy.png)
 ### Obstacles
+![](Gaithang.png)
+![](Cotgai.png)
+![](trap.png)
+![](bossbullet.png)
 ### Boss
+![](boss.png)
 ### Items
+When you accumulate 500 points, you will gain 1 life if you do not have 3 lives.\
+![](player_pw.png)
+![](money.png)
+![](brave.png)
+![](khien.png)
 ### Game photos
+![](Screenshot2024-04-22113329.png)
+![](Screenshot2024-04-22113407.png)
 # Demo
+
 # Credits
 ## Thanks to:
 All teachers in course INT2215 51 - Advanced Programming.\
