@@ -1,5 +1,5 @@
 # Game_Ban_Sung_Ve_Dich
-The game uses `SDL 2`libraries and `C`, `C++`.
+The game uses `SDL 2.0`libraries and `C`, `C++`.
 # Information
 Implementer: Nguyễn Trọng Hiếu.\
 ID: 23020069.\
@@ -33,7 +33,7 @@ When you accumulate 500 points, you will gain 1 life if you do not have 3 lives.
 ![](Screenshot2024-04-22113329.png)
 ![](Screenshot2024-04-22113407.png)
 # Demo
-
+[Link video demo](https://youtu.be/hwJVVEBRFxc)
 # Credits
 ## Thanks to:
 All teachers in course INT2215 51 - Advanced Programming.\
